@@ -422,3 +422,138 @@
   .hud-box span { font-size: .72rem; line-height: 1.25; }
   .hud-box b { font-size: .62rem; margin-bottom: 0; }
 }
+
+/* =====================================================================
+   Timeline v2: big icon markers, a detail panel with thumbnails, every event clickable
+   ===================================================================== */
+.tl-pad { justify-content: flex-start; gap: 16px; padding-top: clamp(14px, 3vw, 30px); padding-bottom: clamp(12px, 2.5vw, 26px); }
+.tl-wrap { position: relative; padding-top: 0; flex: 0 0 auto; }
+.tl-line { top: 23px; height: 2px; left: 4%; right: 4%; }
+.tl-nodes { grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: clamp(6px, 1.6vw, 18px); }
+.tl-node {
+  background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer;
+  display: grid; gap: 6px; align-content: start; justify-items: start; padding: 0 4px 6px;
+}
+.tl-node:focus-visible { outline: 2px solid var(--s-hud); outline-offset: 3px; }
+.tl-marker {
+  width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; position: relative; z-index: 1;
+  border: 2px solid var(--s-glow); background: var(--s-bg); color: var(--s-glow);
+  transition: background .25s, color .25s, box-shadow .25s, transform .2s;
+  animation: tl-hi 2.6s var(--hi, 0s) both;
+}
+.tl-node.last .tl-marker { animation-name: tl-hi-last; }
+.tl-icon { width: 24px; height: 24px; }
+.tl-node:hover .tl-marker { transform: scale(1.1); box-shadow: 0 0 0 5px rgba(217, 128, 63, .22); }
+.tl-node b { font-family: var(--s-title); font-weight: 500; font-size: clamp(.95rem, 1.9vw, 1.3rem); letter-spacing: .05em; color: var(--s-glow); margin-top: 6px; }
+.tl-node p { margin: 0; font-size: clamp(.78rem, 1.3vw, .95rem); line-height: 1.4; }
+@keyframes tl-hi {
+  0% { background: var(--s-bg); color: var(--s-glow); box-shadow: none; }
+  12%, 88% { background: var(--s-glow); color: #1a0a05; box-shadow: 0 0 0 6px rgba(217, 128, 63, .25), 0 0 26px rgba(217, 128, 63, .6); }
+  100% { background: var(--s-bg); color: var(--s-glow); box-shadow: none; }
+}
+@keyframes tl-hi-last {
+  0% { background: var(--s-bg); color: var(--s-glow); box-shadow: none; }
+  12%, 100% { background: var(--s-glow); color: #1a0a05; box-shadow: 0 0 0 6px rgba(217, 128, 63, .25), 0 0 26px rgba(217, 128, 63, .6); }
+}
+.sc-timeline.picked .tl-marker { animation: none; }
+.sc-timeline.picked .tl-node.sel .tl-marker { background: var(--s-glow); color: #1a0a05; box-shadow: 0 0 0 6px rgba(217, 128, 63, .25), 0 0 26px rgba(217, 128, 63, .6); }
+
+.tl-detail { position: relative; flex: 1 1 auto; min-height: 120px; border: 1px solid var(--s-line); background: rgba(15, 6, 4, .62); }
+.tl-detail-item {
+  position: absolute; inset: 0; display: grid; grid-template-columns: minmax(110px, 32%) minmax(0, 1fr);
+  gap: clamp(12px, 2.4vw, 28px); padding: 12px 18px; align-items: center; opacity: 0;
+  animation: tl-item 2.6s var(--hi, 0s) both;
+}
+.tl-detail-item.last { animation-name: tl-item-last; }
+@keyframes tl-item { 0% { opacity: 0; } 8%, 90% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes tl-item-last { 0% { opacity: 0; } 8%, 100% { opacity: 1; } }
+.sc-timeline.picked .tl-detail-item { animation: none; opacity: 0; }
+.sc-timeline.picked .tl-detail-item.sel { opacity: 1; }
+.tl-media { margin: 0; display: grid; gap: 4px; align-content: center; min-height: 0; height: 100%; }
+.tl-thumb { width: 100%; height: 100%; max-height: 190px; object-fit: cover; border: 1px solid var(--s-line); filter: sepia(.2) saturate(1.15); }
+.tl-media figcaption { font-size: .62rem; color: var(--s-dim); text-transform: uppercase; letter-spacing: .06em; }
+.tl-media.big-icon { place-items: center; color: var(--s-glow); }
+.tl-icon-big { width: clamp(56px, 9vw, 96px); height: auto; opacity: .9; }
+.tl-copy b { font-size: .8rem; letter-spacing: .14em; color: var(--s-glow); font-weight: 500; }
+.tl-copy h3 { margin: 4px 0 8px; font-family: var(--s-title); font-weight: 500; font-size: clamp(1rem, 2vw, 1.4rem); letter-spacing: .04em; }
+.tl-copy p { margin: 0; font-size: clamp(.85rem, 1.4vw, 1rem); line-height: 1.55; }
+.scan-hint { margin: 6px 0 0; font-size: .78rem; letter-spacing: .05em; color: var(--s-hud); }
+
+/* =====================================================================
+   Scanner v2: caption under the photo, hover zoom, tappable pins, even spec boxes
+   ===================================================================== */
+.scan-center { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 0; height: 100%; min-width: 0; }
+.scan-center .scan-frame { flex: 1 1 0; min-height: 0; height: auto; aspect-ratio: 1; max-width: 100%; width: auto; align-self: center; }
+.scan-zoom { position: absolute; inset: 0; animation: st-kb calc(var(--dur, 9000ms) + 1500ms) ease-out both; transition: scale .5s ease; }
+.scan-zoom .scan-img { animation: none; }
+.scan-frame:hover .scan-zoom { scale: 1.12; }
+.scan-caption { flex: 0 0 auto; width: 100%; margin: 0; min-height: 2.6em; font-size: .74rem; line-height: 1.4; color: var(--s-dim); text-align: center; letter-spacing: .02em; }
+.scan-caption.lit { color: var(--s-ink); }
+.scan-right { display: grid; grid-auto-rows: 1fr; align-content: center; gap: 10px; }
+.hud-box { display: grid; align-content: center; gap: 2px; }
+
+.pin { position: absolute; transform: translate(-50%, -50%); z-index: 3; width: 44px; height: 44px; padding: 0; margin: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+.pin-dot { position: relative; width: 16px; height: 16px; border-radius: 50%; background: var(--s-hud); box-shadow: 0 0 0 3px rgba(15, 6, 4, .75); }
+.pin-dot::after { content: ""; position: absolute; inset: -7px; border-radius: 50%; border: 2px solid var(--s-hud); animation: pin-ping 1.9s ease-out infinite; }
+@keyframes pin-ping { from { transform: scale(.6); opacity: .9; } to { transform: scale(1.7); opacity: 0; } }
+.pin-label {
+  position: absolute; left: calc(50% + 22px); top: 50%; transform: translateY(-50%); white-space: nowrap;
+  font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--s-ink);
+  background: rgba(15, 6, 4, .88); border: 1px solid var(--s-hud); padding: 3px 9px;
+}
+.pin-label::before { content: ""; position: absolute; right: 100%; top: 50%; width: 14px; height: 1px; background: var(--s-hud); }
+.pin.flip .pin-label { left: auto; right: calc(50% + 22px); }
+.pin.flip .pin-label::before { right: auto; left: 100%; }
+.pin.on .pin-dot { background: var(--s-glow); }
+.pin.on .pin-label { border-color: var(--s-glow); }
+.pin:focus-visible { outline: 2px solid var(--s-hud); outline-offset: 2px; border-radius: 50%; }
+
+@media (max-width: 760px) {
+  .tl-line { left: 22px; right: auto; top: 22px; bottom: 22px; width: 2px; height: auto; }
+  .tl-nodes { grid-template-columns: 1fr; gap: 6px; }
+  .tl-node { grid-template-columns: 38px 1fr; column-gap: 10px; align-items: center; justify-items: start; padding: 0; }
+  .tl-marker { width: 38px; height: 38px; grid-row: 1 / span 2; }
+  .tl-icon { width: 20px; height: 20px; }
+  .tl-node b, .tl-node p { grid-column: 2; margin: 0; }
+  .tl-node p { font-size: .74rem; }
+  .tl-detail { min-height: 96px; }
+  .tl-detail-item { grid-template-columns: 1fr; padding: 8px 12px; }
+  .tl-media { display: none; }
+  .tl-copy h3 { font-size: .95rem; margin: 2px 0 4px; }
+  .tl-copy p { font-size: .8rem; line-height: 1.4; }
+  .scan-center { gap: 4px; }
+  .scan-caption { font-size: .68rem; min-height: 2.4em; }
+}
+@media (max-height: 520px) {
+  .tl-pad { gap: 8px; padding-top: 8px; }
+  .tl-marker { width: 34px; height: 34px; }
+  .tl-line { top: 17px; }
+  .tl-icon { width: 18px; height: 18px; }
+  .tl-node b { margin-top: 2px; font-size: .85rem; }
+  .tl-node p { font-size: .7rem; }
+  .tl-detail { min-height: 70px; }
+  .tl-detail-item { padding: 6px 12px; }
+  .tl-media { display: none; }
+  .tl-detail-item { grid-template-columns: 1fr; }
+  .tl-copy h3 { font-size: .85rem; margin: 2px 0; }
+  .tl-copy p { font-size: .72rem; line-height: 1.35; }
+  .scan-caption { display: none; }
+  .scan-hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tl-marker, .tl-detail-item, .pin-dot::after, .scan-zoom { animation: none; }
+  .scan-zoom { transition: none; }
+}
+
+/* phone portrait: spec boxes in two columns so four of them still fit with the photo */
+@media (max-width: 760px) {
+  .scan-right { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 6px; align-content: start; }
+  .scan-right .hud-box { padding: 5px 8px; }
+  .scan-right .hud-box span { font-size: .74rem; line-height: 1.3; }
+  .scan-right .hud-box b { font-size: .62rem; }
+  .scan-hint { font-size: .72rem; margin-top: 2px; }
+  .scan-left { gap: 8px; }
+}
+@media (max-width: 760px) {
+  .has-pins .scan-left .voice { display: none; }   /* give the pinned photo the room on small portrait screens */
+}

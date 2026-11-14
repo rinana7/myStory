@@ -69,6 +69,7 @@ Then open http://localhost:8765 (a local server is needed because the page loads
 - [NSSDCA: Apollo 17 mission info](https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo17info.html)
 - [NSSDCA: Lunar Roving Vehicle](https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_lrv.html)
 - [NSSDCA: Opportunity, ID 2003-032A](https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-032A)
+- [NASA technical paper: The Lunar Roving Vehicle: Historical perspective (Morea, NASA Marshall, 1992)](https://ntrs.nasa.gov/citations/19930004820)
 - NASA Image and Video Library (see [docs/image-credits.md](docs/image-credits.md))
 
 ## Super Intelligence (SI) disclosure

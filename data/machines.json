@@ -262,7 +262,8 @@
             "file": "images/opportunity/blueberries.jpg",
             "alt": "Close-up of many small, smooth, gray-blue round spherules scattered on reddish Martian soil.",
             "credit": "NASA/JPL-Caltech/Cornell/USGS",
-            "nasaId": "PIA19113"
+            "nasaId": "PIA19113",
+            "caption": "Martian concretions near Fram Crater, seen by Opportunity in April 2004; area shown is 3 cm across"
           },
           "source": [
             "nasa-highlights",
@@ -293,7 +294,8 @@
             "file": "images/opportunity/homestake.jpg",
             "alt": "Black-and-white close-up of a bright, thick mineral vein running diagonally across the frame, with small dark rocks around it.",
             "credit": "NASA/JPL-Caltech",
-            "nasaId": "PIA15035"
+            "nasaId": "PIA15035",
+            "caption": "Close-up view of the Homestake vein, from Opportunity's microscopic imager"
           },
           "source": [
             "nasa-highlights",
@@ -565,6 +567,11 @@
           "id": "nasa-image-as17-134-20382",
           "label": "NASA image as17-134-20382 (astronaut with flag, Lunar Module and rover)",
           "url": "https://images.nasa.gov/details/as17-134-20382"
+        },
+        {
+          "id": "nasa-ntrs-morea",
+          "label": "NASA technical paper: The Lunar Roving Vehicle: Historical perspective (Morea, NASA Marshall, 1992)",
+          "url": "https://ntrs.nasa.gov/citations/19930004820"
         }
       ],
       "image": {
@@ -576,12 +583,13 @@
         "zoom": 1.4
       },
       "notes": [
+        "Rover distance: NASA's 1992 engineering paper (Morea) gives 22.3 miles and 4:26 of driving for Apollo 17, matching NSSDCA's 35.9 km. The 30 km on NSSDCA's command-module page is the outlier.",
         "The user-supplied links are NOT Apollo 17: id=1971-063C is Apollo 15 LM/ALSEP and id=1969-099C is Apollo 12 LM/ALSEP. Apollo 17's LM/ALSEP is 1972-096C (1972-096A is the command and service module). No separate NSSDCA ID was found for the Apollo 17 LRV.",
-        "Rover distance conflict: 35.9 km (LRV page) vs 30 km (1972-096A). Story says 'about 36 kilometers'; consider 'more than 30' if staying safe.",
         "ALSEP instrument count conflict: 1972-096C names five instruments (heat flow, surface gravimeter, mass spectrometer, seismic profiling, ejecta and meteorites); the mission info page lists 12 experiments, some not necessarily on the ALSEP. Story names only instruments from 1972-096C.",
         "Not stated in any page read, so left out: whether the LRV was left on the Moon, LRV top speed, the reason for the 1977 shutdown (an ALSEP Termination Report PDF exists at nssdc.gsfc.nasa.gov/misc/documents/b32116.pdf but wasn't readable), what the instruments discovered, and Apollo 17 retroreflector status.",
         "Apollo 17 has no retroreflector on the pages read (the NSSDCA site list gives retroreflector coordinates for Apollo 11, 14 and 15). Don't claim Apollo 17 carries one; a laser-ranging story would belong to those missions.",
-        "No science.nasa.gov or nasa.gov page was read for this entry; all facts come from NSSDCA pages, some last updated 2016 to 2023."
+        "No science.nasa.gov or nasa.gov page was read for this entry; all facts come from NSSDCA pages, some last updated 2016 to 2023.",
+        "The rover scenes also use NASA's 1992 paper for the wheel, fender and navigation details. Its sample-return figure (249 lb) differs from NSSDCA's 110.52 kg (243 lb), so no sample mass is shown."
       ],
       "storyLabel": "Apollo 17 · Taurus-Littrow",
       "scenes": [
@@ -607,24 +615,44 @@
         {
           "chapter": "Explore",
           "type": "timeline",
-          "duration": 12000,
+          "duration": 14000,
           "title": "My Timeline",
           "events": [
             {
               "date": "Dec. 11, 1972",
-              "text": "Landed on the Moon (UT)"
+              "text": "Landed on the Moon (UT)",
+              "kind": "landing",
+              "detail": "The Lunar Module landed in the Taurus-Littrow valley with Eugene Cernan and Harrison Schmitt aboard.",
+              "image": {
+                "file": "images/apollo17/landing-site.jpg",
+                "alt": "Wide view of the Apollo 17 landing site: the Lunar Module, an astronaut and the rover on gray lunar ground, with tall pale hills against black sky.",
+                "credit": "NASA",
+                "nasaId": "as17-134-20435"
+              }
             },
             {
               "date": "Dec. 12, 1972",
-              "text": "Central station switched on"
+              "text": "Central station switched on",
+              "kind": "poweron",
+              "detail": "The ALSEP central station turned on at 02:53 UT, powered by a SNAP-27 RTG making about 70 watts.",
+              "image": {
+                "file": "images/apollo17/alsep.jpg",
+                "alt": "Lunar ground with footprints and a small red flag in the foreground, and scientific equipment and the rover far away near a hillside.",
+                "credit": "NASA",
+                "nasaId": "as17-147-22548"
+              }
             },
             {
               "date": "Dec. 14, 1972",
-              "text": "Lunar Module lifted off"
+              "text": "Lunar Module lifted off",
+              "kind": "liftoff",
+              "detail": "The crew left after about 75 hours on the surface and three moonwalks totaling 22 hours 4 minutes."
             },
             {
               "date": "Sept. 30, 1977",
-              "text": "ALSEP stations shut down"
+              "text": "ALSEP stations shut down",
+              "kind": "poweroff",
+              "detail": "The ALSEP stations were shut down together on 30 September 1977. The sources used here do not give a reason."
             }
           ],
           "source": [
@@ -637,7 +665,7 @@
           "type": "photo",
           "duration": 9000,
           "title": "Wheels on the Moon",
-          "text": "On Apollo 17, the Lunar Roving Vehicle went 35.9 km in 4 hours 26 minutes of driving.",
+          "text": "On Apollo 17, the Lunar Roving Vehicle covered 22.3 miles (35.9 km) in 4 hours 26 minutes of driving.",
           "image": {
             "file": "images/apollo17/drive.jpg",
             "alt": "An astronaut seated on the Lunar Roving Vehicle beside the Apollo 17 Lunar Module, with a lunar hill behind.",
@@ -647,15 +675,38 @@
           },
           "source": [
             "nssdca-lrv",
+            "nasa-ntrs-morea",
             "nasa-image-as17-147-22527"
+          ]
+        },
+        {
+          "chapter": "Explore",
+          "type": "numbers",
+          "duration": 11000,
+          "title": "Why Bring a Car?",
+          "planned": {
+            "label": "Apollo 11, no rover",
+            "value": "About 250 yards",
+            "sub": "in 21.5 hours on the surface",
+            "ratio": 0.0064
+          },
+          "actual": {
+            "label": "Apollo 17, with rover",
+            "value": "22.3 miles",
+            "sub": "in 4 hours 26 minutes of driving"
+          },
+          "scaleNote": "bars compare distance, drawn to scale",
+          "text": "NASA's engineering history says the decision to carry the rover was not unanimous: its weight could have been extra landing fuel.",
+          "source": [
+            "nasa-ntrs-morea"
           ]
         },
         {
           "chapter": "Discover",
           "type": "scan",
-          "duration": 9000,
+          "duration": 12000,
           "title": "Built for the Moon",
-          "text": "The rover was designed to work in the Moon's low gravity and vacuum, so astronauts could go farther from the Lunar Module.",
+          "text": "The rover was designed to work in the Moon's low gravity and vacuum, so astronauts could go farther from the Lunar Module and still find the way back.",
           "hud": [
             {
               "label": "Mass",
@@ -668,6 +719,10 @@
             {
               "label": "Purpose",
               "value": "Extend how far astronauts could range on foot"
+            },
+            {
+              "label": "Navigation",
+              "value": "A gyro and odometer fed a computer that tracked the way back to the Lunar Module"
             }
           ],
           "image": {
@@ -675,11 +730,27 @@
             "alt": "Close-up of the Apollo 17 Lunar Roving Vehicle's wheel and equipment on dusty gray ground.",
             "credit": "NASA",
             "nasaId": "as17-137-20979",
-            "focus": "58% 72%"
+            "focus": "58% 72%",
+            "caption": "Close-up of the lunar roving vehicle at the Apollo 17 Taurus-Littrow landing site"
           },
           "source": [
             "nssdca-lrv",
+            "nasa-ntrs-morea",
             "nasa-image-as17-137-20979"
+          ],
+          "hotspots": [
+            {
+              "label": "Wheel",
+              "x": 56,
+              "y": 66,
+              "text": "A woven mesh of zinc-coated steel wire with a titanium chevron tread. Testing found that covering 50% of the contact area worked best. Each wheel had its own 1/4 horsepower electric motor in the hub."
+            },
+            {
+              "label": "Fender",
+              "x": 50,
+              "y": 46,
+              "text": "NASA's engineering history says the fenders were designed to stop a \"rooster tail\" of dust from landing on the vehicle and crew."
+            }
           ]
         },
         {
@@ -707,7 +778,8 @@
             "alt": "Lunar ground with footprints and a small red flag in the foreground, and scientific equipment and the rover far away near a hillside.",
             "credit": "NASA",
             "nasaId": "as17-147-22548",
-            "focus": "60% 35%"
+            "focus": "60% 35%",
+            "caption": "Apollo 17 ALSEP area, panorama taken during the first moonwalk (EVA 1)"
           },
           "source": [
             "nssdca-1972-096c",
@@ -840,6 +912,10 @@
           {
             "text": "The ALSEP central station switched on Dec. 12, 1972, and the stations were shut down Sept. 30, 1977.",
             "source": "nssdca-1972-096c"
+          },
+          {
+            "text": "With the rover, Apollo 17's crew drove 22.3 miles. The Apollo 11 crew, without one, traveled about 250 yards in 21.5 hours on the surface.",
+            "source": "nasa-ntrs-morea"
           }
         ],
         "reflection": "Almost five years. A small station on the Moon kept sending what it measured, until the day it was switched off. The last people to land there went home in 1972, and the station stayed behind, listening, for as long as it could."
@@ -912,6 +988,21 @@
           "label": "Landed on Mars",
           "value": "Feb. 18, 2021, Jezero Crater",
           "source": "nasa-ingenuity"
+        },
+        {
+          "label": "Launch",
+          "value": "July 30, 2020, Cape Canaveral Air Force Station, Florida",
+          "source": "nasa-ingenuity"
+        },
+        {
+          "label": "Top ground speed",
+          "value": "22.4 mph (10 m/s), from NASA's flight-log graphic",
+          "source": "nasa-ingenuity"
+        },
+        {
+          "label": "Records set",
+          "value": "Distance (Apr. 8, 2022), altitude (Oct. 5, 2023), groundspeed (Oct. 12, 2023); figures for the records are not given on the page",
+          "source": "nasa-ingenuity"
         }
       ],
       "mythVsFact": null,
@@ -967,7 +1058,10 @@
         "Parts of the NASA main page (after character 39,909) were summarised by the fetch tool, not read verbatim. A summary gave a different first-flight date (Aug. 19, 2021) which contradicts the verbatim text and the release (April 19, 2021); treat that as a summary error but re-check the page.",
         "No NSSDCA entry for Ingenuity was found by browsing; the Master Catalog spacecraft query was not run. Check before citing an NSSDCA ID.",
         "Current status in 2026 isn't stated on any page read; the 'upright and in communication' line is from Jan. 2024 only.",
-        "Don't call it a 'stationary artifact' in the final site unless a NASA page says so."
+        "Don't call it a 'stationary artifact' in the final site unless a NASA page says so.",
+        "Verified: NASA's Jan. 2024 release quotes the project manager saying Ingenuity carries onboard a swatch from the original Wright Flyer. The main Ingenuity page does not mention it.",
+        "The main Ingenuity page's poster caption says the first flight was Aug. 19, 2021; its timeline, key facts and every other mention say April 19, 2021. The site uses April 19.",
+        "Distance flown is 10.5 miles in the page text and 11 miles in the flight-log graphic; both are 17 km. The site shows 10.5 miles (17.0 km)."
       ],
       "storyLabel": "Mars Helicopter",
       "scenes": [
@@ -1016,24 +1110,56 @@
         {
           "chapter": "Explore",
           "type": "timeline",
-          "duration": 12000,
+          "duration": 16000,
           "title": "My Timeline",
           "events": [
             {
+              "date": "July 30, 2020",
+              "text": "Launched from Florida",
+              "kind": "launch",
+              "detail": "NASA lists the launch from Cape Canaveral Air Force Station, Florida, on July 30, 2020."
+            },
+            {
               "date": "Feb. 18, 2021",
-              "text": "Landed at Jezero Crater"
+              "text": "Landed at Jezero Crater",
+              "kind": "landing",
+              "detail": "It rode to Mars attached to the belly of the Perseverance rover."
             },
             {
               "date": "Apr. 19, 2021",
-              "text": "First flight"
+              "text": "First flight",
+              "kind": "flight",
+              "detail": "NASA calls it the first powered, controlled flight on another planet. The camera caught its own shadow.",
+              "image": {
+                "file": "images/ingenuity/first-image.jpg",
+                "alt": "Black-and-white view from above of the helicopter's own shadow, with four thin legs and two rotor blades, on pale Martian ground.",
+                "credit": "NASA/JPL-Caltech",
+                "nasaId": "PIA24584"
+              }
             },
             {
               "date": "Jan. 18, 2024",
-              "text": "72nd and last flight"
+              "text": "72nd and last flight",
+              "kind": "flight",
+              "detail": "A short hop up to 40 feet with a 4.5-second hover. About 3 feet above the ground, it lost contact with the rover.",
+              "image": {
+                "file": "images/ingenuity/damaged-shadow.jpg",
+                "alt": "Ground-level view of reddish Martian soil with the long dark shadow of a rotor blade whose tip looks broken off.",
+                "credit": "NASA/JPL-Caltech",
+                "nasaId": "PIA26243"
+              }
             },
             {
               "date": "Jan. 25, 2024",
-              "text": "Mission completed"
+              "text": "Mission completed",
+              "kind": "end",
+              "detail": "NASA said it was no longer capable of flight. At the time it remained upright and in communication.",
+              "image": {
+                "file": "images/ingenuity/final-airfield.jpg",
+                "alt": "Wide view of rippled Martian dunes and rocky ground; the helicopter is a tiny speck near the center.",
+                "credit": "NASA/JPL-Caltech/ASU/MSSS",
+                "nasaId": "PIA26236"
+              }
             }
           ],
           "source": [
@@ -1065,7 +1191,8 @@
             "file": "images/ingenuity/first-image.jpg",
             "alt": "Black-and-white view from above of the helicopter's own shadow, with four thin legs and two rotor blades, on pale Martian ground.",
             "credit": "NASA/JPL-Caltech",
-            "nasaId": "PIA24584"
+            "nasaId": "PIA24584",
+            "caption": "Ingenuity's first black-and-white image from the air"
           },
           "source": [
             "nasa-ingenuity",
@@ -1098,7 +1225,8 @@
             "alt": "View from above of reddish Martian ground with pale rocks and curving rover tracks.",
             "credit": "NASA/JPL-Caltech",
             "nasaId": "PIA24593",
-            "focus": "50% 55%"
+            "focus": "50% 55%",
+            "caption": "First aerial color image of Mars"
           },
           "source": [
             "nasa-ingenuity",
@@ -1162,12 +1290,12 @@
             },
             {
               "head": "A scout for the rover",
-              "text": "It acted as an aerial scout for Perseverance, previewing areas the rover might explore.",
+              "text": "It acted as an aerial scout for Perseverance, previewing areas the rover might explore. NASA says it kept \"soaring higher and faster than previously imagined.\"",
               "sourceLabel": "NASA: Ingenuity Mars Helicopter"
             },
             {
               "head": "A path for what's next",
-              "text": "NASA says it paved the way for future aerial explorers at Mars and, potentially, other space destinations.",
+              "text": "NASA says it paved the way for future aerial explorers. SkyFall, announced to build on its success, will send next-gen Mars helicopters to scout human landing sites and map subsurface water ice.",
               "sourceLabel": "NASA: Ingenuity Mars Helicopter"
             }
           ],
@@ -1248,6 +1376,10 @@
           },
           {
             "text": "NASA says it paved the way for future aerial explorers at Mars and, potentially, other space destinations.",
+            "source": "nasa-ingenuity"
+          },
+          {
+            "text": "NASA's SkyFall mission, announced to build on Ingenuity's success, will deliver next-gen Mars helicopters to scout human landing sites and map subsurface water ice.",
             "source": "nasa-ingenuity"
           }
         ],
@@ -1410,28 +1542,56 @@
         {
           "chapter": "Explore",
           "type": "timeline",
-          "duration": 13000,
+          "duration": 16000,
           "title": "My Timeline",
           "events": [
             {
               "date": "Sept. 27, 2007",
-              "text": "Launch"
+              "text": "Launch",
+              "kind": "launch",
+              "detail": "Dawn carried 425 kg of xenon propellant for its ion engines.",
+              "image": {
+                "file": "images/dawn.jpg",
+                "alt": "Artist's concept of the Dawn spacecraft with wide solar panels firing a blue ion beam, between a rocky asteroid and a round gray world.",
+                "credit": "NASA/JPL",
+                "nasaId": "PIA12033"
+              }
             },
             {
               "date": "July 16, 2011",
-              "text": "Arrived at Vesta"
+              "text": "Arrived at Vesta",
+              "kind": "orbit",
+              "detail": "Dawn spent fourteen months in orbit at Vesta before moving on to Ceres.",
+              "image": {
+                "file": "images/dawn/vesta.jpg",
+                "alt": "Gray, heavily cratered Vesta against black space, with a 40 kilometer scale bar at the lower right.",
+                "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+                "nasaId": "PIA14778"
+              }
             },
             {
               "date": "March 5, 2015",
-              "text": "Arrived at Ceres"
+              "text": "Arrived at Ceres",
+              "kind": "orbit",
+              "detail": "NASA says Dawn had all the data it needed for its original Ceres objectives by the middle of 2016.",
+              "image": {
+                "file": "images/dawn/occator.jpg",
+                "alt": "Dark, rough cratered ground on Ceres with several bright white patches, the largest at the lower left.",
+                "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+                "nasaId": "PIA20653"
+              }
             },
             {
               "date": "Oct. 31, 2018",
-              "text": "Ran out of hydrazine"
+              "text": "Ran out of hydrazine",
+              "kind": "poweroff",
+              "detail": "Without hydrazine, the spacecraft could not control its orientation in space."
             },
             {
               "date": "Nov. 1, 2018",
-              "text": "End of Mission"
+              "text": "End of Mission",
+              "kind": "end",
+              "detail": "NASA says that for at least the next couple of decades, and probably much longer, Dawn is an inert celestial monument in orbit around Ceres."
             }
           ],
           "source": [
@@ -1464,7 +1624,8 @@
             "file": "images/dawn/vesta.jpg",
             "alt": "Gray, heavily cratered Vesta against black space, with a 40 kilometer scale bar at the lower right.",
             "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
-            "nasaId": "PIA14778"
+            "nasaId": "PIA14778",
+            "caption": "A full-frame view of Vesta from Dawn"
           },
           "source": [
             "nasa-dawn-vesta",
@@ -1497,7 +1658,8 @@
             "alt": "Two perspective views of Vesta's south pole region: a gray one on top and a color-coded one below showing a deep basin in blue and high rims in red.",
             "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA/PSI",
             "nasaId": "PIA15667",
-            "fit": "contain"
+            "fit": "contain",
+            "caption": "Perspective views of Vesta's south pole region, Rheasilvia basin"
           },
           "source": [
             "nasa-dawn-vesta",
@@ -1528,7 +1690,8 @@
             "file": "images/dawn/occator.jpg",
             "alt": "Dark, rough cratered ground on Ceres with several bright white patches, the largest at the lower left.",
             "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
-            "nasaId": "PIA20653"
+            "nasaId": "PIA20653",
+            "caption": "Bright spots of Occator Crater on Ceres, seen close up by Dawn"
           },
           "source": [
             "nasa-dawn-ceres",
@@ -1812,28 +1975,56 @@
         {
           "chapter": "Explore",
           "type": "timeline",
-          "duration": 13000,
+          "duration": 16000,
           "title": "My Timeline",
           "events": [
             {
               "date": "Feb. 17, 1996",
-              "text": "Launch"
+              "text": "Launch",
+              "kind": "launch",
+              "detail": "NEAR launched on a Delta rocket from Cape Canaveral, Florida."
             },
             {
               "date": "June 27, 1997",
-              "text": "Flew past asteroid Mathilde"
+              "text": "Flew past asteroid Mathilde",
+              "kind": "flyby",
+              "detail": "A 25-minute flyby of asteroid 253 Mathilde, with a closest approach of about 750 miles (1,200 km)."
             },
             {
               "date": "Feb. 14, 2000",
-              "text": "Entered orbit around Eros"
+              "text": "Entered orbit around Eros",
+              "kind": "orbit",
+              "detail": "NEAR moved into orbit roughly a year later than intended, at first in an orbit about 200 by 225 miles.",
+              "image": {
+                "file": "images/near/eros-surface.jpg",
+                "alt": "Close-up of the gray, cratered surface of asteroid Eros.",
+                "credit": "NASA/JPL/JHUAPL",
+                "nasaId": "PIA02900"
+              }
             },
             {
               "date": "Feb. 12, 2001",
-              "text": "Touched down on Eros"
+              "text": "Touched down on Eros",
+              "kind": "landing",
+              "detail": "It touched down at 4 mph (6.4 km/h) after taking 69 photos on the way down. It was not designed as a lander.",
+              "image": {
+                "file": "images/near/touchdown-site.jpg",
+                "alt": "Gray mosaic of Eros's surface labeled with crater and boulder sizes and a yellow arrow marking the estimated landing spot.",
+                "credit": "NASA/JPL/JHUAPL",
+                "nasaId": "PIA03144"
+              }
             },
             {
               "date": "Feb. 28, 2001",
-              "text": "Last contact"
+              "text": "Last contact",
+              "kind": "signal",
+              "detail": "NASA says the spacecraft succumbed to the extreme cold. An attempt to reach it on Dec. 10, 2002 was unsuccessful.",
+              "image": {
+                "file": "images/near/final-image.jpg",
+                "alt": "Gray close-up of rocky ground and a boulder on Eros, with streaky vertical lines across the bottom where the signal was lost.",
+                "credit": "NASA/JPL/JHUAPL",
+                "nasaId": "PIA03148"
+              }
             }
           ],
           "source": [
@@ -1865,7 +2056,8 @@
             "alt": "Close-up of the gray, cratered surface of asteroid Eros.",
             "credit": "NASA/JPL/JHUAPL",
             "nasaId": "PIA02900",
-            "focus": "45% 40%"
+            "focus": "45% 40%",
+            "caption": "A close view of the surface of Eros"
           },
           "source": [
             "nasa-near",
@@ -1898,7 +2090,8 @@
             "credit": "NASA/JPL/JHUAPL",
             "nasaId": "PIA02955",
             "fit": "contain",
-            "kind": "Shape of Eros (computer model)"
+            "kind": "Shape of Eros (computer model)",
+            "caption": "The shape of Eros"
           },
           "source": [
             "nasa-near",
@@ -1930,7 +2123,8 @@
             "alt": "Gray mosaic of Eros's surface labeled with crater and boulder sizes and a yellow arrow marking the estimated landing spot.",
             "credit": "NASA/JPL/JHUAPL",
             "nasaId": "PIA03144",
-            "fit": "contain"
+            "fit": "contain",
+            "caption": "Landmarks at the NEAR Shoemaker touchdown site"
           },
           "source": [
             "nasa-near",

@@ -48,6 +48,37 @@
     return p;
   }
 
+  /* small line icons for timeline events, drawn in code */
+  var ICONS = {
+    launch:   'M12 3v14M6 9l6-6 6 6M8 21h8',
+    liftoff:  'M12 3v14M6 9l6-6 6 6M8 21h8',
+    landing:  'M12 3v12M6 11l6 6 6-6M5 21h14',
+    flyby:    'M3 19Q11 1 21 9M9 12a1.6 1.6 0 1 0 .01 0',
+    orbit:    'M3 12a9 4 0 1 0 18 0a9 4 0 1 0-18 0M12 12h.01',
+    poweron:  'M12 3v8M6.5 6.5a8 8 0 1 0 11 0',
+    poweroff: 'M12 3v8M6.5 6.5a8 8 0 1 0 11 0M4 4l16 16',
+    signal:   'M5 12a7 7 0 0 1 14 0M8 12a4 4 0 0 1 8 0M12 12h.01M4 20l16-16',
+    flight:   'M3 5h18M12 5v5M7 10h10v5H7zM9 20l1-5M15 20l-1-5',
+    end:      'M12 3a9 9 0 1 0 .01 0M8 12l3 3 5-6'
+  };
+  function icon(kind, cls) {
+    var ns = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('class', cls || 'tl-icon');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+    var path = document.createElementNS(ns, 'path');
+    path.setAttribute('d', ICONS[kind] || ICONS.end);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', 'currentColor');
+    path.setAttribute('stroke-width', '1.8');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(path);
+    return svg;
+  }
+
   /* ---------- scene renderers: each returns an element ---------- */
 
   var renderers = {
@@ -100,22 +131,48 @@
       ]);
     },
 
-    scan: function (s) {
+    scan: function (s, api) {
+      var zoom = h('div', { class: 'scan-zoom' }, [picture(s.image, 'scan-img')]);
+      var caption = h('p', { class: 'scan-caption', 'aria-live': 'polite', text: (s.image && s.image.caption) || '' });
+      var defaultCaption = caption.textContent;
+      var pins = [];
+      (s.hotspots || []).forEach(function (hs, i) {
+        var flip = hs.x > 45;
+        var pin = h('button', { class: 'pin' + (flip ? ' flip' : ''), type: 'button', 'aria-label': hs.label + ': ' + hs.text }, [
+          h('span', { class: 'pin-dot', 'aria-hidden': 'true' }),
+          h('span', { class: 'pin-label', text: hs.label })
+        ]);
+        pin.style.left = hs.x + '%';
+        pin.style.top = hs.y + '%';
+        pin.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var on = !pin.classList.contains('on');
+          pins.forEach(function (p) { p.classList.remove('on'); });
+          if (on) { pin.classList.add('on'); caption.textContent = hs.label + ': ' + hs.text; }
+          else caption.textContent = defaultCaption;
+          caption.classList.toggle('lit', on);
+          if (api && api.pause) api.pause();     // reading a callout pauses the story
+        });
+        pins.push(pin);
+        zoom.appendChild(pin);
+      });
       var frame = corners(h('div', { class: 'scan-frame' }, [
-        picture(s.image, 'scan-img'),
+        zoom,
         h('div', { class: 'ring', 'aria-hidden': 'true' }),
         h('div', { class: 'cross', 'aria-hidden': 'true' })
       ]));
       var boxes = (s.hud || []).map(function (b, i) {
         return delay(corners(h('div', { class: 'hud-box fade-up' }, [h('b', { text: b.label }), typed(h('span'), b.value, 1.4 + i * 0.9, 55)])), 1.2 + i * 0.9);
       });
-      return h('div', { class: 'st-scene sc-scan' }, [
+      var hint = pins.length ? delay(h('p', { class: 'scan-hint fade-up', text: 'Select a pin on the photo to learn about that part.' }), 2.2) : null;
+      return h('div', { class: 'st-scene sc-scan' + (pins.length ? ' has-pins' : '') }, [
         h('div', { class: 'scan-grid' }, [
           h('div', { class: 'scan-left' }, [
             delay(h('h2', { class: 'title fade-up', text: s.title }), 0.2),
-            typed(h('p', { class: 'voice' }), s.text, 0.9, 40)
+            typed(h('p', { class: 'voice' }), s.text, 0.9, 40),
+            hint
           ]),
-          frame,
+          h('div', { class: 'scan-center' }, [frame, caption]),
           h('div', { class: 'scan-right' }, boxes)
         ])
       ]);
@@ -173,24 +230,67 @@
       ]);
     },
 
-    timeline: function (s) {
-      var n = (s.events || []).length;
-      var nodes = (s.events || []).map(function (ev, i) {
-        return delay(h('div', { class: 'tl-node fade-up' }, [
-          h('span', { class: 'tl-dot', 'aria-hidden': 'true' }),
+    timeline: function (s, api) {
+      var evs = s.events || [];
+      var n = evs.length;
+      var STEP = 2.6, START = 1.6;            // each event is spotlighted for a few seconds so its detail can be read
+      var root = h('div', { class: 'st-scene sc-timeline' });
+      var nodes = [], items = [];
+
+      function pick(i) {
+        root.classList.add('picked');
+        nodes.forEach(function (nd, k) { nd.classList.toggle('sel', k === i); nd.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+        items.forEach(function (it, k) { it.classList.toggle('sel', k === i); });
+        if (api && api.pause) api.pause();     // choosing an event pauses the story so it can be read
+      }
+
+      evs.forEach(function (ev, i) {
+        var d = START + i * STEP;
+        var node = h('button', { class: 'tl-node fade-up', type: 'button', 'aria-pressed': 'false' }, [
+          h('span', { class: 'tl-marker' }, [icon(ev.kind)]),
           h('b', { text: ev.date }),
           h('p', { text: ev.text })
-        ]), 0.9 + i * 1.1);
+        ]);
+        node.style.setProperty('--n', i);
+        node.style.animationDelay = (0.6 + i * 0.5) + 's';
+        node.style.setProperty('--hi', d + 's');
+        if (i === n - 1) node.classList.add('last');
+        node.addEventListener('click', function () { pick(i); });
+        nodes.push(node);
+
+        var media;
+        if (ev.image && ev.image.file) {
+          media = h('figure', { class: 'tl-media' }, [
+            picture(ev.image, 'tl-thumb'),
+            h('figcaption', { text: 'Image: ' + (ev.image.credit || 'NASA') + (ev.image.nasaId ? ' (' + ev.image.nasaId + ')' : '') })
+          ]);
+        } else {
+          media = h('div', { class: 'tl-media big-icon' }, [icon(ev.kind, 'tl-icon-big')]);
+        }
+        var item = h('div', { class: 'tl-detail-item' + (i === n - 1 ? ' last' : '') }, [
+          media,
+          h('div', { class: 'tl-copy' }, [
+            h('b', { text: ev.date }),
+            h('h3', { text: ev.text }),
+            h('p', { text: ev.detail || '' })
+          ])
+        ]);
+        item.style.setProperty('--hi', d + 's');
+        items.push(item);
       });
+
       var kids = [
         delay(h('h2', { class: 'title fade-up', text: s.title }), 0.1),
         h('div', { class: 'tl-wrap' }, [
           delay(h('div', { class: 'tl-line', 'aria-hidden': 'true' }), 0.5),
-          h('div', { class: 'tl-nodes', style: '--n:' + n }, nodes)
-        ])
+          h('div', { class: 'tl-nodes', style: '--cols:' + n }, nodes)
+        ]),
+        h('div', { class: 'tl-detail', 'aria-live': 'polite' }, items),
+        delay(h('p', { class: 'scan-hint fade-up', text: 'Select an event to read more.' }), 1.2)
       ];
-      if (s.text) kids.push(typed(h('p', { class: 'voice' }), s.text, 1.2 + n * 1.1, 40));
-      return h('div', { class: 'st-scene sc-timeline' }, [h('div', { class: 'pad' }, kids)]);
+      root.appendChild(h('div', { class: 'pad tl-pad' }, kids));
+      if (reduceMotion && n) pick(0);   // no animation: show the first event's detail
+      return root;
     },
 
     photo: function (s) {
@@ -304,7 +404,7 @@
     typer = window.Typewriter ? window.Typewriter.make({ isPlaying: function () { return !!(state && state.playing); } }) : null;
     state = { visited: {}, completed: false, root: root, index: -1, elapsed: 0, playing: !reduceMotion, raf: 0, last: 0, scenes: scenes, opts: opts };
 
-    var api = { close: close, answer: opts.userAnswer || '', next: function () { goTo(state.index + 1); } };
+    var api = { close: close, answer: opts.userAnswer || '', next: function () { goTo(state.index + 1); }, pause: function () { setPlaying(false); } };
 
     function setPlaying(on) {
       state.playing = on;
