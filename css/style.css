@@ -2,17 +2,17 @@
 /* Look and feel: dark Mars-dusk "mission console". Typewriter titles, mono data, copper + teal accents. */
 
 :root {
-  --bg0: #0b0504;
-  --bg1: #1a0d07;
-  --bg2: #3a1a0d;
-  --panel: rgba(20, 10, 6, .92);
-  --copper: #d9803f;
-  --amber: #ffb566;
-  --sand: #f4dcc0;
-  --muted: #b99a7c;
+  --bg0: #031010;
+  --bg1: #07201f;
+  --bg2: #0e3836;
+  --panel: rgba(6, 22, 22, .92);
+  --copper: #72dccf;
+  --amber: #b4f3ea;
+  --sand: #e4f8f5;
+  --muted: #8fbab5;
   --hud: #7fe8dc;
-  --line: rgba(244, 220, 192, .28);
-  --line-strong: rgba(244, 220, 192, .55);
+  --line: rgba(228, 248, 245, .28);
+  --line-strong: rgba(228, 248, 245, .55);
   --focus: #7fe8dc;
 
   --title: "Orbitron", "Share Tech Mono", ui-monospace, monospace;
@@ -27,8 +27,8 @@ body {
   font-family: var(--mono);
   line-height: 1.6;
   background:
-    radial-gradient(ellipse 70% 45% at 50% 108%, rgba(217, 128, 63, .38), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 82% -5%, rgba(255, 181, 102, .10), transparent 70%),
+    radial-gradient(ellipse 70% 45% at 50% 108%, rgba(114, 220, 207, .38), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 82% -5%, rgba(130, 232, 222, .10), transparent 70%),
     linear-gradient(180deg, var(--bg0), var(--bg1) 55%, var(--bg2));
   background-attachment: fixed;
 }
@@ -36,8 +36,8 @@ body {
 body::before {
   content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
   background-image:
-    linear-gradient(rgba(244,220,192,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(244,220,192,.035) 1px, transparent 1px);
+    linear-gradient(rgba(228, 248, 245,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(228, 248, 245,.035) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
@@ -91,8 +91,8 @@ h2[tabindex="-1"]:focus, h2[tabindex="-1"]:focus-visible { outline: none; }
   margin: 0 auto; padding: 24px;
   border: 1px solid var(--line);
   background:
-    radial-gradient(circle at 50% 78%, rgba(255, 190, 110, .95) 0, rgba(255, 150, 70, .55) 9%, rgba(217, 128, 63, .22) 26%, transparent 55%),
-    linear-gradient(180deg, #14090a 0%, #2b130c 55%, #6a2f16 100%);
+    radial-gradient(circle at 50% 78%, rgba(135, 234, 224, .95) 0, rgba(90, 218, 205, .55) 9%, rgba(114, 220, 207, .22) 26%, transparent 55%),
+    linear-gradient(180deg, #061312 0%, #0c2d2b 55%, #1b6460 100%);
   color: var(--sand);
   font: inherit; text-align: center;
   cursor: pointer;
@@ -101,7 +101,7 @@ h2[tabindex="-1"]:focus, h2[tabindex="-1"]:focus-visible { outline: none; }
 }
 .cover::before {   /* horizon silhouette */
   content: ""; position: absolute; left: -5%; right: -5%; bottom: 0; height: 24%;
-  background: #1a0a06;
+  background: #051a19;
   clip-path: polygon(0 55%, 8% 40%, 16% 52%, 27% 30%, 38% 48%, 50% 34%, 61% 52%, 72% 28%, 84% 46%, 93% 36%, 100% 50%, 100% 100%, 0 100%);
 }
 .cover.hud-frame { --len: 26px; background-clip: padding-box; }
@@ -137,20 +137,20 @@ h2[tabindex="-1"]:focus, h2[tabindex="-1"]:focus-visible { outline: none; }
 .art-inner { position: absolute; inset: 0; transform: scale(1); transition: transform 9s cubic-bezier(.2,.6,.2,1); will-change: transform; }
 .art-inner.zoomed { transform: scale(var(--zoom, 1.45)); }
 .art svg { width: 100%; height: 100%; display: block; }
-.art img { width: 100%; height: 100%; object-fit: cover; display: block; filter: sepia(.22) saturate(1.18) contrast(1.06); }
+.art img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.05) contrast(1.06); }
 /* colour grade + vignette so every photo sits in the same warm light */
 .art::after {
   content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
   background:
-    radial-gradient(ellipse at 50% 42%, transparent 38%, rgba(8, 3, 2, .7) 100%),
-    linear-gradient(rgba(214, 112, 40, .16), rgba(214, 112, 40, .16));
+    radial-gradient(ellipse at 50% 42%, transparent 38%, rgba(2, 10, 10, .7) 100%),
+    linear-gradient(rgba(70, 200, 188, .16), rgba(70, 200, 188, .16));
   mix-blend-mode: normal;
 }
 .art-frame { position: absolute; inset: 14px; z-index: 3; pointer-events: none; --len: 22px; }
 .art-caption {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
   padding: 26px 22px 14px; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--sand);
-  background: linear-gradient(transparent, rgba(8, 3, 2, .88));
+  background: linear-gradient(transparent, rgba(2, 10, 10, .88));
 }
 
 /* ---------- Text page ---------- */
@@ -179,13 +179,13 @@ h2 { font-size: clamp(1.4rem, 2.8vw, 2.1rem); }
 .after { opacity: 0; transition: opacity .8s ease; }
 .after.on { opacity: 1; }
 
-.ending { margin: 12px 0; padding: 12px 14px; border: 1px solid var(--line); border-left: 3px solid var(--copper); background: rgba(217, 128, 63, .07); font-size: .86rem; }
+.ending { margin: 12px 0; padding: 12px 14px; border: 1px solid var(--line); border-left: 3px solid var(--copper); background: rgba(114, 220, 207, .07); font-size: .86rem; }
 .ending b { display: block; font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); margin-bottom: 4px; font-weight: 500; }
 
 details { margin: 12px 0; font-size: .86rem; }
 summary { cursor: pointer; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); padding: 6px 0; }
 .chips { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; }
-.chips li { padding: 9px 12px; border: 1px solid var(--line); background: rgba(244, 220, 192, .04); font-size: .82rem; }
+.chips li { padding: 9px 12px; border: 1px solid var(--line); background: rgba(228, 248, 245, .04); font-size: .82rem; }
 .chips b { display: block; font-weight: 500; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
 
 .sources { font-size: .74rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: 14px; padding-top: 10px; }
@@ -201,7 +201,7 @@ summary { cursor: pointer; font-size: .72rem; letter-spacing: .22em; text-transf
 .controls button {
   font: inherit; font-size: .76rem; letter-spacing: .16em; text-transform: uppercase;
   padding: 10px 18px; min-height: 44px;
-  border: 1px solid var(--line-strong); background: rgba(20, 10, 6, .8); color: var(--sand); cursor: pointer;
+  border: 1px solid var(--line-strong); background: rgba(6, 22, 22, .8); color: var(--sand); cursor: pointer;
 }
 .controls button:hover:not(:disabled) { border-color: var(--amber); color: var(--amber); }
 .controls button:disabled { opacity: .3; cursor: default; }
@@ -246,7 +246,7 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 .tag + .play-story { margin-left: 14px; }
 
 /* ---------- "What it meant" section on the book page ---------- */
-.meaning { margin: 16px 0 4px; padding: 14px 16px; border: 1px solid var(--line); background: rgba(244, 220, 192, .04); }
+.meaning { margin: 16px 0 4px; padding: 14px 16px; border: 1px solid var(--line); background: rgba(228, 248, 245, .04); }
 .m-head { display: block; font-weight: 400; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); margin-bottom: 6px; }
 .m-list { margin: 0 0 14px; padding-left: 18px; font-size: .88rem; }
 .m-list li { margin-bottom: 6px; }
@@ -260,7 +260,7 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 .intro-row { display: flex; gap: 10px; margin: 14px 0 10px; }
 .page-right .ask-input {
   flex: 1; min-width: 0; font: inherit; font-size: 1rem; color: var(--sand);
-  background: rgba(15, 6, 4, .85); border: 1px solid var(--hud); padding: 12px 14px; min-height: 46px; border-radius: 0;
+  background: rgba(4, 18, 17, .85); border: 1px solid var(--hud); padding: 12px 14px; min-height: 46px; border-radius: 0;
 }
 .page-right .ask-input::placeholder { color: var(--muted); }
 .page-right .ask-input:focus-visible { outline: 2px solid var(--hud); outline-offset: 2px; }
@@ -296,7 +296,7 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
   justify-content: flex-start;
   background:
     radial-gradient(ellipse 80% 40% at 50% 0%, rgba(127, 232, 220, .10), transparent 70%),
-    linear-gradient(180deg, #07090f 0%, #120a0c 38%, #2a120a 100%);
+    linear-gradient(180deg, #03100f 0%, #05191a 38%, #0a2b29 100%);
   border: 1px solid var(--line-strong);
   text-align: center;
 }
@@ -307,16 +307,16 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
   position: absolute !important; inset: 0 0 40% 0; z-index: 0 !important; pointer-events: none;
   background-image:
     radial-gradient(1.4px 1.4px at 12% 18%, #fff, transparent 60%),
-    radial-gradient(1px 1px at 28% 8%, #f4dcc0, transparent 60%),
+    radial-gradient(1px 1px at 28% 8%, #e4f8f5, transparent 60%),
     radial-gradient(1.6px 1.6px at 44% 22%, #fff, transparent 60%),
     radial-gradient(1px 1px at 61% 12%, #fff, transparent 60%),
-    radial-gradient(1.3px 1.3px at 78% 20%, #f4dcc0, transparent 60%),
+    radial-gradient(1.3px 1.3px at 78% 20%, #e4f8f5, transparent 60%),
     radial-gradient(1px 1px at 90% 9%, #fff, transparent 60%),
     radial-gradient(1px 1px at 8% 48%, #fff, transparent 60%),
-    radial-gradient(1.2px 1.2px at 35% 52%, #f4dcc0, transparent 60%),
+    radial-gradient(1.2px 1.2px at 35% 52%, #e4f8f5, transparent 60%),
     radial-gradient(1px 1px at 70% 46%, #fff, transparent 60%),
     radial-gradient(1.4px 1.4px at 93% 58%, #fff, transparent 60%),
-    radial-gradient(1px 1px at 52% 70%, #f4dcc0, transparent 60%),
+    radial-gradient(1px 1px at 52% 70%, #e4f8f5, transparent 60%),
     radial-gradient(1px 1px at 20% 78%, #fff, transparent 60%);
   animation: cover-twinkle 5s ease-in-out infinite;
 }
@@ -329,20 +329,20 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 }
 .cover-photo img {
   width: 100%; height: 100%; object-fit: cover; object-position: 38% 62%; display: block;
-  filter: sepia(.3) saturate(1.35) contrast(1.1) brightness(1.05);
+  filter: saturate(1.05) contrast(1.1) brightness(1.05);
   transform: scale(1.04); animation: cover-drift 24s ease-in-out infinite alternate;
 }
 @keyframes cover-drift { to { transform: scale(1.14) translateX(-2%); } }
 .cover-photo::after {   /* warm sunset tint so the photo matches the rest of the book */
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(rgba(255, 140, 60, 0), rgba(214, 112, 40, .28) 70%, rgba(10, 4, 3, .55));
+  background: linear-gradient(rgba(80, 212, 200, 0), rgba(70, 200, 188, .28) 70%, rgba(3, 12, 12, .55));
 }
 
 .cover-top { display: grid; justify-items: center; gap: 10px; margin-bottom: 18px; color: var(--sand); }
-.cover-emblem { width: 52px; height: 52px; color: var(--sand); filter: drop-shadow(0 0 10px rgba(217, 128, 63, .45)); }
+.cover-emblem { width: 52px; height: 52px; color: var(--sand); filter: drop-shadow(0 0 10px rgba(114, 220, 207, .45)); }
 .cover-label { font-size: .68rem; letter-spacing: .34em; text-transform: uppercase; color: var(--muted); }
 
-.cover-title { font-size: clamp(2.1rem, 7.2vw, 3.3rem); font-weight: 500; letter-spacing: .2em; text-indent: .2em; line-height: 1; text-shadow: 0 0 28px rgba(217, 128, 63, .35); }
+.cover-title { font-size: clamp(2.1rem, 7.2vw, 3.3rem); font-weight: 500; letter-spacing: .2em; text-indent: .2em; line-height: 1; text-shadow: 0 0 28px rgba(114, 220, 207, .35); }
 .cover-sub { margin-top: 12px; font-family: var(--title); font-style: normal; font-size: clamp(.8rem, 2vw, .95rem); letter-spacing: .3em; text-indent: .3em; text-transform: uppercase; color: var(--amber); }
 .cover-rule { width: 56px; height: 2px; margin: 18px auto 16px; background: var(--copper); }
 .cover-tag { max-width: 26ch; font-size: .92rem; line-height: 1.55; color: var(--sand); }
@@ -357,7 +357,7 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 .cover-hint { display: none; }
 
 .cover-foot { position: absolute !important; left: 0; right: 0; bottom: 0; padding: 22px 16px 12px; display: grid; gap: 4px; justify-items: center;
-  background: linear-gradient(transparent, rgba(8, 3, 2, .82)); z-index: 3 !important; }
+  background: linear-gradient(transparent, rgba(2, 10, 10, .82)); z-index: 3 !important; }
 .cover-roster { font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--sand); opacity: .9; }
 .cover-credit { font-size: .56rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 
@@ -391,13 +391,13 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
   background-image:
     radial-gradient(2px 2px at 18% 30%, #fff, transparent 65%),
     radial-gradient(2.2px 2.2px at 66% 34%, #fff, transparent 65%),
-    radial-gradient(1.8px 1.8px at 84% 42%, #f4dcc0, transparent 65%),
-    radial-gradient(2px 2px at 38% 64%, #f4dcc0, transparent 65%);
+    radial-gradient(1.8px 1.8px at 84% 42%, #e4f8f5, transparent 65%),
+    radial-gradient(2px 2px at 38% 64%, #e4f8f5, transparent 65%);
   animation: cover-twinkle 3.4s ease-in-out infinite reverse;
 }
 .cover::after {
   content: ""; position: absolute; inset: 12px; z-index: 4; pointer-events: none;
-  --c: rgba(244, 220, 192, .7); --len: 22px;
+  --c: rgba(228, 248, 245, .7); --len: 22px;
   background-image:
     linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
     linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
@@ -411,20 +411,20 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 /* ---------- the glowing page revealed when the cover opens ---------- */
 .glow-page {
   position: absolute; z-index: 0; pointer-events: none;
-  border: 1px solid rgba(255, 224, 176, .8);
+  border: 1px solid rgba(190, 248, 240, .8);
   background:
-    repeating-linear-gradient(0deg, rgba(70, 30, 10, .16) 0 1px, transparent 1px 28px),
-    radial-gradient(ellipse at 50% 42%, #fff6dc 0%, #ffd899 20%, #f2a45a 46%, #9a4a1d 78%, #3d1a0c 100%);
+    repeating-linear-gradient(0deg, rgba(14, 70, 66, .16) 0 1px, transparent 1px 28px),
+    radial-gradient(ellipse at 50% 42%, #e9fffb 0%, #bff7ef 20%, #6fd9cc 46%, #1f8a84 78%, #0f3d3a 100%);
   box-shadow:
-    0 0 50px 8px rgba(255, 176, 96, .6),
-    0 0 150px 40px rgba(217, 128, 63, .4),
-    inset 0 0 50px rgba(255, 244, 210, .55);
+    0 0 50px 8px rgba(124, 230, 220, .6),
+    0 0 150px 40px rgba(114, 220, 207, .4),
+    inset 0 0 50px rgba(228, 254, 250, .55);
   animation: glow-pulse 1.6s ease-in-out infinite alternate;
 }
 .glow-page[hidden] { display: none; }
 .glow-page::after {   /* HUD brackets so it still belongs to the same book */
   content: ""; position: absolute; inset: 12px;
-  --c: rgba(60, 25, 8, .7); --len: 22px;
+  --c: rgba(14, 70, 66, .7); --len: 22px;
   background-image:
     linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
     linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
@@ -443,20 +443,20 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 .glow-page {
   border: 0; overflow: hidden;
   background:
-    radial-gradient(circle at 28% 30%, rgba(255, 244, 214, .95), transparent 46%),
-    radial-gradient(circle at 72% 62%, rgba(255, 168, 86, .95), transparent 52%),
+    radial-gradient(circle at 28% 30%, rgba(228, 254, 250, .95), transparent 46%),
+    radial-gradient(circle at 72% 62%, rgba(110, 226, 214, .95), transparent 52%),
     radial-gradient(circle at 36% 84%, rgba(127, 232, 220, .45), transparent 50%),
-    linear-gradient(160deg, #8a3a14, #d57a34 55%, #7a2f10);
+    linear-gradient(160deg, #14625e, #3fb5aa 55%, #0e4a46);
   background-size: 170% 170%;
   animation: glow-flow 3.2s ease-in-out infinite alternate;
-  box-shadow: 0 0 60px 10px rgba(255, 176, 96, .55), 0 0 160px 40px rgba(217, 128, 63, .35);
+  box-shadow: 0 0 60px 10px rgba(124, 230, 220, .55), 0 0 160px 40px rgba(114, 220, 207, .35);
 }
 .glow-page::before {   /* second layer drifting the other way, for a liquid feel */
   content: ""; position: absolute; inset: -20%;
   background:
-    radial-gradient(circle at 60% 25%, rgba(255, 230, 180, .7), transparent 42%),
-    radial-gradient(circle at 25% 70%, rgba(255, 140, 70, .65), transparent 48%),
-    radial-gradient(circle at 80% 85%, rgba(255, 244, 214, .5), transparent 40%);
+    radial-gradient(circle at 60% 25%, rgba(200, 250, 243, .7), transparent 42%),
+    radial-gradient(circle at 25% 70%, rgba(85, 215, 203, .65), transparent 48%),
+    radial-gradient(circle at 80% 85%, rgba(228, 254, 250, .5), transparent 40%);
   mix-blend-mode: screen;
   animation: glow-flow2 4.4s ease-in-out infinite alternate;
 }
@@ -468,7 +468,7 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 /* ---------- glowing page v3: no shape, just a drifting bloom of light that melts away ---------- */
 .glow-page {
   border: 0; border-radius: 50%; box-shadow: none; overflow: hidden;
-  background: radial-gradient(closest-side, rgba(255, 246, 220, .95) 0%, rgba(255, 196, 120, .8) 38%, rgba(217, 128, 63, .4) 68%, transparent 100%);
+  background: radial-gradient(closest-side, rgba(232, 255, 251, .95) 0%, rgba(140, 236, 226, .8) 38%, rgba(114, 220, 207, .4) 68%, transparent 100%);
   -webkit-mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
   mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
   filter: blur(10px);
@@ -480,7 +480,7 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 
 /* keep the bloom from creating scrollbars, and soften the inner glow so no ring shows */
 .scene { overflow: hidden; }
-.glow-page { background: radial-gradient(closest-side, rgba(255, 246, 220, .9) 0%, rgba(255, 196, 120, .7) 30%, rgba(217, 128, 63, .32) 62%, transparent 100%); }
+.glow-page { background: radial-gradient(closest-side, rgba(232, 255, 251, .9) 0%, rgba(140, 236, 226, .7) 30%, rgba(114, 220, 207, .32) 62%, transparent 100%); }
 .glow-page::before { opacity: .5; filter: blur(34px); }
 
 /* =====================================================================
@@ -499,7 +499,7 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
   border: 3px solid var(--copper); border-radius: 50%; pointer-events: none;
 }
 .postmark {
-  position: absolute; right: -14%; bottom: -16%; width: 62%; height: auto; color: rgba(52, 20, 8, .82);
+  position: absolute; right: -14%; bottom: -16%; width: 62%; height: auto; color: rgba(12, 52, 50, .82);
   mix-blend-mode: multiply; transform: rotate(-12deg);
 }
 /* make room so the title never runs under the stamp */
@@ -509,7 +509,7 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 .page-right.stamped > .play-story { max-width: calc(100% - clamp(120px, 17vw, 180px)); }
 
 /* collection on the last page */
-.stamp-collection { margin: 6px 0 18px; padding: 14px 16px; border: 1px solid var(--line); background: rgba(244, 220, 192, .04); }
+.stamp-collection { margin: 6px 0 18px; padding: 14px 16px; border: 1px solid var(--line); background: rgba(228, 248, 245, .04); }
 .stamp-count { margin: 4px 0 12px; font-size: .86rem; color: var(--sand); }
 .stamp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 12px 10px; align-items: start; }
 .stamp-cell { display: grid; gap: 6px; justify-items: center; text-align: center; }
@@ -533,7 +533,7 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 
 .stamp-lightbox {
   position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 20px;
-  background: radial-gradient(ellipse at 50% 40%, rgba(60, 28, 12, .86), rgba(6, 3, 2, .94));
+  background: radial-gradient(ellipse at 50% 40%, rgba(14, 60, 58, .86), rgba(2, 9, 9, .94));
   backdrop-filter: blur(5px); overflow-y: auto; cursor: zoom-out;
 }
 .stamp-lb-inner { display: grid; gap: 14px; justify-items: center; text-align: center; max-width: min(92vw, 620px); cursor: default; }
@@ -552,3 +552,36 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 /* keep the required "SI-generated art" mark (bottom right of each stamp) uncovered */
 .postmark { right: auto; left: -14%; bottom: -16%; }
 .stamp-lb-stamp .postmark { right: auto; left: -6%; bottom: -8%; }
+
+/* =====================================================================
+   Page turn: a leaf swings around the spine (desktop); a slide on phones
+   ===================================================================== */
+@media (min-width: 761px) {
+  .spread { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }   /* equal pages so the leaf fits exactly */
+}
+.flip-layer { position: absolute; inset: 0; z-index: 40; pointer-events: none; perspective: 2600px; }
+.flip-static { position: absolute; top: 0; bottom: 0; width: 50%; overflow: hidden; background: #041413; }
+.flip-static.left { left: 0; }
+.flip-static.right { left: 50%; }
+.flip-leaf { position: absolute; top: 0; bottom: 0; width: 50%; transform-style: preserve-3d; will-change: transform; }
+.flip-leaf.fwd { left: 50%; transform-origin: left center; }
+.flip-leaf.back { left: 0; transform-origin: right center; }
+.flip-face { position: absolute; inset: 0; overflow: hidden; background: #041413; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flip-face.back-face { transform: rotateY(180deg); }
+.flip-shade { position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: 0; background: linear-gradient(90deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, .1) 60%, rgba(0, 0, 0, .45)); }
+.flip-cast { position: absolute; top: 0; bottom: 0; width: 50%; pointer-events: none; }
+.flip-cast.right { left: 50%; background: linear-gradient(90deg, rgba(0, 0, 0, .6), rgba(0, 0, 0, 0) 75%); }
+.flip-cast.left { left: 0; background: linear-gradient(270deg, rgba(0, 0, 0, .6), rgba(0, 0, 0, 0) 75%); }
+/* a soft fold line down the middle of the open book */
+.spread::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 34px; margin-left: -17px; z-index: 6; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .35), transparent); }
+@media (max-width: 760px) { .spread::before { display: none; } }
+
+/* ---------- teal grade for the cover photo and softer tint on book photos ---------- */
+.cover-photo img { filter: grayscale(.9) contrast(1.15) brightness(1.1); }
+.cover-photo::after { background: linear-gradient(rgba(70, 200, 188, .12), rgba(70, 200, 188, .5) 62%, rgba(3, 16, 15, .7)); }
+.art::after {
+  background:
+    radial-gradient(ellipse at 50% 42%, transparent 38%, rgba(2, 10, 10, .7) 100%),
+    linear-gradient(rgba(70, 200, 188, .06), rgba(70, 200, 188, .06));
+}

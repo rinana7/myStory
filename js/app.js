@@ -56,7 +56,7 @@
     return match ? parseInt(match[0], 10) : 9999;
   }
 
-  fetch('data/machines.json?v=23')
+  fetch('data/machines.json?v=29')
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function (data) {
       machines = (data.machines || []).slice().sort(function (a, b) { return startYear(a) - startYear(b); });
@@ -362,6 +362,28 @@
 
   /* ---------- navigation with a page-turn ---------- */
   var pending = 0;   // one queued page turn, so fast key presses aren't lost
+  var FLIP_MS = 1050;
+
+  function isNarrow() { return window.matchMedia('(max-width: 760px)').matches; }
+
+  // a frozen, non-interactive copy of a page, used as the face of the turning leaf
+  function pageCopy(src) {
+    var c = src.cloneNode(true);
+    c.removeAttribute('id');
+    c.removeAttribute('tabindex');
+    c.querySelectorAll('[id]').forEach(function (n) { n.removeAttribute('id'); });
+    c.setAttribute('aria-hidden', 'true');
+    c.inert = true;
+    c.style.cssText += ';position:absolute;inset:0;width:100%;height:100%;margin:0;transform:none;';
+    return c;
+  }
+
+  function mk(cls, kids) {
+    var d = document.createElement('div');
+    d.className = cls;
+    (kids || []).forEach(function (k) { d.appendChild(k); });
+    return d;
+  }
 
   function go(delta) {
     if (window.Story && window.Story.isActive()) return;
@@ -369,33 +391,64 @@
     if (busy) { pending = delta; return; }
     if (target < 0 || target > machines.length + 1 || !machines.length) return;
     busy = true;
-    var dir = delta > 0 ? -1 : 1;
-    var exitAnim = null;
+    var forward = delta > 0;
 
-    function finish() {
-      if (exitAnim) exitAnim.cancel();   // drop the held "edge-on" state before showing the new page
+    function done(parts) {
+      busy = false;
+      if (parts && parts.heading) parts.heading.focus({ preventScroll: true });
+      if (pending) { var d = pending; pending = 0; go(d); }
+    }
+
+    // reduced motion: no animation at all
+    if (reduceMotion || !spread.animate) {
       index = target;
-      var parts = render(index);
-      var turnIn = (!reduceMotion && pageRight.animate)
-        ? pageRight.animate(
-            [{ transform: 'rotateY(' + (-dir * 90) + 'deg)' }, { transform: 'rotateY(0deg)' }],
-            { duration: 320, easing: 'ease-out' }).finished
-        : Promise.resolve();
-      turnIn.then(function () {
-        busy = false;
-        if (parts.heading) parts.heading.focus({ preventScroll: true });
-        if (pending) { var d = pending; pending = 0; go(d); }
-      });
+      done(render(index));
+      return;
     }
 
-    if (!reduceMotion && pageRight.animate) {
-      exitAnim = pageRight.animate(
-        [{ transform: 'rotateY(0deg)' }, { transform: 'rotateY(' + (dir * 90) + 'deg)' }],
-        { duration: 320, easing: 'ease-in', fill: 'forwards' });
-      exitAnim.finished.then(finish);
-    } else {
-      finish();
+    // phones (stacked layout): a short slide instead of a spine flip
+    if (isNarrow()) {
+      var px = forward ? 26 : -26;
+      var out = spread.animate([{ opacity: 1, transform: 'translateX(0)' }, { opacity: 0, transform: 'translateX(' + (-px) + 'px)' }],
+        { duration: 170, easing: 'ease-in', fill: 'forwards' });
+      out.finished.then(function () {
+        out.cancel();
+        index = target;
+        var parts = render(index);
+        spread.animate([{ opacity: 0, transform: 'translateX(' + px + 'px)' }, { opacity: 1, transform: 'translateX(0)' }],
+          { duration: 240, easing: 'ease-out', fill: 'backwards' }).finished.then(function () { done(parts); });
+      });
+      return;
     }
+
+    // desktop: a real page turn. The leaf swings around the spine; its back face is the next page on the other side.
+    var rightScroll = pageRight.scrollTop;
+    var oldLeft = pageCopy(pageLeft), oldRight = pageCopy(pageRight);
+    index = target;
+    var parts = render(index);                  // the new pages are rendered underneath, ready to be revealed
+    var newLeft = pageCopy(pageLeft), newRight = pageCopy(pageRight);
+
+    var frontShade = mk('flip-shade'), backShade = mk('flip-shade');
+    var frontFace = mk('flip-face', [forward ? oldRight : oldLeft, frontShade]);
+    var backFace = mk('flip-face back-face', [forward ? newLeft : newRight, backShade]);
+    var leaf = mk('flip-leaf ' + (forward ? 'fwd' : 'back'), [frontFace, backFace]);
+    var staticOld = mk('flip-static ' + (forward ? 'left' : 'right'), [forward ? oldLeft.cloneNode(true) : oldRight.cloneNode(true)]);
+    var cast = mk('flip-cast ' + (forward ? 'right' : 'left'));
+    var layer = mk('flip-layer', [staticOld, cast, leaf]);
+    spread.appendChild(layer);
+    if (forward) oldRight.scrollTop = rightScroll; else staticOld.firstChild.scrollTop = rightScroll;
+
+    var angle = forward ? -180 : 180;
+    var turn = leaf.animate([{ transform: 'rotateY(0deg)' }, { transform: 'rotateY(' + angle + 'deg)' }],
+      { duration: FLIP_MS, easing: 'cubic-bezier(.62,.02,.35,1)', fill: 'forwards' });
+    frontShade.animate([{ opacity: 0 }, { opacity: .6, offset: .5 }, { opacity: .6 }], { duration: FLIP_MS, fill: 'forwards' });
+    backShade.animate([{ opacity: .6 }, { opacity: .6, offset: .5 }, { opacity: 0 }], { duration: FLIP_MS, fill: 'forwards' });
+    cast.animate([{ opacity: 1 }, { opacity: 0 }], { duration: FLIP_MS * .9, fill: 'forwards' });
+
+    turn.finished.then(function () {
+      layer.remove();
+      done(parts);
+    });
   }
 
   function openBook() {
