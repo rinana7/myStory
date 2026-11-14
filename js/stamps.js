@@ -36,7 +36,7 @@
     var id = 'stm' + (++uid);
 
     var root = svg('svg', { viewBox: '0 0 ' + W + ' ' + H, class: 'stamp-svg' + (opts.ghost ? ' ghost' : ''), focusable: 'false' });
-    if (opts.ghost) root.setAttribute('aria-hidden', 'true');
+    if (opts.ghost || opts.decorative) root.setAttribute('aria-hidden', 'true');
     else { root.setAttribute('role', 'img'); root.setAttribute('aria-label', st.alt); }
 
     var defs = svg('defs');
@@ -131,6 +131,77 @@
     return slot;
   }
 
+  /* Click a stamp in the collection: it grows to full size over a dimmed page. */
+  function openLightbox(m, opener) {
+    if (document.querySelector('.stamp-lightbox')) return;
+    var isEarned = !!earned[m.id];
+    var app = document.getElementById('app');
+
+    var box = div('stamp-lightbox');
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', m.name + ' stamp');
+
+    var inner = div('stamp-lb-inner');
+    var big = div('stamp-lb-stamp' + (isEarned ? '' : ' unearned'));
+    big.appendChild(build(m, { ghost: !isEarned }));
+    if (isEarned) big.appendChild(postmark());
+    inner.appendChild(big);
+
+    var title = document.createElement('h2');
+    title.className = 'stamp-lb-title';
+    title.textContent = m.name;
+    inner.appendChild(title);
+
+    var msg = document.createElement('p');
+    msg.className = 'stamp-lb-msg';
+    msg.textContent = isEarned
+      ? 'Stamp earned. You watched this robot\u2019s story to the end.'
+      : 'Not yet earned. Watch this robot\u2019s story to the end to stamp it.';
+    inner.appendChild(msg);
+
+    var note = document.createElement('p');
+    note.className = 'm-note';
+    note.textContent = 'Stylized SI-generated art, not a technical drawing of the real hardware.';
+    inner.appendChild(note);
+
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'stamp-lb-close';
+    close.textContent = 'Close';
+    inner.appendChild(close);
+    box.appendChild(inner);
+
+    function shut() {
+      document.removeEventListener('keydown', onKey, true);
+      app.inert = false;
+      var done = function () { box.remove(); if (opener && opener.focus) opener.focus({ preventScroll: true }); };
+      if (!reduceMotion && box.animate) box.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 180, fill: 'forwards' }).finished.then(done);
+      else done();
+    }
+    function onKey(e) {
+      if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); shut(); }
+      else if (e.key === 'Tab') { e.preventDefault(); close.focus(); }   // only one control, keep focus in the dialog
+      else if (e.key.indexOf('Arrow') === 0) { e.stopPropagation(); }       // arrows must not turn the book behind it
+    }
+    close.addEventListener('click', shut);
+    box.addEventListener('click', function (e) { if (e.target === box || e.target === inner) shut(); });
+    document.addEventListener('keydown', onKey, true);
+
+    document.body.appendChild(box);
+    app.inert = true;
+    close.focus({ preventScroll: true });
+
+    if (!reduceMotion && box.animate) {
+      box.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, fill: 'backwards' });
+      big.animate([
+        { opacity: 0, transform: 'scale(.4) rotate(-10deg)', offset: 0 },
+        { opacity: 1, transform: 'scale(1.05) rotate(1.5deg)', offset: .7 },
+        { opacity: 1, transform: 'scale(1) rotate(-1.5deg)', offset: 1 }
+      ], { duration: 460, easing: 'cubic-bezier(.2,.8,.25,1)', fill: 'backwards' });
+    }
+  }
+
   /* The collection shown on the last page: earned stamps in colour, the rest as ghosts. */
   function collection(machines) {
     var box = div('stamp-collection');
@@ -152,7 +223,13 @@
     var grid = div('stamp-grid');
     withStamp.forEach(function (m) {
       var cell = div('stamp-cell' + (earned[m.id] ? ' earned' : ''));
-      cell.appendChild(build(m, { ghost: !earned[m.id] }));
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'stamp-btn';
+      btn.setAttribute('aria-label', 'Enlarge the ' + m.name + ' stamp' + (earned[m.id] ? '' : ' (not yet earned)'));
+      btn.appendChild(build(m, { ghost: !earned[m.id], decorative: true }));
+      btn.addEventListener('click', function () { openLightbox(m, btn); });
+      cell.appendChild(btn);
       var cap = document.createElement('span');
       cap.className = 'stamp-cap';
       cap.textContent = m.name + (earned[m.id] ? '' : ' · not yet earned');

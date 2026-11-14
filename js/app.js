@@ -56,7 +56,7 @@
     return match ? parseInt(match[0], 10) : 9999;
   }
 
-  fetch('data/machines.json?v=16')
+  fetch('data/machines.json?v=18')
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function (data) {
       machines = (data.machines || []).slice().sort(function (a, b) { return startYear(a) - startYear(b); });
@@ -459,6 +459,7 @@
 
   document.addEventListener('keydown', function (e) {
     if (e.target && e.target.tagName === 'INPUT') return;
+    if (document.querySelector('.stamp-lightbox')) return;
     if (e.key === 'ArrowRight') { index === -1 ? openBook() : go(1); }
     else if (e.key === 'ArrowLeft') { go(-1); }
   });
