@@ -1,0 +1,432 @@
+/* My Story: an interactive storybook.
+   Reads data/machines.json and turns each machine into a spread.
+   Illustrations are PLACEHOLDERS drawn in code; replace with credited NASA images. */
+
+(function () {
+  'use strict';
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var book = document.getElementById('book');
+  var cover = document.getElementById('cover');
+  var spread = document.getElementById('spread');
+  var pageLeft = document.getElementById('pageLeft');
+  var pageRight = document.getElementById('pageRight');
+  var controls = document.getElementById('controls');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var skipBtn = document.getElementById('skip');
+  var counter = document.getElementById('counter');
+  var statusEl = document.getElementById('status');
+
+  var bookTyper = window.Typewriter.make();
+  var machines = [];
+  var intro = null;        // content of the first page (the question)
+  var userAnswer = '';     // kept in memory only; never saved or sent anywhere
+  var index = -1;          // -1 = cover, 0 = intro question, 1..n = machines, n+1 = credits page
+  var busy = false;
+  var timers = [];
+  var revealNow = null;    // function that shows everything immediately
+
+  /* ---------- tiny DOM helper ---------- */
+  function h(tag, attrs, kids) {
+    var node = document.createElement(tag);
+    if (attrs) {
+      Object.keys(attrs).forEach(function (k) {
+        if (k === 'class') node.className = attrs[k];
+        else if (k === 'text') node.textContent = attrs[k];
+        else node.setAttribute(k, attrs[k]);
+      });
+    }
+    (kids || []).forEach(function (kid) {
+      if (kid == null) return;
+      node.appendChild(typeof kid === 'string' ? document.createTextNode(kid) : kid);
+    });
+    return node;
+  }
+
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+
+  /* ---------- data ---------- */
+  function startYear(m) {
+    var match = /\d{4}/.exec(m.years || '');
+    return match ? parseInt(match[0], 10) : 9999;
+  }
+
+  fetch('data/machines.json')
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (data) {
+      machines = (data.machines || []).slice().sort(function (a, b) { return startYear(a) - startYear(b); });
+      intro = data.intro || null;
+    })
+    .catch(function () {
+      cover.querySelector('.cover-hint').textContent =
+        'Could not load the stories. Serve this folder with a web server and reload.';
+      cover.disabled = true;
+    });
+
+  /* ---------- placeholder illustrations ---------- */
+  var PALETTES = {
+    'Moon':   { sky: ['#05060d', '#1b2030'], ground: '#9097a6', ground2: '#6f7686' },
+    'Mars':   { sky: ['#3a1d14', '#c98a5c'], ground: '#a24a28', ground2: '#7d3720' },
+    'Asteroid belt': { sky: ['#05060d', '#232a52'], ground: '#6b6f8f', ground2: '#4a4e6b' },
+    'Asteroid': { sky: ['#05060d', '#232a52'], ground: '#7a7466', ground2: '#59554a' }
+  };
+
+  function machineShape(id) {
+    // very simple shapes, all positioned near (200, 190) so the zoom has a target
+    if (id === 'ingenuity') {
+      return '<g stroke="#e9e9e9" stroke-width="3" fill="#e9e9e9">' +
+        '<line x1="140" y1="150" x2="260" y2="150"/><line x1="200" y1="150" x2="200" y2="168"/>' +
+        '<rect x="188" y="168" width="24" height="16" rx="3"/>' +
+        '<line x1="192" y1="184" x2="188" y2="196"/><line x1="208" y1="184" x2="212" y2="196"/></g>';
+    }
+    if (id === 'dawn') {
+      return '<g fill="#cfd6e6"><rect x="186" y="150" width="28" height="28" rx="3"/></g>' +
+        '<g fill="#3d6fb5" stroke="#cfd6e6"><rect x="110" y="156" width="70" height="16"/>' +
+        '<rect x="220" y="156" width="70" height="16"/></g>';
+    }
+    if (id === 'near-shoemaker') {
+      return '<g fill="#cfd6e6"><rect x="190" y="152" width="20" height="26" rx="2"/></g>' +
+        '<g fill="#3d6fb5"><rect x="150" y="160" width="36" height="10"/><rect x="214" y="160" width="36" height="10"/></g>';
+    }
+    // rovers / stations: body + wheels
+    return '<g fill="#d9d9d9"><rect x="165" y="172" width="70" height="22" rx="4"/>' +
+      '<rect x="190" y="156" width="20" height="16" rx="2"/></g>' +
+      '<g fill="#333"><circle cx="175" cy="198" r="8"/><circle cx="200" cy="198" r="8"/><circle cx="225" cy="198" r="8"/></g>';
+  }
+
+  function placeholderSVG(m) {
+    var p = PALETTES[m.place] || PALETTES['Moon'];
+    var uid = 'g' + m.id.replace(/[^a-z0-9]/gi, '');
+    return '<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" ' +
+      'aria-label="Placeholder illustration for ' + m.name.replace(/"/g, '') + '">' +
+      '<defs><linearGradient id="' + uid + '" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0" stop-color="' + p.sky[0] + '"/><stop offset="1" stop-color="' + p.sky[1] + '"/></linearGradient></defs>' +
+      '<rect width="400" height="300" fill="url(#' + uid + ')"/>' +
+      '<g fill="#fff" opacity=".8"><circle cx="40" cy="40" r="1.5"/><circle cx="120" cy="70" r="1"/><circle cx="330" cy="50" r="1.5"/>' +
+      '<circle cx="280" cy="110" r="1"/><circle cx="70" cy="120" r="1"/><circle cx="360" cy="140" r="1"/></g>' +
+      '<ellipse cx="200" cy="290" rx="320" ry="90" fill="' + p.ground2 + '"/>' +
+      '<ellipse cx="220" cy="300" rx="300" ry="80" fill="' + p.ground + '"/>' +
+      machineShape(m.id) +
+      '</svg>';
+  }
+
+  /* ---------- page builders ---------- */
+  function buildLeftMachine(m) {
+    var inner = h('div', { class: 'art-inner' });
+    var img = m.image || {};
+    var captionText;
+    if (img.file) {
+      var pic = h('img', { src: img.file, alt: img.alt || '' });
+      pic.style.objectPosition = img.focus || '50% 50%';
+      inner.appendChild(pic);
+      inner.style.transformOrigin = img.focus || '50% 50%';
+      inner.style.setProperty('--zoom', img.zoom || 1.4);
+      captionText = (img.kind ? img.kind + ' // ' : '') + 'Image // ' + (img.credit || 'NASA') +
+        (img.nasaId ? ' // NASA ID ' + img.nasaId : '');
+    } else {
+      inner.style.transformOrigin = '50% 62%';   // zoom toward the machine
+      inner.innerHTML = placeholderSVG(m);
+      captionText = 'Placeholder illustration. A credited NASA image will go here.';
+    }
+    var art = h('div', { class: 'art' }, [inner]);
+    var caption = h('div', { class: 'art-caption', text: captionText });
+    pageLeft.replaceChildren(art, h('div', { class: 'art-frame hud-frame', 'aria-hidden': 'true' }), caption);
+    return inner;
+  }
+
+  function buildRightIntro() {
+    var heading = h('h2', { text: intro.title, tabindex: '-1' });
+    var leadEl = h('p', { class: 'story-text' });
+    var promptEl = h('p', { class: 'story-text intro-prompt' });
+    var replyEl = h('p', { class: 'ask-reply-book' });
+    var input = h('input', { class: 'ask-input', type: 'text', maxlength: '140', 'aria-label': intro.prompt, placeholder: 'Type your answer, then press Enter' });
+    var send = h('button', { class: 'play-story intro-send', type: 'button', text: 'Send' });
+    var hint = h('p', { class: 'intro-hint', text: intro.hint });
+    hint.hidden = true;
+    var note = h('p', { class: 'intro-note', text: intro.note });
+    var after = h('div', { class: 'after' }, [h('div', { class: 'intro-row' }, [input, send]), replyEl, hint, note]);
+
+    function submit() {
+      var v = input.value.trim();
+      if (!v) return;
+      userAnswer = v;
+      input.disabled = true; send.disabled = true;
+      // the answer is shown here only; it is not stored or sent anywhere
+      bookTyper.add(replyEl, '"' + v + '"  ' + intro.reply, { delay: 0, cps: 50, onDone: function () {
+        hint.hidden = false;
+        nextBtn.classList.add('nudge');
+      } });
+    }
+    send.addEventListener('click', submit);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); submit(); } });
+
+    pageRight.replaceChildren(
+      h('p', { class: 'kicker', text: intro.kicker }),
+      heading, leadEl, promptEl, after
+    );
+    return { leadEl: leadEl, promptEl: promptEl, after: after, heading: heading, manualReveal: true, spans: [] };
+  }
+
+  function buildLeftCredits() {
+    var inner = h('div', { class: 'art-inner' });
+    inner.innerHTML = placeholderSVG({ id: 'end', name: 'The end', place: 'Moon' });
+    pageLeft.replaceChildren(h('div', { class: 'art' }, [inner]), h('div', { class: 'art-frame hud-frame', 'aria-hidden': 'true' }));
+    return inner;
+  }
+
+  function sentences(text) {
+    return (text || '').split(/(?<=[.!?])\s+/).filter(Boolean);
+  }
+
+  function buildRightMachine(m) {
+    var storyEl = h('p', { class: 'story-text' });
+
+    var meta = 'Mission log // ' + [m.place, m.years].filter(Boolean).join(' · ');
+
+    var chips = h('ul', { class: 'chips' }, (m.stats || []).map(function (s) {
+      return h('li', null, [h('b', { text: s.label }), s.value]);
+    }));
+    var facts = h('details', null, [h('summary', { text: 'Mission data' }), chips]);
+
+    var ending = m.ending ? h('p', { class: 'ending' }, [h('b', { text: 'How it ended: ' }), m.ending]) : null;
+
+    var srcList = h('ul', null, (m.sources || []).map(function (s) {
+      return h('li', null, [h('a', { href: s.url, target: '_blank', rel: 'noopener', text: s.label })]);
+    }));
+    var sources = h('div', { class: 'sources' }, [h('span', { text: 'Source pages consulted:' }), srcList]);
+
+    var meaning = null;
+    if (m.meaning) {
+      var srcLabel = function (id) {
+        var f = (m.sources || []).filter(function (x) { return x.id === id; })[0];
+        return f ? f.label : id;
+      };
+      meaning = h('div', { class: 'meaning' }, [
+        h('b', { class: 'm-head', text: 'What it changed' }),
+        h('ul', { class: 'm-list' }, (m.meaning.changed || []).map(function (c) {
+          return h('li', null, [c.text + ' ', h('span', { class: 'm-src', text: '(' + srcLabel(c.source) + ')' })]);
+        })),
+        h('b', { class: 'm-head voice-head', text: 'Story voice' }),
+        h('p', { class: 'reflection', text: m.meaning.reflection }),
+        h('p', { class: 'm-note', text: 'Written by the storyteller, not a NASA statement.' })
+      ]);
+    }
+
+    var after = h('div', { class: 'after' }, [facts, ending, meaning, sources].filter(Boolean));
+
+    var tagText = m.endingType ? 'Ending: ' + m.endingType.replace(/-/g, ' ') : null;
+
+    var heading = h('h2', { text: m.name, tabindex: '-1' });
+    var playBtn = null;
+    if (m.scenes && m.scenes.length && window.Story) {
+      playBtn = h('button', { class: 'play-story', type: 'button', text: '▶ Play the story' });
+      playBtn.addEventListener('click', function () { openStory(m); });
+    }
+    pageRight.replaceChildren.apply(pageRight, [
+      h('p', { class: 'kicker', text: meta }),
+      heading,
+      tagText ? h('span', { class: 'tag', text: tagText }) : null,
+      playBtn,
+      storyEl,
+      after
+    ].filter(Boolean));
+    return { spans: [], story: { el: storyEl, text: m.story || '' }, after: after, heading: heading };
+  }
+
+  function buildRightCredits() {
+    var seen = {};
+    var links = [];
+    machines.forEach(function (m) {
+      (m.sources || []).forEach(function (s) {
+        if (!seen[s.url]) { seen[s.url] = true; links.push(s); }
+      });
+    });
+    var list = h('ul', null, links.map(function (s) {
+      return h('li', null, [h('a', { href: s.url, target: '_blank', rel: 'noopener', text: s.label })]);
+    }));
+
+    var heading = h('h2', { text: 'The end, for now', tabindex: '-1' });
+    pageRight.replaceChildren(
+      h('p', { class: 'kicker', text: 'About this book' }),
+      heading,
+      h('div', { class: 'credits' }, [
+        userAnswer ? h('p', { class: 'your-question', text: 'You asked: "' + userAnswer + '" Every robot in this book began with a question like yours.' }) : null,
+        h('p', { text: 'These robots finished their work, but the places they explored are still there, and so is what they taught us.' }),
+        h('p', { text: 'Not affiliated with or endorsed by NASA. NASA did not review this project and is not responsible for its accuracy.' }),
+        h('p', { text: 'Each picture comes from the NASA Image and Video Library, with its credit line under the image. The drawing on this last page was made in code.' }),
+        h('p', { text: 'Super Intelligence (SI) disclosure: the story drafts and this page’s code were written with help from an SI tool (Claude). [Finalize wording before submitting.]' }),
+        h('p', { text: 'Source pages consulted:' }),
+        list
+      ].filter(Boolean))
+    );
+    return { spans: [], after: null, heading: heading };
+  }
+
+  /* ---------- show a page ---------- */
+  function render(i) {
+    clearTimers();
+    revealNow = null;
+
+    nextBtn.classList.remove('nudge');
+    var zoomEl, parts;
+    var isIntro = i === 0 && !!intro;
+    var machineAt = i - 1;
+    if (isIntro) {
+      zoomEl = buildLeftMachine({ id: 'intro', name: 'Mars panorama', image: intro.image });
+      parts = buildRightIntro();
+    } else if (machineAt >= 0 && machineAt < machines.length) {
+      var m = machines[machineAt];
+      zoomEl = buildLeftMachine(m);
+      parts = buildRightMachine(m);
+    } else {
+      zoomEl = buildLeftCredits();
+      parts = buildRightCredits();
+    }
+
+    function two(n) { return (n < 10 ? '0' : '') + n; }
+    counter.textContent = isIntro ? 'Before we begin' : (machineAt < machines.length ? 'Page ' + two(i) + ' / ' + two(machines.length) : 'The end');
+    prevBtn.disabled = i <= 0;
+    nextBtn.disabled = i >= machines.length + 1;
+    statusEl.textContent = isIntro ? intro.title : (machineAt < machines.length ? machines[machineAt].name : 'The end');
+
+    var TYPE_DELAY = 900, TYPE_CPS = 42;
+    bookTyper.clear();
+    if (parts.story) bookTyper.add(parts.story.el, parts.story.text, { delay: TYPE_DELAY, cps: TYPE_CPS });
+    if (isIntro) {
+      // lead line types first, then the question, then the answer box appears
+      bookTyper.add(parts.leadEl, intro.lead, { delay: TYPE_DELAY, cps: TYPE_CPS, onDone: function () {
+        bookTyper.add(parts.promptEl, intro.prompt, { delay: 400, cps: TYPE_CPS, onDone: function () {
+          parts.after.classList.add('on');
+        } });
+      } });
+    }
+
+    function showAll() {
+      clearTimers();
+      bookTyper.finishAll();
+      if (parts.after) parts.after.classList.add('on');
+    }
+    revealNow = showAll;
+
+    if (reduceMotion) { showAll(); return parts; }
+
+    // machines with a scene script start their story once the zoom is under way
+    if (machineAt >= 0 && machineAt < machines.length && machines[machineAt].scenes && machines[machineAt].scenes.length && window.Story) {
+      var storyMachine = machines[machineAt];
+      later(function () { openStory(storyMachine); }, 3200);
+    }
+
+    // 1) slow zoom toward the image, 2) tell the story line by line, 3) reveal facts
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { zoomEl.classList.add('zoomed'); });
+    });
+    if (!parts.manualReveal) {
+      var typingMs = TYPE_DELAY + (parts.story ? parts.story.text.length / TYPE_CPS * 1000 : 0) + 500;
+      later(function () { if (parts.after) parts.after.classList.add('on'); }, typingMs);
+    }
+    return parts;
+  }
+
+  /* ---------- cinematic story overlay ---------- */
+  function openStory(m) {
+    if (!window.Story || window.Story.isActive() || busy) return;
+    clearTimers();
+    controls.hidden = true;
+    window.Story.open(m, {
+      host: spread,
+      userAnswer: userAnswer,
+      onClose: function () {
+        controls.hidden = false;
+        if (revealNow) revealNow();
+        var hd = pageRight.querySelector('h2');
+        if (hd) hd.focus({ preventScroll: true });
+      }
+    });
+  }
+
+  /* ---------- navigation with a page-turn ---------- */
+  var pending = 0;   // one queued page turn, so fast key presses aren't lost
+
+  function go(delta) {
+    if (window.Story && window.Story.isActive()) return;
+    var target = index + delta;
+    if (busy) { pending = delta; return; }
+    if (target < 0 || target > machines.length + 1 || !machines.length) return;
+    busy = true;
+    var dir = delta > 0 ? -1 : 1;
+    var exitAnim = null;
+
+    function finish() {
+      if (exitAnim) exitAnim.cancel();   // drop the held "edge-on" state before showing the new page
+      index = target;
+      var parts = render(index);
+      var turnIn = (!reduceMotion && pageRight.animate)
+        ? pageRight.animate(
+            [{ transform: 'rotateY(' + (-dir * 90) + 'deg)' }, { transform: 'rotateY(0deg)' }],
+            { duration: 320, easing: 'ease-out' }).finished
+        : Promise.resolve();
+      turnIn.then(function () {
+        busy = false;
+        if (parts.heading) parts.heading.focus({ preventScroll: true });
+        if (pending) { var d = pending; pending = 0; go(d); }
+      });
+    }
+
+    if (!reduceMotion && pageRight.animate) {
+      exitAnim = pageRight.animate(
+        [{ transform: 'rotateY(0deg)' }, { transform: 'rotateY(' + (dir * 90) + 'deg)' }],
+        { duration: 320, easing: 'ease-in', fill: 'forwards' });
+      exitAnim.finished.then(finish);
+    } else {
+      finish();
+    }
+  }
+
+  function openBook() {
+    if (!machines.length || index !== -1 || busy) return;
+    busy = true;
+    var done = function () {
+      cover.hidden = true;
+      book.dataset.state = 'open';
+      spread.hidden = false;
+      controls.hidden = false;
+      index = 0;
+      var parts = render(0);
+      busy = false;
+      if (parts.heading) parts.heading.focus({ preventScroll: true });
+    };
+    if (!reduceMotion && cover.animate) {
+      cover.animate(
+        [{ transform: 'rotateY(0deg)', opacity: 1 }, { transform: 'rotateY(-95deg)', opacity: 0 }],
+        { duration: 700, easing: 'ease-in', fill: 'forwards' }).finished.then(done);
+    } else {
+      done();
+    }
+  }
+
+  /* ---------- events ---------- */
+  cover.addEventListener('click', openBook);
+  nextBtn.addEventListener('click', function () { go(1); });
+  prevBtn.addEventListener('click', function () { go(-1); });
+  skipBtn.addEventListener('click', function () { if (revealNow) revealNow(); });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.target && e.target.tagName === 'INPUT') return;
+    if (e.key === 'ArrowRight') { index === -1 ? openBook() : go(1); }
+    else if (e.key === 'ArrowLeft') { go(-1); }
+  });
+
+  var startX = null;
+  spread.addEventListener('pointerdown', function (e) {
+    startX = (e.target.closest && e.target.closest('input, button, a')) ? null : e.clientX;
+  });
+  spread.addEventListener('pointerup', function (e) {
+    if (startX === null || (window.Story && window.Story.isActive())) { startX = null; return; }
+    var dx = e.clientX - startX;
+    startX = null;
+    if (Math.abs(dx) > 60) go(dx < 0 ? 1 : -1);
+  });
+})();

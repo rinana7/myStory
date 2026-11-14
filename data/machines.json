@@ -1,0 +1,2061 @@
+{
+  "_schema": {
+    "id": "short slug",
+    "name": "display name",
+    "place": "Moon | Mars | Deep space | Asteroid belt | Asteroid",
+    "endingType": "left-by-design | shut-down | power | fuel | stuck | damage | landed | drifting",
+    "years": "active years",
+    "status": "plain-language current status",
+    "whyItWasSent": "one sentence, kid-friendly",
+    "whatItDiscovered": "one or two sentences",
+    "ending": "how it ended, one or two sentences",
+    "story": "first-person voice, about 80 words, ages 8-12",
+    "stats": "array of {label, value, source} for quick-fact chips",
+    "mythVsFact": "optional {myth, fact}",
+    "sources": "array of {id, label, url}",
+    "image": "{file, alt, credit, nasaId, kind, focus, zoom} - focus is the zoom target as 'x% y%', zoom is the final scale; kind is optional (e.g. artist's concept)",
+    "notes": "unresolved questions or facts not yet found in a source"
+  },
+  "_voiceGuide": "Approved voice: warm, first-person, from the machine's point of view; ages 8-12; short sentences; about 80 words; stay playful but never invent quotes or feelings attributed to NASA or the real spacecraft.",
+  "_rules": [
+    "Do not add any fact that is not taken from a listed source (NSSDCA or NASA mission pages).",
+    "Leave a field null until it has been filled from a source.",
+    "Tag each stat with the source id it came from."
+  ],
+  "_mediaRules": [
+    "Educational, non-commercial use of NASA images is generally allowed; acknowledge NASA as the source of the image.",
+    "Do not use the NASA meatball, worm logotype or seal anywhere, and never next to SI-generated imagery.",
+    "Do not imply NASA endorsement of this project.",
+    "Third-party images marked copyright-protected need permission from the holder; skip them.",
+    "Images of identifiable people (e.g. astronauts): fine for non-commercial education, but keep the project non-commercial, and no NFTs or crypto use.",
+    "Hackathon: no images or likeness of anyone under 18.",
+    "SI-generated images need a visible SI watermark; SI-written text and code need an acknowledgment in descriptive text and metadata.",
+    "NASA's SI guidance: do not write 'according to NASA' in SI-assisted text; list NASA pages as 'source pages consulted' and say NASA did not review the project."
+  ],
+  "intro": {
+    "kicker": "Mission briefing // before you begin",
+    "title": "Your Turn",
+    "lead": "Every robot in this book began with a question. Before you meet them, here is yours.",
+    "prompt": "If you could send a robot anywhere in the solar system, where would it go? What would you ask it to find?",
+    "reply": "Logged. Every mission begins with a question like this one.",
+    "hint": "Press Next to meet the explorers.",
+    "note": "Your answer stays on this page. It is not saved or sent anywhere.",
+    "image": {
+      "file": "images/opportunity/panorama.jpg",
+      "alt": "Wide panorama of the rim of Endeavour Crater on Mars under a hazy brown sky, with parts of a rover in the foreground.",
+      "credit": "NASA/JPL-Caltech/Cornell Univ./Arizona State Univ.",
+      "nasaId": "PIA19109",
+      "focus": "38% 60%",
+      "zoom": 1.2
+    }
+  },
+  "machines": [
+    {
+      "id": "opportunity",
+      "name": "Opportunity",
+      "storyLabel": "Mars Exploration Rover",
+      "meaning": {
+        "changed": [
+          {
+            "text": "NASA says the rovers confirmed that water was long standing on the surface of Mars.",
+            "source": "nasa-spirit-opportunity"
+          },
+          {
+            "text": "Opportunity found hematite, gypsum veins and clay minerals, all signs of a watery past.",
+            "source": "nasa-highlights"
+          },
+          {
+            "text": "It was designed for 90 sols and operated almost 15 years, exceeding its life expectancy by 60 times.",
+            "source": "nasa-opportunity"
+          }
+        ],
+        "reflection": "No one planned for it to stay this long. Almost fifteen years, a planet of pictures, and one question it was sent to answer. Then the sky went dark, and somewhere on Mars it is still where it stopped."
+      },
+      "place": "Mars",
+      "endingType": "power",
+      "years": "2004-2018",
+      "status": "Last communicated with Earth on June 10, 2018; NASA declared End of Mission on Feb. 13, 2019.",
+      "whyItWasSent": "To look for signs of past water on Mars.",
+      "whatItDiscovered": "Small round deposits of hematite, a mineral that typically forms in water, nicknamed 'blueberries'. Near the rim of Endeavour Crater it found bright veins of gypsum and clay minerals, which are signs of a watery past.",
+      "ending": "A severe Mars-wide dust storm blanketed the solar-powered rover's location in June 2018. Its last communication with Earth was June 10, 2018, and NASA declared End of Mission on Feb. 13, 2019.",
+      "story": "I'm Opportunity, a solar-powered rover. My team planned for me to work about three months. I explored Mars for almost 15 years! I found tiny round deposits of hematite, a mineral that usually forms in water. They were nicknamed blueberries. Near Endeavour Crater I found bright veins of gypsum and clay minerals. In 2018 a planet-wide dust storm covered my spot on Mars, and on June 10 I last spoke with Earth.",
+      "stats": [
+        {
+          "label": "Planned mission",
+          "value": "90 sols, about 3 Earth months",
+          "source": "nasa-opportunity"
+        },
+        {
+          "label": "Actual mission",
+          "value": "Almost 15 years; exceeded life expectancy by 60 times",
+          "source": "nasa-opportunity"
+        },
+        {
+          "label": "Distance driven",
+          "value": "28.06 miles (45.16 km)",
+          "source": "nasa-spirit-opportunity"
+        },
+        {
+          "label": "Power source",
+          "value": "Solar arrays, up to 140 W",
+          "source": "nssdca"
+        },
+        {
+          "label": "Launch",
+          "value": "July 7, 2003 (20:18:15 PDT)",
+          "source": "nasa-opportunity"
+        },
+        {
+          "label": "Landing",
+          "value": "Jan. 24, 2004 PST (Jan. 25 Universal Time)",
+          "source": "nasa-highlights"
+        },
+        {
+          "label": "Reached Endeavour Crater",
+          "value": "Aug. 9, 2011",
+          "source": "nasa-opportunity"
+        },
+        {
+          "label": "Last contact",
+          "value": "June 10, 2018",
+          "source": "nasa-opportunity"
+        },
+        {
+          "label": "End of Mission",
+          "value": "Feb. 13, 2019",
+          "source": "nasa-opportunity"
+        }
+      ],
+      "mythVsFact": null,
+      "sources": [
+        {
+          "id": "nasa-spirit-opportunity",
+          "label": "NASA: Spirit and Opportunity (overview)",
+          "url": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+        },
+        {
+          "id": "nasa-opportunity",
+          "label": "NASA: Opportunity rover page",
+          "url": "https://science.nasa.gov/mission/mer-opportunity/"
+        },
+        {
+          "id": "nasa-highlights",
+          "label": "NASA: MER science highlights",
+          "url": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-highlights/"
+        },
+        {
+          "id": "nasa-image-PIA19109",
+          "label": "NASA image PIA19109 (panorama from Endeavour rim)",
+          "url": "https://images.nasa.gov/details/PIA19109"
+        },
+        {
+          "id": "nasa-image-PIA23178",
+          "label": "NASA image PIA23178 (Opportunity's final traverse map)",
+          "url": "https://images.nasa.gov/details/PIA23178"
+        },
+        {
+          "id": "nasa-image-PIA19113",
+          "label": "NASA image PIA19113 (concretions near Fram Crater)",
+          "url": "https://images.nasa.gov/details/PIA19113"
+        },
+        {
+          "id": "nasa-image-PIA15035",
+          "label": "NASA image PIA15035 (Homestake vein close-up)",
+          "url": "https://images.nasa.gov/details/PIA15035"
+        },
+        {
+          "id": "nasa-image-PIA22929",
+          "label": "NASA image PIA22929 (Opportunity's last image)",
+          "url": "https://images.nasa.gov/details/PIA22929"
+        },
+        {
+          "id": "nssdca",
+          "label": "NSSDCA: Opportunity, ID 2003-032A",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-032A"
+        }
+      ],
+      "image": {
+        "file": "images/opportunity.jpg",
+        "alt": "Self-portrait of the Opportunity rover from above, its solar panels covered in a fine layer of reddish dust, on orange-brown Martian ground.",
+        "credit": "NASA/JPL-Caltech/Cornell Univ./Arizona State Univ.",
+        "nasaId": "PIA17759",
+        "focus": "46% 48%",
+        "zoom": 1.5
+      },
+      "scenes": [
+        {
+          "chapter": "Explore",
+          "type": "hero",
+          "duration": 8000,
+          "title": "OPPORTUNITY",
+          "kicker": "Mars · 2004–2018",
+          "text": "I'm a solar-powered rover. My job: look for signs of past water on Mars.",
+          "image": {
+            "file": "images/opportunity/panorama.jpg",
+            "alt": "Wide panorama of the rim of Endeavour Crater on Mars under a hazy brown sky, with parts of the rover in the foreground.",
+            "credit": "NASA/JPL-Caltech/Cornell Univ./Arizona State Univ.",
+            "nasaId": "PIA19109"
+          },
+          "source": [
+            "nasa-opportunity",
+            "nasa-image-PIA19109"
+          ]
+        },
+        {
+          "chapter": "Explore",
+          "type": "numbers",
+          "duration": 8000,
+          "title": "Built for 90 sols",
+          "planned": {
+            "label": "Planned",
+            "value": "90 sols",
+            "sub": "about 3 Earth months"
+          },
+          "actual": {
+            "label": "Actual",
+            "value": "Almost 15 years",
+            "sub": "60 times its planned lifetime"
+          },
+          "text": "NASA says Opportunity exceeded its life expectancy by 60 times.",
+          "source": [
+            "nasa-opportunity"
+          ]
+        },
+        {
+          "chapter": "Explore",
+          "type": "map",
+          "duration": 9000,
+          "title": "My Journey Across Mars",
+          "text": "From Eagle Crater to the rim of Endeavour Crater: 28.06 miles (45.16 kilometers).",
+          "image": {
+            "file": "images/opportunity/traverse-map.jpg",
+            "alt": "Gray satellite map of Mars with a yellow line tracing Opportunity's route from Eagle Crater at the top, past Endurance, Victoria and Santa Maria craters, to Perseverance Valley on the rim of Endeavour Crater. A 5 kilometer scale bar is at the lower left.",
+            "credit": "NASA/JPL-Caltech/MSSS",
+            "nasaId": "PIA23178"
+          },
+          "source": [
+            "nasa-image-PIA23178"
+          ]
+        },
+        {
+          "chapter": "Discover",
+          "type": "scan",
+          "duration": 9000,
+          "title": "Blueberries on Mars",
+          "text": "Small round deposits of hematite, a mineral that typically forms in water. Scientists nicknamed them \"blueberries.\"",
+          "hud": [
+            {
+              "label": "Location",
+              "value": "Near Fram Crater, April 2004"
+            },
+            {
+              "label": "Area shown",
+              "value": "1.2 inches (3 cm) across"
+            },
+            {
+              "label": "Observation",
+              "value": "Hematite typically forms in water"
+            }
+          ],
+          "image": {
+            "file": "images/opportunity/blueberries.jpg",
+            "alt": "Close-up of many small, smooth, gray-blue round spherules scattered on reddish Martian soil.",
+            "credit": "NASA/JPL-Caltech/Cornell/USGS",
+            "nasaId": "PIA19113"
+          },
+          "source": [
+            "nasa-highlights",
+            "nasa-image-PIA19113"
+          ]
+        },
+        {
+          "chapter": "Discover",
+          "type": "scan",
+          "duration": 9000,
+          "title": "A Vein of Gypsum",
+          "text": "Near the rim of Endeavour Crater, I found bright veins of gypsum, and clay minerals that formed in neutral-pH water.",
+          "hud": [
+            {
+              "label": "Target",
+              "value": "Homestake vein"
+            },
+            {
+              "label": "Made of",
+              "value": "Rich in calcium and sulfur, possibly gypsum"
+            },
+            {
+              "label": "Instrument",
+              "value": "Microscopic Imager"
+            }
+          ],
+          "image": {
+            "file": "images/opportunity/homestake.jpg",
+            "alt": "Black-and-white close-up of a bright, thick mineral vein running diagonally across the frame, with small dark rocks around it.",
+            "credit": "NASA/JPL-Caltech",
+            "nasaId": "PIA15035"
+          },
+          "source": [
+            "nasa-highlights",
+            "nasa-image-PIA15035"
+          ]
+        },
+        {
+          "chapter": "Mission",
+          "type": "datacard",
+          "duration": 9000,
+          "title": "My Job on Mars",
+          "text": "For almost 15 years I explored the Martian surface, looking for signs of a watery past.",
+          "card": [
+            {
+              "label": "Mission",
+              "value": "Opportunity (Mars Exploration Rover)"
+            },
+            {
+              "label": "Launch",
+              "value": "July 7, 2003"
+            },
+            {
+              "label": "Landing",
+              "value": "Jan. 24, 2004 PST (Jan. 25 UT)"
+            },
+            {
+              "label": "Reached Endeavour Crater",
+              "value": "Aug. 9, 2011"
+            },
+            {
+              "label": "Last communication",
+              "value": "June 10, 2018"
+            },
+            {
+              "label": "End of Mission",
+              "value": "Feb. 13, 2019"
+            }
+          ],
+          "image": {
+            "file": "images/opportunity.jpg",
+            "alt": "Self-portrait of the Opportunity rover from above, its solar panels covered in a fine layer of reddish dust.",
+            "credit": "NASA/JPL-Caltech/Cornell Univ./Arizona State Univ.",
+            "nasaId": "PIA17759"
+          },
+          "source": [
+            "nasa-opportunity",
+            "nasa-highlights"
+          ]
+        },
+        {
+          "chapter": "Meaning",
+          "type": "cards",
+          "duration": 14000,
+          "title": "What It Changed",
+          "cards": [
+            {
+              "head": "Water, confirmed",
+              "text": "NASA says the rovers confirmed that water was long standing on the surface of Mars.",
+              "sourceLabel": "NASA: Spirit and Opportunity"
+            },
+            {
+              "head": "Clues in the rocks",
+              "text": "Hematite, gypsum veins and clay minerals: signs of a watery past.",
+              "sourceLabel": "NASA: MER science highlights"
+            },
+            {
+              "head": "Far beyond the plan",
+              "text": "Designed for 90 sols, it operated almost 15 years. Its off-Earth driving record stood until Perseverance passed it on Oct. 11, 2026.",
+              "sourceLabel": "NASA: Opportunity rover page; NASA: Spirit and Opportunity"
+            }
+          ],
+          "source": [
+            "nasa-spirit-opportunity",
+            "nasa-highlights",
+            "nasa-opportunity"
+          ]
+        },
+        {
+          "chapter": "Farewell",
+          "type": "dust",
+          "duration": 8000,
+          "title": "A Planet-Wide Storm",
+          "text": "In June 2018, a severe Mars-wide dust storm blanketed the solar-powered rover's location.",
+          "note": "Illustration drawn in code, not a photo.",
+          "source": [
+            "nasa-opportunity",
+            "nasa-spirit-opportunity"
+          ]
+        },
+        {
+          "chapter": "Farewell",
+          "type": "lastimage",
+          "duration": 9000,
+          "title": "The Last Data",
+          "kicker": "June 10, 2018 · sol 5111",
+          "text": "This noisy, incomplete image was the last data Opportunity sent back from Perseverance Valley.",
+          "image": {
+            "file": "images/opportunity/last-image.jpg",
+            "alt": "A dark, grainy, static-filled image with a black band across the bottom.",
+            "credit": "NASA/JPL-Caltech/Cornell/ASU",
+            "nasaId": "PIA22929"
+          },
+          "source": [
+            "nasa-image-PIA22929"
+          ]
+        },
+        {
+          "chapter": "Farewell",
+          "type": "reflect",
+          "duration": 27000,
+          "voice": "story",
+          "title": "The Quiet",
+          "lines": [
+            {
+              "text": "Somewhere on Mars, a rover sits where it stopped.",
+              "at": 1.5
+            },
+            {
+              "text": "No one planned for it to stay this long.",
+              "at": 7.0
+            },
+            {
+              "text": "Almost fifteen years. A planet of pictures. And one question it was sent to answer.",
+              "at": 11.5
+            }
+          ],
+          "image": {
+            "file": "images/opportunity.jpg",
+            "alt": "Self-portrait of the Opportunity rover from above, its solar panels covered in a fine layer of reddish dust.",
+            "credit": "NASA/JPL-Caltech/Cornell Univ./Arizona State Univ.",
+            "nasaId": "PIA17759"
+          },
+          "source": []
+        },
+        {
+          "chapter": "Farewell",
+          "type": "closing",
+          "duration": 9000,
+          "title": "Farewell",
+          "text": "The mission is over. What it showed us about water on Mars remains.",
+          "small": "NASA declared the end of the mission on February 13, 2019.",
+          "source": [
+            "nasa-opportunity",
+            "nasa-spirit-opportunity"
+          ]
+        }
+      ],
+      "notes": [
+        "Duration wording differs across NASA pages: 'almost 15 years' (Opportunity page) vs 'more than 14 years' (Highlights) and 'over 14 years' (NSSDCA). Story uses 'almost 15 years'.",
+        "Launch UT date (8 July 2003) comes from NSSDCA; NASA lists July 7, 2003 PDT. Both correct for their time bases.",
+        "Landing date resolved by the Highlights page: Jan. 25, 2004 UT = Jan. 24, 2004 PST. The Opportunity page also quotes '21:05 PST (04:54 UTC)', which doesn't match by arithmetic, so avoid citing that time.",
+        "The NASA Opportunity page's second half was summarised by the fetch tool, not read verbatim; the Endeavour arrival date (Aug. 9, 2011) and anything else from it should be re-checked on the page before final publication.",
+        "'My battery is low and it's getting dark' is not on any NASA page read, so no myth-vs-fact card yet.",
+        "Perseverance passed Opportunity's off-Earth driving record on Oct. 11, 2026 (NASA overview page); available as an optional closing line."
+      ]
+    },
+    {
+      "id": "apollo17-lrv-alsep",
+      "name": "Apollo 17 Lunar Roving Vehicle and ALSEP science station",
+      "place": "Moon",
+      "endingType": "shut-down",
+      "years": "1972-1977",
+      "status": "The Apollo 17 ALSEP stations were shut down on 30 September 1977. The Apollo 17 Lunar Module descent stage was left behind on the Moon.",
+      "whyItWasSent": "The rover was designed to operate in the Moon's low gravity and vacuum and extend how far astronauts could range on the surface. The ALSEP carried experiments to measure things like heat loss, gravity, the thin lunar atmosphere, and ejecta and meteorites.",
+      "whatItDiscovered": null,
+      "ending": "The Apollo 17 ALSEP was shut down along with the other ALSEP stations on 30 September 1977.",
+      "story": "I'm the Apollo 17 science station. Astronauts Eugene Cernan and Harrison Schmitt landed in the Taurus-Littrow valley in December 1972. Schmitt was the first scientist-astronaut to walk on the Moon! Their Lunar Roving Vehicle drove about 36 kilometers around the valley. My central station switched on December 12, 1972. An RTG gave me about 70 watts to measure heat flow, gravity, the thin lunar atmosphere, and ejecta and meteorites. In 1977 all the ALSEP stations were shut down.",
+      "stats": [
+        {
+          "label": "Landing",
+          "value": "11 December 1972 UT, Taurus-Littrow",
+          "source": "nssdca-apollo17info"
+        },
+        {
+          "label": "Moonwalkers",
+          "value": "Eugene A. Cernan and Harrison H. Schmitt",
+          "source": "nssdca-1972-096c"
+        },
+        {
+          "label": "Rover drive on Apollo 17",
+          "value": "35.9 km in 4 hours 26 minutes (another NSSDCA page says 30 km)",
+          "source": "nssdca-lrv"
+        },
+        {
+          "label": "Rover mass",
+          "value": "210 kg",
+          "source": "nssdca-lrv"
+        },
+        {
+          "label": "Rover power",
+          "value": "Two 36-volt silver-zinc, non-rechargeable batteries",
+          "source": "nssdca-lrv"
+        },
+        {
+          "label": "Station power",
+          "value": "SNAP-27 RTG, about 70 W DC",
+          "source": "nssdca-1972-096c"
+        },
+        {
+          "label": "ALSEP turned on",
+          "value": "02:53 UT, 12 December 1972",
+          "source": "nssdca-1972-096c"
+        },
+        {
+          "label": "ALSEP shut down",
+          "value": "30 September 1977",
+          "source": "nssdca-1972-096c"
+        },
+        {
+          "label": "Time on the surface",
+          "value": "75 hours; three moonwalks totaling 22 hours 4 minutes",
+          "source": "nssdca-1972-096c, nssdca-1972-096a"
+        }
+      ],
+      "mythVsFact": null,
+      "sources": [
+        {
+          "id": "nssdca-1972-096c",
+          "label": "NSSDCA: Apollo 17 Lunar Module / ALSEP, ID 1972-096C",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1972-096C"
+        },
+        {
+          "id": "nssdca-1972-096a",
+          "label": "NSSDCA: Apollo 17 Command and Service Module, ID 1972-096A",
+          "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1972-096A"
+        },
+        {
+          "id": "nssdca-lrv",
+          "label": "NSSDCA: Lunar Roving Vehicle",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_lrv.html"
+        },
+        {
+          "id": "nssdca-apollo17info",
+          "label": "NSSDCA: Apollo 17 mission info",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo17info.html"
+        },
+        {
+          "id": "nasa-apollo17",
+          "label": "NASA: Apollo 17 mission",
+          "url": "https://www.nasa.gov/mission/apollo-17/"
+        },
+        {
+          "id": "nasa-image-as17-134-20435",
+          "label": "NASA image as17-134-20435 (wide view of the landing site)",
+          "url": "https://images.nasa.gov/details/as17-134-20435"
+        },
+        {
+          "id": "nasa-image-as17-147-22527",
+          "label": "NASA image as17-147-22527 (astronaut on the rover beside the Lunar Module)",
+          "url": "https://images.nasa.gov/details/as17-147-22527"
+        },
+        {
+          "id": "nasa-image-as17-137-20979",
+          "label": "NASA image as17-137-20979 (close-up of the rover wheel)",
+          "url": "https://images.nasa.gov/details/as17-137-20979"
+        },
+        {
+          "id": "nasa-image-as17-147-22548",
+          "label": "NASA image as17-147-22548 (ALSEP area panorama)",
+          "url": "https://images.nasa.gov/details/as17-147-22548"
+        },
+        {
+          "id": "nasa-image-as17-134-20382",
+          "label": "NASA image as17-134-20382 (astronaut with flag, Lunar Module and rover)",
+          "url": "https://images.nasa.gov/details/as17-134-20382"
+        }
+      ],
+      "image": {
+        "file": "images/apollo17-lrv-alsep.jpg",
+        "alt": "Close-up of the Apollo 17 Lunar Roving Vehicle's wheel and equipment on dusty gray ground, with an astronaut's spacesuit and backpack at the right edge of the photo.",
+        "credit": "NASA",
+        "nasaId": "as17-137-20979",
+        "focus": "58% 72%",
+        "zoom": 1.4
+      },
+      "notes": [
+        "The user-supplied links are NOT Apollo 17: id=1971-063C is Apollo 15 LM/ALSEP and id=1969-099C is Apollo 12 LM/ALSEP. Apollo 17's LM/ALSEP is 1972-096C (1972-096A is the command and service module). No separate NSSDCA ID was found for the Apollo 17 LRV.",
+        "Rover distance conflict: 35.9 km (LRV page) vs 30 km (1972-096A). Story says 'about 36 kilometers'; consider 'more than 30' if staying safe.",
+        "ALSEP instrument count conflict: 1972-096C names five instruments (heat flow, surface gravimeter, mass spectrometer, seismic profiling, ejecta and meteorites); the mission info page lists 12 experiments, some not necessarily on the ALSEP. Story names only instruments from 1972-096C.",
+        "Not stated in any page read, so left out: whether the LRV was left on the Moon, LRV top speed, the reason for the 1977 shutdown (an ALSEP Termination Report PDF exists at nssdc.gsfc.nasa.gov/misc/documents/b32116.pdf but wasn't readable), what the instruments discovered, and Apollo 17 retroreflector status.",
+        "Apollo 17 has no retroreflector on the pages read (the NSSDCA site list gives retroreflector coordinates for Apollo 11, 14 and 15). Don't claim Apollo 17 carries one; a laser-ranging story would belong to those missions.",
+        "No science.nasa.gov or nasa.gov page was read for this entry; all facts come from NSSDCA pages, some last updated 2016 to 2023."
+      ],
+      "storyLabel": "Apollo 17 · Taurus-Littrow",
+      "scenes": [
+        {
+          "chapter": "Explore",
+          "type": "hero",
+          "duration": 8000,
+          "title": "APOLLO 17",
+          "kicker": "Moon · 1972–1977",
+          "text": "I'm the Apollo 17 science station. This is my home: the Taurus-Littrow valley, on the Moon.",
+          "image": {
+            "file": "images/apollo17/landing-site.jpg",
+            "alt": "Wide view of the Apollo 17 landing site: the Lunar Module, an astronaut and the rover on gray lunar ground, with tall pale hills against black sky.",
+            "credit": "NASA",
+            "nasaId": "as17-134-20435",
+            "focus": "50% 40%"
+          },
+          "source": [
+            "nssdca-apollo17info",
+            "nasa-image-as17-134-20435"
+          ]
+        },
+        {
+          "chapter": "Explore",
+          "type": "timeline",
+          "duration": 12000,
+          "title": "My Timeline",
+          "events": [
+            {
+              "date": "Dec. 11, 1972",
+              "text": "Landed on the Moon (UT)"
+            },
+            {
+              "date": "Dec. 12, 1972",
+              "text": "Central station switched on"
+            },
+            {
+              "date": "Dec. 14, 1972",
+              "text": "Lunar Module lifted off"
+            },
+            {
+              "date": "Sept. 30, 1977",
+              "text": "ALSEP stations shut down"
+            }
+          ],
+          "source": [
+            "nssdca-apollo17info",
+            "nssdca-1972-096c"
+          ]
+        },
+        {
+          "chapter": "Explore",
+          "type": "photo",
+          "duration": 9000,
+          "title": "Wheels on the Moon",
+          "text": "On Apollo 17, the Lunar Roving Vehicle went 35.9 km in 4 hours 26 minutes of driving.",
+          "image": {
+            "file": "images/apollo17/drive.jpg",
+            "alt": "An astronaut seated on the Lunar Roving Vehicle beside the Apollo 17 Lunar Module, with a lunar hill behind.",
+            "credit": "NASA",
+            "nasaId": "as17-147-22527",
+            "focus": "30% 70%"
+          },
+          "source": [
+            "nssdca-lrv",
+            "nasa-image-as17-147-22527"
+          ]
+        },
+        {
+          "chapter": "Discover",
+          "type": "scan",
+          "duration": 9000,
+          "title": "Built for the Moon",
+          "text": "The rover was designed to work in the Moon's low gravity and vacuum, so astronauts could go farther from the Lunar Module.",
+          "hud": [
+            {
+              "label": "Mass",
+              "value": "210 kg"
+            },
+            {
+              "label": "Power",
+              "value": "Two 36-volt silver-zinc, non-rechargeable batteries"
+            },
+            {
+              "label": "Purpose",
+              "value": "Extend how far astronauts could range on foot"
+            }
+          ],
+          "image": {
+            "file": "images/apollo17-lrv-alsep.jpg",
+            "alt": "Close-up of the Apollo 17 Lunar Roving Vehicle's wheel and equipment on dusty gray ground.",
+            "credit": "NASA",
+            "nasaId": "as17-137-20979",
+            "focus": "58% 72%"
+          },
+          "source": [
+            "nssdca-lrv",
+            "nasa-image-as17-137-20979"
+          ]
+        },
+        {
+          "chapter": "Discover",
+          "type": "scan",
+          "duration": 10000,
+          "title": "The Science Station",
+          "text": "My instruments measured heat flow, gravity, the thin lunar atmosphere, seismic waves, and speeding ejecta and meteorites.",
+          "hud": [
+            {
+              "label": "Power",
+              "value": "SNAP-27 RTG, about 70 W DC"
+            },
+            {
+              "label": "Switched on",
+              "value": "02:53 UT, 12 December 1972"
+            },
+            {
+              "label": "Instruments",
+              "value": "Heat flow, surface gravimeter, mass spectrometer, seismic profiling, ejecta and meteorites"
+            }
+          ],
+          "image": {
+            "file": "images/apollo17/alsep.jpg",
+            "alt": "Lunar ground with footprints and a small red flag in the foreground, and scientific equipment and the rover far away near a hillside.",
+            "credit": "NASA",
+            "nasaId": "as17-147-22548",
+            "focus": "60% 35%"
+          },
+          "source": [
+            "nssdca-1972-096c",
+            "nasa-image-as17-147-22548"
+          ]
+        },
+        {
+          "chapter": "Mission",
+          "type": "datacard",
+          "duration": 9000,
+          "title": "My Job on the Moon",
+          "text": "Two astronauts, three moonwalks, one valley.",
+          "card": [
+            {
+              "label": "Mission",
+              "value": "Apollo 17 Lunar Module / ALSEP"
+            },
+            {
+              "label": "Landing",
+              "value": "11 December 1972 (UT)"
+            },
+            {
+              "label": "Moonwalkers",
+              "value": "Eugene A. Cernan, Harrison H. Schmitt"
+            },
+            {
+              "label": "Time on the surface",
+              "value": "75 hours"
+            },
+            {
+              "label": "Moonwalks",
+              "value": "3, totaling 22 hours 4 minutes"
+            },
+            {
+              "label": "Stations shut down",
+              "value": "30 September 1977"
+            }
+          ],
+          "image": {
+            "file": "images/apollo17/schmitt.jpg",
+            "alt": "An astronaut in a white spacesuit stands near the Lunar Module, an American flag and the rover on dark gray lunar ground.",
+            "credit": "NASA",
+            "nasaId": "as17-134-20382",
+            "focus": "50% 55%"
+          },
+          "source": [
+            "nssdca-1972-096c",
+            "nssdca-1972-096a",
+            "nasa-image-as17-134-20382"
+          ]
+        },
+        {
+          "chapter": "Meaning",
+          "type": "cards",
+          "duration": 14000,
+          "title": "What It Meant",
+          "cards": [
+            {
+              "head": "The last landing",
+              "text": "NASA calls Apollo 17 the Apollo Program's last lunar landing mission.",
+              "sourceLabel": "NASA: Apollo 17 mission"
+            },
+            {
+              "head": "A scientist on the Moon",
+              "text": "Harrison Schmitt, a geologist, was the first scientist to step on the Moon.",
+              "sourceLabel": "NASA: Apollo 17 mission"
+            },
+            {
+              "head": "A station that kept listening",
+              "text": "The central station switched on Dec. 12, 1972. The ALSEP stations were shut down Sept. 30, 1977, almost five years later.",
+              "sourceLabel": "NSSDCA: Apollo 17 Lunar Module / ALSEP"
+            }
+          ],
+          "source": [
+            "nasa-apollo17",
+            "nssdca-1972-096c"
+          ]
+        },
+        {
+          "chapter": "Farewell",
+          "type": "reflect",
+          "duration": 27000,
+          "voice": "story",
+          "title": "The Quiet",
+          "lines": [
+            {
+              "text": "Almost five years.",
+              "at": 1.5
+            },
+            {
+              "text": "A small station on the Moon kept sending what it measured, until the day it was switched off.",
+              "at": 5.0
+            },
+            {
+              "text": "The last people to land there went home in 1972. The station stayed, listening, for as long as it could.",
+              "at": 11.5
+            }
+          ],
+          "image": {
+            "file": "images/apollo17/landing-site.jpg",
+            "alt": "Wide view of the Apollo 17 landing site on the Moon.",
+            "credit": "NASA",
+            "nasaId": "as17-134-20435",
+            "focus": "50% 40%"
+          },
+          "source": []
+        },
+        {
+          "chapter": "Farewell",
+          "type": "closing",
+          "duration": 9000,
+          "title": "Farewell",
+          "text": "The stations went quiet in 1977.",
+          "small": "Apollo 17 was the last Apollo landing on the Moon.",
+          "source": [
+            "nasa-apollo17"
+          ]
+        }
+      ],
+      "meaning": {
+        "changed": [
+          {
+            "text": "NASA calls Apollo 17 the Apollo Program's last lunar landing mission, and the first to include an astronaut-scientist.",
+            "source": "nasa-apollo17"
+          },
+          {
+            "text": "Harrison Schmitt, a geologist, is described by NASA as the first scientist to step on the Moon.",
+            "source": "nasa-apollo17"
+          },
+          {
+            "text": "The ALSEP central station switched on Dec. 12, 1972, and the stations were shut down Sept. 30, 1977.",
+            "source": "nssdca-1972-096c"
+          }
+        ],
+        "reflection": "Almost five years. A small station on the Moon kept sending what it measured, until the day it was switched off. The last people to land there went home in 1972, and the station stayed behind, listening, for as long as it could."
+      }
+    },
+    {
+      "id": "ingenuity",
+      "name": "Ingenuity Mars Helicopter",
+      "place": "Mars",
+      "endingType": "damage",
+      "years": "2021-2024",
+      "status": "No longer capable of flight after one or more rotor blades sustained damage during landing on its last flight. NASA's mission-end release (Jan. 25, 2024) said it remained upright and in communication; no later status was found.",
+      "whyItWasSent": "To demonstrate the first powered flight on Mars. It was designed as a technology demonstration that would make no more than five test flights in 30 days.",
+      "whatItDiscovered": "It proved that powered, controlled flight on Mars was possible. It also acted as an aerial scout for Perseverance scientists and rover drivers, and paved the way for future aerial explorers at Mars.",
+      "ending": "On its 72nd flight, on Jan. 18, 2024, imagery showed one or more rotor blades had been damaged during landing. NASA declared the mission completed on Jan. 25, 2024. The cause of the communications dropout and the helicopter's orientation at touchdown were still being investigated.",
+      "story": "I'm Ingenuity, a helicopter that rode to Mars strapped beneath the Perseverance rover. My team planned up to five test flights in 30 days. I flew 72 times! On April 19, 2021, I made the first powered flight on another planet. In all I flew about 17 kilometers, as high as 24 meters, and scouted rocky ground for Perseverance. On my last flight, January 18, 2024, one or more of my rotor blades was damaged during landing. I can't fly anymore, but I proved flying on Mars is possible.",
+      "stats": [
+        {
+          "label": "Planned",
+          "value": "Up to 5 test flights in 30 days",
+          "source": "nasa-ingenuity"
+        },
+        {
+          "label": "Actual",
+          "value": "72 flights across nearly three years",
+          "source": "nasa-ingenuity"
+        },
+        {
+          "label": "First flight",
+          "value": "April 19, 2021",
+          "source": "nasa-ingenuity"
+        },
+        {
+          "label": "Last flight",
+          "value": "Jan. 18, 2024",
+          "source": "nasa-ingenuity"
+        },
+        {
+          "label": "Total flying",
+          "value": "128.8 minutes, 10.5 miles (17.0 km)",
+          "source": "nasa-ingenuity"
+        },
+        {
+          "label": "Highest altitude",
+          "value": "78.7 feet (24.0 m)",
+          "source": "nasa-ingenuity"
+        },
+        {
+          "label": "Mass",
+          "value": "3.97 pounds (1.8 kg)",
+          "source": "nasa-ingenuity"
+        },
+        {
+          "label": "Blade span",
+          "value": "Just under 4 feet (1.2 m)",
+          "source": "nasa-ingenuity"
+        },
+        {
+          "label": "Power",
+          "value": "Solar panel charging lithium-ion batteries",
+          "source": "nasa-ingenuity"
+        },
+        {
+          "label": "Landed on Mars",
+          "value": "Feb. 18, 2021, Jezero Crater",
+          "source": "nasa-ingenuity"
+        }
+      ],
+      "mythVsFact": null,
+      "sources": [
+        {
+          "id": "nasa-ingenuity",
+          "label": "NASA: Ingenuity Mars Helicopter",
+          "url": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+        },
+        {
+          "id": "nasa-numbers",
+          "label": "NASA: Ingenuity by the numbers",
+          "url": "https://science.nasa.gov/resource/ingenuity-mars-helicopter-by-the-numbers/"
+        },
+        {
+          "id": "nasa-release",
+          "label": "NASA release: After three years on Mars, Ingenuity helicopter mission ends (Jan. 25, 2024)",
+          "url": "https://www.nasa.gov/news-release/after-three-years-on-mars-nasas-ingenuity-helicopter-mission-ends/"
+        },
+        {
+          "id": "nasa-image-PIA24593",
+          "label": "NASA image PIA24593 (first aerial color image)",
+          "url": "https://images.nasa.gov/details/PIA24593"
+        },
+        {
+          "id": "nasa-image-PIA24584",
+          "label": "NASA image PIA24584 (first black-and-white image from the air)",
+          "url": "https://images.nasa.gov/details/PIA24584"
+        },
+        {
+          "id": "nasa-image-PIA26243",
+          "label": "NASA image PIA26243 (shadow of the damaged rotor blade)",
+          "url": "https://images.nasa.gov/details/PIA26243"
+        },
+        {
+          "id": "nasa-image-PIA26236",
+          "label": "NASA image PIA26236 (Perseverance spots Ingenuity at its final airfield)",
+          "url": "https://images.nasa.gov/details/PIA26236"
+        }
+      ],
+      "image": {
+        "file": "images/ingenuity.jpg",
+        "alt": "The Ingenuity Mars Helicopter on a pale blue surface, with two long black rotor blades above a small silver body on four thin legs.",
+        "credit": "NASA/JPL-Caltech",
+        "nasaId": "PIA23882",
+        "focus": "46% 52%",
+        "zoom": 1.45
+      },
+      "notes": [
+        "Altitude conflict inside the NASA main page: 78.7 ft (24.0 m) is the flight-log record; the Tech Specs say 'up to 15 feet (5 meters)', which is a design spec. Story uses the record.",
+        "Distance: 10.5 miles (17.0 km) on the main page vs 'flown 11 miles' on by-the-numbers, probably rounding. Story says 'about 17 kilometers'.",
+        "Top speed appears only in the flight-log image alt text (22.4 mph / 10 m/s); not used.",
+        "Parts of the NASA main page (after character 39,909) were summarised by the fetch tool, not read verbatim. A summary gave a different first-flight date (Aug. 19, 2021) which contradicts the verbatim text and the release (April 19, 2021); treat that as a summary error but re-check the page.",
+        "No NSSDCA entry for Ingenuity was found by browsing; the Master Catalog spacecraft query was not run. Check before citing an NSSDCA ID.",
+        "Current status in 2026 isn't stated on any page read; the 'upright and in communication' line is from Jan. 2024 only.",
+        "Don't call it a 'stationary artifact' in the final site unless a NASA page says so."
+      ],
+      "storyLabel": "Mars Helicopter",
+      "scenes": [
+        {
+          "chapter": "Explore",
+          "type": "hero",
+          "duration": 8000,
+          "title": "INGENUITY",
+          "kicker": "Mars · 2021–2024",
+          "text": "I'm a helicopter. I rode to Mars attached to the belly of the Perseverance rover.",
+          "image": {
+            "file": "images/ingenuity/first-color.jpg",
+            "alt": "View from above of reddish Martian ground with pale rocks and curving rover tracks, taken from the air.",
+            "credit": "NASA/JPL-Caltech",
+            "nasaId": "PIA24593",
+            "focus": "50% 55%"
+          },
+          "source": [
+            "nasa-release",
+            "nasa-image-PIA24593"
+          ]
+        },
+        {
+          "chapter": "Explore",
+          "type": "numbers",
+          "duration": 9000,
+          "title": "Built for 5 flights",
+          "planned": {
+            "label": "Planned",
+            "value": "No more than 5 test flights",
+            "sub": "in 30 days",
+            "ratio": 0.069
+          },
+          "actual": {
+            "label": "Actual",
+            "value": "72 flights",
+            "sub": "across nearly three years"
+          },
+          "text": "NASA says it flew more than 14 times farther than planned.",
+          "source": [
+            "nasa-ingenuity",
+            "nasa-release"
+          ]
+        },
+        {
+          "chapter": "Explore",
+          "type": "timeline",
+          "duration": 12000,
+          "title": "My Timeline",
+          "events": [
+            {
+              "date": "Feb. 18, 2021",
+              "text": "Landed at Jezero Crater"
+            },
+            {
+              "date": "Apr. 19, 2021",
+              "text": "First flight"
+            },
+            {
+              "date": "Jan. 18, 2024",
+              "text": "72nd and last flight"
+            },
+            {
+              "date": "Jan. 25, 2024",
+              "text": "Mission completed"
+            }
+          ],
+          "source": [
+            "nasa-ingenuity",
+            "nasa-release"
+          ]
+        },
+        {
+          "chapter": "Discover",
+          "type": "scan",
+          "duration": 10000,
+          "title": "The First Flight",
+          "text": "On April 19, 2021, I made the first powered, controlled flight on another planet. My camera caught my own shadow.",
+          "hud": [
+            {
+              "label": "NASA calls it",
+              "value": "A 'Wright Brothers moment'"
+            },
+            {
+              "label": "Flying in",
+              "value": "Air less than 1 percent as dense as Earth's"
+            },
+            {
+              "label": "Carries",
+              "value": "A swatch from the original Wright Flyer"
+            }
+          ],
+          "image": {
+            "file": "images/ingenuity/first-image.jpg",
+            "alt": "Black-and-white view from above of the helicopter's own shadow, with four thin legs and two rotor blades, on pale Martian ground.",
+            "credit": "NASA/JPL-Caltech",
+            "nasaId": "PIA24584"
+          },
+          "source": [
+            "nasa-ingenuity",
+            "nasa-release",
+            "nasa-image-PIA24584"
+          ]
+        },
+        {
+          "chapter": "Discover",
+          "type": "scan",
+          "duration": 10000,
+          "title": "Seeing Mars From Above",
+          "text": "I took the first color image of the Martian surface from an aerial vehicle in flight.",
+          "hud": [
+            {
+              "label": "Highest altitude",
+              "value": "78.7 feet (24.0 m)"
+            },
+            {
+              "label": "Total flying",
+              "value": "128.8 minutes"
+            },
+            {
+              "label": "Distance covered",
+              "value": "10.5 miles (17.0 km)"
+            }
+          ],
+          "image": {
+            "file": "images/ingenuity/first-color.jpg",
+            "alt": "View from above of reddish Martian ground with pale rocks and curving rover tracks.",
+            "credit": "NASA/JPL-Caltech",
+            "nasaId": "PIA24593",
+            "focus": "50% 55%"
+          },
+          "source": [
+            "nasa-ingenuity",
+            "nasa-image-PIA24593"
+          ]
+        },
+        {
+          "chapter": "Mission",
+          "type": "datacard",
+          "duration": 9000,
+          "title": "My Job on Mars",
+          "text": "I scouted ahead for Perseverance, previewing places the rover might explore.",
+          "card": [
+            {
+              "label": "Mission",
+              "value": "Ingenuity Mars Helicopter"
+            },
+            {
+              "label": "Landed",
+              "value": "Feb. 18, 2021, Jezero Crater"
+            },
+            {
+              "label": "Flights",
+              "value": "72"
+            },
+            {
+              "label": "Airfields used",
+              "value": "48, with three emergency landings"
+            },
+            {
+              "label": "Last flight",
+              "value": "Jan. 18, 2024"
+            },
+            {
+              "label": "Mission completed",
+              "value": "Jan. 25, 2024"
+            }
+          ],
+          "image": {
+            "file": "images/ingenuity/first-color.jpg",
+            "alt": "View from above of reddish Martian ground with pale rocks and curving rover tracks.",
+            "credit": "NASA/JPL-Caltech",
+            "nasaId": "PIA24593",
+            "focus": "50% 55%"
+          },
+          "source": [
+            "nasa-ingenuity",
+            "nasa-release"
+          ]
+        },
+        {
+          "chapter": "Meaning",
+          "type": "cards",
+          "duration": 15000,
+          "title": "What It Changed",
+          "cards": [
+            {
+              "head": "Flight on another world",
+              "text": "The first aircraft to achieve powered, controlled flight on another planet, a feat NASA's page says has been called a 'Wright Brothers moment.'",
+              "sourceLabel": "NASA: Ingenuity Mars Helicopter"
+            },
+            {
+              "head": "A scout for the rover",
+              "text": "It acted as an aerial scout for Perseverance, previewing areas the rover might explore.",
+              "sourceLabel": "NASA: Ingenuity Mars Helicopter"
+            },
+            {
+              "head": "A path for what's next",
+              "text": "NASA says it paved the way for future aerial explorers at Mars and, potentially, other space destinations.",
+              "sourceLabel": "NASA: Ingenuity Mars Helicopter"
+            }
+          ],
+          "source": [
+            "nasa-ingenuity",
+            "nasa-release"
+          ]
+        },
+        {
+          "chapter": "Farewell",
+          "type": "lastimage",
+          "duration": 10000,
+          "title": "The Last Flight",
+          "kicker": "Jan. 18, 2024 · flight 72",
+          "text": "A short hop: up to 40 feet and a 4.5-second hover. Then, about 3 feet above the ground, it lost contact with the rover.",
+          "image": {
+            "file": "images/ingenuity/damaged-shadow.jpg",
+            "alt": "Ground-level view of reddish Martian soil with the long dark shadow of a rotor blade whose tip looks broken off.",
+            "credit": "NASA/JPL-Caltech",
+            "nasaId": "PIA26243"
+          },
+          "source": [
+            "nasa-release",
+            "nasa-image-PIA26243"
+          ]
+        },
+        {
+          "chapter": "Farewell",
+          "type": "reflect",
+          "duration": 27000,
+          "voice": "story",
+          "title": "The Quiet",
+          "lines": [
+            {
+              "text": "A helicopter meant to fly five times flew seventy-two.",
+              "at": 1.5
+            },
+            {
+              "text": "Then a rotor blade was damaged, and NASA said it could no longer fly.",
+              "at": 6.5
+            },
+            {
+              "text": "Far across the sand, a speck sits where it stopped, upright, a flier that will never leave the ground again.",
+              "at": 12.0
+            }
+          ],
+          "image": {
+            "file": "images/ingenuity/final-airfield.jpg",
+            "alt": "Wide view of rippled Martian dunes and rocky ground; the helicopter is a tiny speck near the center.",
+            "credit": "NASA/JPL-Caltech/ASU/MSSS",
+            "nasaId": "PIA26236",
+            "focus": "50% 50%"
+          },
+          "source": []
+        },
+        {
+          "chapter": "Farewell",
+          "type": "closing",
+          "duration": 9000,
+          "title": "Farewell",
+          "text": "The mission is over. A helicopter flew on Mars, and now others can follow.",
+          "small": "NASA completed the mission on January 25, 2024.",
+          "source": [
+            "nasa-ingenuity",
+            "nasa-release"
+          ]
+        }
+      ],
+      "meaning": {
+        "changed": [
+          {
+            "text": "Ingenuity was the first aircraft to achieve powered, controlled flight on another planet, a feat NASA says has been called a 'Wright Brothers moment.'",
+            "source": "nasa-ingenuity"
+          },
+          {
+            "text": "It acted as an aerial scout for Perseverance, previewing areas the rover might explore.",
+            "source": "nasa-ingenuity"
+          },
+          {
+            "text": "NASA says it paved the way for future aerial explorers at Mars and, potentially, other space destinations.",
+            "source": "nasa-ingenuity"
+          }
+        ],
+        "reflection": "A helicopter meant to fly five times flew seventy-two. Then a rotor blade was damaged, and NASA said it could no longer fly. Far across the sand, a speck sits where it stopped, a flier that will never leave the ground again."
+      }
+    },
+    {
+      "id": "dawn",
+      "name": "Dawn",
+      "place": "Asteroid belt",
+      "endingType": "fuel",
+      "years": "2007-2018",
+      "status": "Mission ended Nov. 1, 2018. NASA says Dawn remains in perpetual orbit around Ceres and, for at least the next couple of decades and probably much longer, is an inert celestial monument.",
+      "whyItWasSent": "To study Vesta and Ceres up close. NASA says they were chosen because they are so different, giving a snapshot of conditions during the first 10 million years after the birth of our solar system.",
+      "whatItDiscovered": "At Vesta: two colossal impact basins in the southern hemisphere, and confirmation that Vesta is the parent body of the HED meteorites. At Ceres: bright spots that are deposits of carbonates and other salts, abundant ice at high latitudes, evidence of recent and potentially ongoing activity, and ammonia.",
+      "ending": "Dawn depleted its hydrazine propellant on Oct. 31, 2018. Without it, the spacecraft could not control its orientation in space. The loss of its radio signal at the Deep Space Network indicated the mission had concluded, and NASA marked End of Mission on Nov. 1, 2018.",
+      "story": "I'm Dawn, a spacecraft pushed along by ion engines that use xenon. That let me orbit two different worlds, a first for any spacecraft! I spent fourteen months orbiting Vesta, then flew on to the dwarf planet Ceres in March 2015. There I found that the bright spots are deposits of carbonates and other salts. In 2018 I ran out of hydrazine and couldn't control which way I pointed. My radio signal went quiet, but I stay in orbit around Ceres.",
+      "stats": [
+        {
+          "label": "Launch",
+          "value": "Sept. 27, 2007",
+          "source": "nasa-dawn"
+        },
+        {
+          "label": "Arrived at Vesta",
+          "value": "July 16, 2011",
+          "source": "nasa-dawn-overview"
+        },
+        {
+          "label": "Time orbiting Vesta",
+          "value": "Fourteen months",
+          "source": "nasa-dawn-overview"
+        },
+        {
+          "label": "Arrived at Ceres",
+          "value": "March 5, 2015",
+          "source": "nasa-dawn-ceres"
+        },
+        {
+          "label": "Ion engine fuel",
+          "value": "Xenon, 425 kg at launch",
+          "source": "nasa-dawn-ion"
+        },
+        {
+          "label": "Final orbit at Ceres",
+          "value": "About 22 to 2,500 miles (35 to 4,000 km) from the surface",
+          "source": "nasa-dawn-status"
+        },
+        {
+          "label": "Fuel ran out",
+          "value": "Hydrazine depleted Oct. 31, 2018",
+          "source": "nasa-dawn-status"
+        },
+        {
+          "label": "End of Mission",
+          "value": "Nov. 1, 2018",
+          "source": "nasa-dawn-status"
+        }
+      ],
+      "mythVsFact": null,
+      "sources": [
+        {
+          "id": "nasa-dawn",
+          "label": "NASA: Dawn mission",
+          "url": "https://science.nasa.gov/mission/dawn/"
+        },
+        {
+          "id": "nasa-dawn-overview",
+          "label": "NASA: Dawn science overview",
+          "url": "https://science.nasa.gov/mission/dawn/science/overview/"
+        },
+        {
+          "id": "nasa-dawn-vesta",
+          "label": "NASA: Dawn at Vesta",
+          "url": "https://science.nasa.gov/mission/dawn/science/vesta/"
+        },
+        {
+          "id": "nasa-dawn-ceres",
+          "label": "NASA: Dawn at Ceres",
+          "url": "https://science.nasa.gov/mission/dawn/science/ceres/"
+        },
+        {
+          "id": "nasa-dawn-ion",
+          "label": "NASA: Dawn ion propulsion",
+          "url": "https://science.nasa.gov/mission/dawn/technology/ion-propulsion/"
+        },
+        {
+          "id": "nasa-dawn-status",
+          "label": "NASA: Dawn mission status",
+          "url": "https://science.nasa.gov/mission/dawn/mission-status/"
+        },
+        {
+          "id": "nasa-image-PIA12033",
+          "label": "NASA image PIA12033 (artist's concept of Dawn)",
+          "url": "https://images.nasa.gov/details/PIA12033"
+        },
+        {
+          "id": "nasa-image-PIA14778",
+          "label": "NASA image PIA14778 (full view of Vesta)",
+          "url": "https://images.nasa.gov/details/PIA14778"
+        },
+        {
+          "id": "nasa-image-PIA15667",
+          "label": "NASA image PIA15667 (south pole of Vesta, Rheasilvia basin)",
+          "url": "https://images.nasa.gov/details/PIA15667"
+        },
+        {
+          "id": "nasa-image-PIA20653",
+          "label": "NASA image PIA20653 (bright spots of Occator Crater, Ceres)",
+          "url": "https://images.nasa.gov/details/PIA20653"
+        }
+      ],
+      "image": {
+        "file": "images/dawn.jpg",
+        "alt": "Artist's concept of the Dawn spacecraft with wide solar panels firing a blue ion beam, between a rocky asteroid at lower left and a round gray world at upper right.",
+        "credit": "NASA/JPL",
+        "nasaId": "PIA12033",
+        "kind": "Artist's concept",
+        "focus": "47% 45%",
+        "zoom": 1.5
+      },
+      "notes": [
+        "Date conflict on NASA pages: the mission-events list shows 'July 16, 2011: Vesta Arrival' and 'Sept. 5, 2017: Vesta Departure', which doesn't fit 'fourteen months in orbit at Vesta' or a March 2015 Ceres arrival. The story uses the 'fourteen months' prose and avoids the Vesta departure date; verify the departure date on the page before publishing it.",
+        "The ion propulsion page is written in future tense (pre-mission copy). The 'first for any spacecraft' claim comes from it; the overview's 'Major Science Achievements' also lists 'First to orbit a main-belt asteroid' and 'First to reach a dwarf planet'.",
+        "The Mission Status page was only partly read verbatim (about 40k of 304k characters); the rest was summarised by the fetch tool. A summary gave March 6, 2015 for Ceres arrival, unconfirmed; the timeline says March 5, 2015.",
+        "Not found: NSSDCA/COSPAR ID, a fact sheet, and any planetary-protection note. Don't cite an ID until it's confirmed on the NSSDCA site.",
+        "Not read: JPL's end-of-mission news release (dawn.jpl.nasa.gov/news/news-detail.html?id=7275).",
+        "Ceres arrival, discoveries and orbit claims are from NASA pages dated Nov 2024.",
+        "'Asteroid belt' is used as place; confirm wording on NASA pages (Ceres is described there as a dwarf planet)."
+      ],
+      "storyLabel": "Dawn · Vesta and Ceres",
+      "scenes": [
+        {
+          "chapter": "Explore",
+          "type": "hero",
+          "duration": 8000,
+          "title": "DAWN",
+          "kicker": "Asteroid belt · 2007–2018",
+          "text": "I'm a spacecraft pushed along by ion engines. They let me visit two worlds.",
+          "image": {
+            "file": "images/dawn.jpg",
+            "alt": "Artist's concept of the Dawn spacecraft with wide solar panels firing a blue ion beam, between a rocky asteroid and a round gray world.",
+            "credit": "NASA/JPL",
+            "nasaId": "PIA12033",
+            "focus": "47% 45%",
+            "kind": "Artist's concept"
+          },
+          "source": [
+            "nasa-dawn",
+            "nasa-dawn-ion",
+            "nasa-image-PIA12033"
+          ]
+        },
+        {
+          "chapter": "Explore",
+          "type": "timeline",
+          "duration": 13000,
+          "title": "My Timeline",
+          "events": [
+            {
+              "date": "Sept. 27, 2007",
+              "text": "Launch"
+            },
+            {
+              "date": "July 16, 2011",
+              "text": "Arrived at Vesta"
+            },
+            {
+              "date": "March 5, 2015",
+              "text": "Arrived at Ceres"
+            },
+            {
+              "date": "Oct. 31, 2018",
+              "text": "Ran out of hydrazine"
+            },
+            {
+              "date": "Nov. 1, 2018",
+              "text": "End of Mission"
+            }
+          ],
+          "source": [
+            "nasa-dawn",
+            "nasa-dawn-ceres",
+            "nasa-dawn-status"
+          ]
+        },
+        {
+          "chapter": "Discover",
+          "type": "scan",
+          "duration": 10000,
+          "title": "Vesta",
+          "text": "Vesta is the second largest object in the asteroid belt after the dwarf planet Ceres. I orbited it for fourteen months.",
+          "hud": [
+            {
+              "label": "Found",
+              "value": "Two colossal impact basins in the southern hemisphere"
+            },
+            {
+              "label": "Confirmed",
+              "value": "Vesta is the parent body of the HED meteorites"
+            },
+            {
+              "label": "Scale bar in image",
+              "value": "40 km"
+            }
+          ],
+          "image": {
+            "file": "images/dawn/vesta.jpg",
+            "alt": "Gray, heavily cratered Vesta against black space, with a 40 kilometer scale bar at the lower right.",
+            "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+            "nasaId": "PIA14778"
+          },
+          "source": [
+            "nasa-dawn-vesta",
+            "nasa-dawn-overview",
+            "nasa-image-PIA14778"
+          ]
+        },
+        {
+          "chapter": "Discover",
+          "type": "scan",
+          "duration": 10000,
+          "title": "Giant Basins",
+          "text": "Two impact basins overlap near Vesta's south pole. Rheasilvia is the larger one.",
+          "hud": [
+            {
+              "label": "Rheasilvia",
+              "value": "310 miles (500 km)"
+            },
+            {
+              "label": "Veneneia",
+              "value": "250 miles (400 km)"
+            },
+            {
+              "label": "Young craters",
+              "value": "Pitted terrain and gullies, tied to volatile releases and transient water flow"
+            }
+          ],
+          "image": {
+            "file": "images/dawn/rheasilvia.jpg",
+            "alt": "Two perspective views of Vesta's south pole region: a gray one on top and a color-coded one below showing a deep basin in blue and high rims in red.",
+            "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA/PSI",
+            "nasaId": "PIA15667",
+            "fit": "contain"
+          },
+          "source": [
+            "nasa-dawn-vesta",
+            "nasa-image-PIA15667"
+          ]
+        },
+        {
+          "chapter": "Discover",
+          "type": "scan",
+          "duration": 10000,
+          "title": "Bright Spots on Ceres",
+          "text": "The bright spots on Ceres are deposits of carbonates and other salts.",
+          "hud": [
+            {
+              "label": "Ice",
+              "value": "Abundant ice at high latitudes"
+            },
+            {
+              "label": "Activity",
+              "value": "Evidence of recent and potentially ongoing activity"
+            },
+            {
+              "label": "Ammonia",
+              "value": "Suggests Ceres's materials came from the outer solar system"
+            }
+          ],
+          "image": {
+            "file": "images/dawn/occator.jpg",
+            "alt": "Dark, rough cratered ground on Ceres with several bright white patches, the largest at the lower left.",
+            "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+            "nasaId": "PIA20653"
+          },
+          "source": [
+            "nasa-dawn-ceres",
+            "nasa-image-PIA20653"
+          ]
+        },
+        {
+          "chapter": "Mission",
+          "type": "datacard",
+          "duration": 9000,
+          "title": "My Job in the Belt",
+          "text": "Visit two very different worlds, and learn how they formed.",
+          "card": [
+            {
+              "label": "Mission",
+              "value": "Dawn (orbiter)"
+            },
+            {
+              "label": "Launch",
+              "value": "Sept. 27, 2007"
+            },
+            {
+              "label": "At Vesta",
+              "value": "Arrived July 16, 2011"
+            },
+            {
+              "label": "At Ceres",
+              "value": "Arrived March 5, 2015"
+            },
+            {
+              "label": "Ion engine fuel",
+              "value": "425 kg of xenon at launch"
+            },
+            {
+              "label": "End of Mission",
+              "value": "Nov. 1, 2018"
+            }
+          ],
+          "image": {
+            "file": "images/dawn/vesta.jpg",
+            "alt": "Gray, heavily cratered Vesta against black space.",
+            "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+            "nasaId": "PIA14778"
+          },
+          "source": [
+            "nasa-dawn",
+            "nasa-dawn-ion"
+          ]
+        },
+        {
+          "chapter": "Meaning",
+          "type": "cards",
+          "duration": 15000,
+          "title": "What It Changed",
+          "cards": [
+            {
+              "head": "Two worlds, one craft",
+              "text": "NASA says ion propulsion let Dawn orbit two different solar system bodies, a first for any spacecraft.",
+              "sourceLabel": "NASA: Dawn ion propulsion"
+            },
+            {
+              "head": "A snapshot of the beginning",
+              "text": "Studying both gave scientists a snapshot of conditions during the first 10 million years after the birth of our solar system.",
+              "sourceLabel": "NASA: Dawn science overview"
+            },
+            {
+              "head": "New questions about ice",
+              "text": "NASA says Ceres's unexpected discoveries are stimulating new thinking on the evolution of ice-rich bodies.",
+              "sourceLabel": "NASA: Dawn at Ceres"
+            }
+          ],
+          "source": [
+            "nasa-dawn-ion",
+            "nasa-dawn-overview",
+            "nasa-dawn-ceres"
+          ]
+        },
+        {
+          "chapter": "Farewell",
+          "type": "reflect",
+          "duration": 27000,
+          "voice": "story",
+          "title": "The Quiet",
+          "lines": [
+            {
+              "text": "On October 31, 2018, Dawn ran out of hydrazine.",
+              "at": 1.5
+            },
+            {
+              "text": "Without it, the craft could no longer control which way it pointed. Then its radio signal was lost.",
+              "at": 6.0
+            },
+            {
+              "text": "For at least the next couple of decades, and probably much longer, it circles Ceres, silent.",
+              "at": 13.0
+            }
+          ],
+          "image": {
+            "file": "images/dawn/occator.jpg",
+            "alt": "Dark cratered ground on Ceres with bright white patches.",
+            "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+            "nasaId": "PIA20653"
+          },
+          "source": []
+        },
+        {
+          "chapter": "Farewell",
+          "type": "closing",
+          "duration": 9000,
+          "title": "Farewell",
+          "text": "The mission is over. Dawn is still out there, circling a world it helped us see.",
+          "small": "NASA marked the end of the mission on Nov. 1, 2018.",
+          "source": [
+            "nasa-dawn-status"
+          ]
+        }
+      ],
+      "meaning": {
+        "changed": [
+          {
+            "text": "NASA says ion propulsion allowed Dawn to orbit two different solar system bodies, a first for any spacecraft.",
+            "source": "nasa-dawn-ion"
+          },
+          {
+            "text": "Studying Vesta and Ceres gave scientists a snapshot of conditions during the first 10 million years after the birth of the solar system.",
+            "source": "nasa-dawn-overview"
+          },
+          {
+            "text": "Ceres's unexpected discoveries are stimulating new thinking on the chemical and physical evolution of ice-rich bodies.",
+            "source": "nasa-dawn-ceres"
+          }
+        ],
+        "reflection": "Dawn ran out of fuel to point itself, and its signal faded. For at least the next couple of decades, and probably much longer, it circles Ceres, silent, a monument to the worlds it showed us."
+      }
+    },
+    {
+      "id": "near-shoemaker",
+      "name": "NEAR Shoemaker",
+      "place": "Asteroid",
+      "endingType": "landed",
+      "years": "1996-2001",
+      "status": "Landed on asteroid 433 Eros on Feb. 12, 2001. Last contact was Feb. 28, 2001; an attempt to contact it on Dec. 10, 2002 was unsuccessful.",
+      "whyItWasSent": "To fly by asteroid Mathilde, orbit asteroid 433 Eros and land on Eros. NASA's page lists its primary goal as rendezvousing with the minor planet 433 Eros.",
+      "whatItDiscovered": "Eros was smaller than expected, has two medium-sized craters, a long surface ridge, a density similar to Earth's crust, and no magnetic field. NEAR mapped more than 70 percent of the surface with its near-infrared spectrometer.",
+      "ending": "The spacecraft, which was not designed as a lander, survived touchdown on Eros and returned data, especially from its gamma-ray spectrometer, for about two weeks. Last contact was Feb. 28, 2001, with the spacecraft having succumbed to the extreme cold.",
+      "story": "I'm NEAR Shoemaker, renamed to honor the geologist Eugene Shoemaker. In February 2000 I became the first spacecraft to orbit an asteroid, a space rock called 433 Eros. I found out it was smaller than expected and has no magnetic field. Then my team tried something bold. On February 12, 2001, I landed on Eros at a gentle 4 miles per hour, even though I was not designed as a lander! I sent data for about two weeks before the extreme cold ended my mission.",
+      "stats": [
+        {
+          "label": "Launch",
+          "value": "Feb. 17, 1996",
+          "source": "nasa-near"
+        },
+        {
+          "label": "Mathilde flyby",
+          "value": "June 27, 1997, a 25-minute flyby",
+          "source": "nasa-near"
+        },
+        {
+          "label": "Entered orbit at Eros",
+          "value": "Feb. 14, 2000",
+          "source": "nasa-near"
+        },
+        {
+          "label": "Time orbiting Eros",
+          "value": "About a year before landing",
+          "source": "nasa-collision"
+        },
+        {
+          "label": "Surface mapped",
+          "value": "More than 70 percent, with the near-infrared spectrometer",
+          "source": "nasa-near"
+        },
+        {
+          "label": "Touchdown",
+          "value": "Feb. 12, 2001, at 4 mph (6.4 km/h)",
+          "source": "nasa-near"
+        },
+        {
+          "label": "Photos on the way down",
+          "value": "69 high-resolution photos",
+          "source": "nasa-near"
+        },
+        {
+          "label": "Data after landing",
+          "value": "About two weeks",
+          "source": "nasa-near"
+        },
+        {
+          "label": "Last contact",
+          "value": "Feb. 28, 2001",
+          "source": "nasa-near"
+        }
+      ],
+      "mythVsFact": null,
+      "sources": [
+        {
+          "id": "nasa-near",
+          "label": "NASA: NEAR Shoemaker mission",
+          "url": "https://science.nasa.gov/mission/near-shoemaker/"
+        },
+        {
+          "id": "nasa-near-stories",
+          "label": "NASA: NEAR Shoemaker stories",
+          "url": "https://science.nasa.gov/mission/near-shoemaker/stories/"
+        },
+        {
+          "id": "nasa-collision",
+          "label": "NASA: A Collision Worth a Thousand Boulders (2001, updated 2024)",
+          "url": "https://science.nasa.gov/solar-system/a-collision-worth-a-thousand-boulders/"
+        },
+        {
+          "id": "nasa-photojournal-final",
+          "label": "NASA Photojournal: Final Eros images, last closest image of Eros",
+          "url": "https://science.nasa.gov/photojournal/final-eros-images-last-closest-image-of-eros/"
+        },
+        {
+          "id": "nasa-image-PIA02493",
+          "label": "NASA image PIA02493 (Sunset on Eros)",
+          "url": "https://images.nasa.gov/details/PIA02493"
+        },
+        {
+          "id": "nasa-image-PIA02900",
+          "label": "NASA image PIA02900 (close view of Eros)",
+          "url": "https://images.nasa.gov/details/PIA02900"
+        },
+        {
+          "id": "nasa-image-PIA03144",
+          "label": "NASA image PIA03144 (landmarks at the touchdown site)",
+          "url": "https://images.nasa.gov/details/PIA03144"
+        },
+        {
+          "id": "nasa-image-PIA03148",
+          "label": "NASA image PIA03148 (last, closest image of Eros)",
+          "url": "https://images.nasa.gov/details/PIA03148"
+        }
+      ],
+      "image": {
+        "file": "images/near-shoemaker.jpg",
+        "alt": "Close-up view of the rocky, cratered surface of asteroid Eros against black space.",
+        "credit": "NASA/JPL/JHUAPL",
+        "nasaId": "PIA02900",
+        "focus": "40% 45%",
+        "zoom": 1.2
+      },
+      "notes": [
+        "NEAR 'was not designed as a lander' (NASA mission page) even though the page's type list includes 'Lander' and its objective lists landing. Story says it was not designed as a lander.",
+        "The 'first spacecraft to orbit an asteroid' claim is on the mission page (and the 2001 article). 'First spacecraft to land on an asteroid' is also on the mission page; the story only uses the orbit claim.",
+        "'Then my team tried something bold' is storytelling framing, not a sourced statement about intent; check that no page contradicts it, or drop it.",
+        "Eros is described as 'potato-shaped' in one NASA article and 'peanut-shaped' in a photo caption; the story avoids a shape word.",
+        "Where NEAR is now isn't stated outright on the pages read; they say it landed on Eros and a Dec. 10, 2002 contact attempt failed.",
+        "No NSSDCA ID found; the Master Catalog query form wasn't submitted. The mission page has no overview, science or end-of-mission subpages to read.",
+        "All pages read were dated Nov 2024 (NASA) or the 2001 article updated Jan 2024."
+      ],
+      "storyLabel": "NEAR Shoemaker · Eros",
+      "scenes": [
+        {
+          "chapter": "Explore",
+          "type": "hero",
+          "duration": 8000,
+          "title": "NEAR SHOEMAKER",
+          "kicker": "Asteroid 433 Eros · 1996–2001",
+          "text": "I was the first spacecraft to orbit an asteroid, and the first to land on one.",
+          "image": {
+            "file": "images/near/eros-sunset.jpg",
+            "alt": "A sliver of the asteroid Eros lit from one side, gray and rocky, against black space.",
+            "credit": "NASA/JPL/JHUAPL",
+            "nasaId": "PIA02493",
+            "focus": "55% 60%"
+          },
+          "source": [
+            "nasa-near",
+            "nasa-image-PIA02493"
+          ]
+        },
+        {
+          "chapter": "Explore",
+          "type": "timeline",
+          "duration": 13000,
+          "title": "My Timeline",
+          "events": [
+            {
+              "date": "Feb. 17, 1996",
+              "text": "Launch"
+            },
+            {
+              "date": "June 27, 1997",
+              "text": "Flew past asteroid Mathilde"
+            },
+            {
+              "date": "Feb. 14, 2000",
+              "text": "Entered orbit around Eros"
+            },
+            {
+              "date": "Feb. 12, 2001",
+              "text": "Touched down on Eros"
+            },
+            {
+              "date": "Feb. 28, 2001",
+              "text": "Last contact"
+            }
+          ],
+          "source": [
+            "nasa-near"
+          ]
+        },
+        {
+          "chapter": "Discover",
+          "type": "scan",
+          "duration": 10000,
+          "title": "Smaller Than Expected",
+          "text": "Eros turned out to be smaller than expected, a 21-mile-long asteroid.",
+          "hud": [
+            {
+              "label": "Craters and ridge",
+              "value": "Two medium-sized craters and a long surface ridge"
+            },
+            {
+              "label": "Density",
+              "value": "Similar to Earth's crust"
+            },
+            {
+              "label": "Magnetic field",
+              "value": "None"
+            }
+          ],
+          "image": {
+            "file": "images/near/eros-surface.jpg",
+            "alt": "Close-up of the gray, cratered surface of asteroid Eros.",
+            "credit": "NASA/JPL/JHUAPL",
+            "nasaId": "PIA02900",
+            "focus": "45% 40%"
+          },
+          "source": [
+            "nasa-near",
+            "nasa-image-PIA02900"
+          ]
+        },
+        {
+          "chapter": "Discover",
+          "type": "scan",
+          "duration": 10000,
+          "title": "Mapping Eros",
+          "text": "NEAR mapped more than 70 percent of the surface and sent back about 10 times more data than planned.",
+          "hud": [
+            {
+              "label": "Images returned",
+              "value": "160,000"
+            },
+            {
+              "label": "Surface mapped",
+              "value": "More than 70 percent"
+            },
+            {
+              "label": "Most boulders",
+              "value": "Came from a single crater (Shoemaker, proposed name)"
+            }
+          ],
+          "image": {
+            "file": "images/near/eros-shape.jpg",
+            "alt": "Two views of the shape of Eros on a blue background: a cloud of white points on the left and a smooth gray 3D model on the right.",
+            "credit": "NASA/JPL/JHUAPL",
+            "nasaId": "PIA02955",
+            "fit": "contain",
+            "kind": "Shape of Eros (computer model)"
+          },
+          "source": [
+            "nasa-near",
+            "nasa-collision"
+          ]
+        },
+        {
+          "chapter": "Discover",
+          "type": "scan",
+          "duration": 10000,
+          "title": "The Landing Site",
+          "text": "I touched down just south of a saddle-shaped feature named Himeros.",
+          "hud": [
+            {
+              "label": "Touchdown",
+              "value": "Feb. 12, 2001, 19:44 UT"
+            },
+            {
+              "label": "Speed",
+              "value": "4 mph (6.4 km/h)"
+            },
+            {
+              "label": "Photos on the way down",
+              "value": "69 high-resolution"
+            }
+          ],
+          "image": {
+            "file": "images/near/touchdown-site.jpg",
+            "alt": "Gray mosaic of Eros's surface labeled with crater and boulder sizes and a yellow arrow marking the estimated landing spot.",
+            "credit": "NASA/JPL/JHUAPL",
+            "nasaId": "PIA03144",
+            "fit": "contain"
+          },
+          "source": [
+            "nasa-near",
+            "nasa-image-PIA03144"
+          ]
+        },
+        {
+          "chapter": "Mission",
+          "type": "datacard",
+          "duration": 9000,
+          "title": "My Job at Eros",
+          "text": "Orbit an asteroid, study it up close, and then try something no one planned.",
+          "card": [
+            {
+              "label": "Mission",
+              "value": "NEAR Shoemaker"
+            },
+            {
+              "label": "Launch",
+              "value": "Feb. 17, 1996"
+            },
+            {
+              "label": "Entered orbit",
+              "value": "Feb. 14, 2000"
+            },
+            {
+              "label": "Touchdown",
+              "value": "Feb. 12, 2001"
+            },
+            {
+              "label": "Data after landing",
+              "value": "About two weeks"
+            },
+            {
+              "label": "Last contact",
+              "value": "Feb. 28, 2001"
+            }
+          ],
+          "image": {
+            "file": "images/near/eros-sunset.jpg",
+            "alt": "A sliver of the asteroid Eros against black space.",
+            "credit": "NASA/JPL/JHUAPL",
+            "nasaId": "PIA02493",
+            "focus": "55% 60%"
+          },
+          "source": [
+            "nasa-near"
+          ]
+        },
+        {
+          "chapter": "Meaning",
+          "type": "cards",
+          "duration": 15000,
+          "title": "What It Meant",
+          "cards": [
+            {
+              "head": "Two firsts",
+              "text": "NASA says NEAR was the first spacecraft to orbit an asteroid and also the first to land on one.",
+              "sourceLabel": "NASA: NEAR Shoemaker"
+            },
+            {
+              "head": "Not built to land",
+              "text": "It was not designed as a lander, yet it survived touchdown and returned data for about two weeks.",
+              "sourceLabel": "NASA: NEAR Shoemaker"
+            },
+            {
+              "head": "A name with a story",
+              "text": "NASA renamed it in honor of renowned geologist Eugene M. Shoemaker (1928–1997), a month after it entered orbit around Eros.",
+              "sourceLabel": "NASA: NEAR Shoemaker"
+            }
+          ],
+          "source": [
+            "nasa-near"
+          ]
+        },
+        {
+          "chapter": "Farewell",
+          "type": "lastimage",
+          "duration": 10000,
+          "title": "The Last Closest Image",
+          "kicker": "Taken from 120 meters",
+          "text": "The streaky lines at the bottom mark the loss of signal as the spacecraft touched down.",
+          "image": {
+            "file": "images/near/final-image.jpg",
+            "alt": "Gray close-up of rocky ground and a boulder on Eros, with streaky vertical lines across the bottom where the signal was lost.",
+            "credit": "NASA/JPL/JHUAPL",
+            "nasaId": "PIA03148"
+          },
+          "source": [
+            "nasa-photojournal-final",
+            "nasa-image-PIA03148"
+          ]
+        },
+        {
+          "chapter": "Farewell",
+          "type": "reflect",
+          "duration": 27000,
+          "voice": "story",
+          "title": "The Quiet",
+          "lines": [
+            {
+              "text": "It was never meant to land.",
+              "at": 1.5
+            },
+            {
+              "text": "It landed anyway, gently, and kept talking for about two weeks.",
+              "at": 5.0
+            },
+            {
+              "text": "Then the cold took it. Last contact: February 28, 2001. In December 2002, NASA tried again. No answer.",
+              "at": 11.0
+            }
+          ],
+          "image": {
+            "file": "images/near/eros-surface.jpg",
+            "alt": "Close-up of the gray, cratered surface of Eros.",
+            "credit": "NASA/JPL/JHUAPL",
+            "nasaId": "PIA02900",
+            "focus": "45% 40%"
+          },
+          "source": []
+        },
+        {
+          "chapter": "Farewell",
+          "type": "closing",
+          "duration": 9000,
+          "title": "Farewell",
+          "text": "The mission is over. Somewhere on Eros, a spacecraft named for a geologist is still where it landed.",
+          "small": "NASA says last contact was Feb. 28, 2001.",
+          "source": [
+            "nasa-near"
+          ]
+        }
+      ],
+      "meaning": {
+        "changed": [
+          {
+            "text": "NASA says NEAR was the first spacecraft to orbit an asteroid and also the first to land on one.",
+            "source": "nasa-near"
+          },
+          {
+            "text": "It was not designed as a lander, yet it survived touchdown and returned data for about two weeks.",
+            "source": "nasa-near"
+          },
+          {
+            "text": "NASA renamed it in honor of renowned geologist Eugene M. Shoemaker (1928–1997).",
+            "source": "nasa-near"
+          }
+        ],
+        "reflection": "It was never meant to land. It landed anyway, gently, and kept talking for about two weeks. Then the cold took it. In December 2002, NASA tried again. No answer."
+      }
+    }
+  ]
+}
