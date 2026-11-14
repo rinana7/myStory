@@ -1,26 +1,47 @@
 <!doctype html>
+<!-- SI disclosure: this site's code and story text were written with help from an SI tool (Claude, by Anthropic). The five postage-stamp illustrations are SI-generated art with a visible mark. Other images are NASA images with credit lines. -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>My Story: Abandoned but not Forgotten</title>
-  <meta name="description" content="An interactive storybook about robot explorers left behind on the Moon, Mars and beyond.">
+  <meta name="description" content="An interactive storybook about robot explorers left behind on the Moon, Mars and beyond. Built for the NASA Space Apps Challenge. Not affiliated with or endorsed by NASA.">
+  <meta name="generator" content="Hand-written HTML, CSS and JavaScript, built with help from Claude (an SI tool by Anthropic)">
+  <meta name="si-disclosure" content="Code and text were written with help from an SI tool (Claude). The five postage-stamp illustrations are SI-generated art and carry a visible mark; all other pictures are NASA images with credit lines.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=3">
-  <link rel="stylesheet" href="css/story.css?v=3">
+  <link rel="stylesheet" href="css/style.css?v=16">
+  <link rel="stylesheet" href="css/story.css?v=16">
 </head>
 <body>
   <main class="scene" id="app">
+    <h1 class="sr-only">My Story: Abandoned but not Forgotten</h1>
     <div class="book" id="book" data-state="closed">
       <button class="cover hud-frame" id="cover" type="button" aria-label="Open the book: My Story">
-        <span class="cover-label">Mission log</span>
+        <span class="cover-stars" aria-hidden="true"></span>
+        <span class="cover-photo" aria-hidden="true"><img src="images/opportunity/panorama.jpg" alt="" loading="eager"></span>
+        <span class="cover-top">
+          <svg class="cover-emblem" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <circle cx="32" cy="32" r="26" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".55"/>
+            <ellipse cx="32" cy="32" rx="26" ry="10" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(-28 32 32)"/>
+            <circle cx="32" cy="32" r="6" fill="var(--copper)"/>
+            <circle cx="54" cy="20" r="2.6" fill="currentColor"/>
+          </svg>
+          <span class="cover-label">Mission log &middot; No. 001</span>
+        </span>
         <span class="cover-title">MY STORY</span>
+        <span class="cover-sub">Abandoned but not forgotten</span>
         <span class="cover-rule" aria-hidden="true"></span>
-        <span class="cover-sub">Robot explorers we left behind</span>
-        <span class="cover-hint">Press to open</span>
+        <span class="cover-tag">Five robot explorers. Five endings. One question for you.</span>
+        <span class="cover-cta">Open the log <span aria-hidden="true">&rarr;</span></span>
+        <span class="cover-foot">
+          <span class="cover-roster" aria-hidden="true">Apollo 17 &middot; NEAR Shoemaker &middot; Opportunity &middot; Dawn &middot; Ingenuity</span>
+          <span class="cover-credit">Image: NASA/JPL-Caltech/Cornell Univ./Arizona State Univ. (PIA19109)</span>
+        </span>
       </button>
+
+      <div class="glow-page" id="glowPage" aria-hidden="true" hidden></div>
 
       <div class="spread" id="spread" hidden>
         <section class="page page-left" id="pageLeft" aria-label="Illustration"></section>
@@ -38,8 +59,9 @@
     <p id="status" class="sr-only" aria-live="polite"></p>
     <noscript>This storybook needs JavaScript to turn its pages.</noscript>
   </main>
-  <script src="js/typewriter.js?v=3"></script>
-  <script src="js/story.js?v=3"></script>
-  <script src="js/app.js?v=3"></script>
+  <script src="js/stamps.js?v=16"></script>
+  <script src="js/typewriter.js?v=16"></script>
+  <script src="js/story.js?v=16"></script>
+  <script src="js/app.js?v=16"></script>
 </body>
 </html>

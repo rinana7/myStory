@@ -1,3 +1,4 @@
+/* Written with help from an SI tool (Claude, by Anthropic). */
 /* Story player: a silent, caption-driven "video" made of scenes.
    Scenes come from machine.scenes in data/machines.json.
    Every piece of text on screen is in the page (not baked into pictures), so it is readable by screen readers. */
@@ -75,7 +76,7 @@
       var actual = h('div', { class: 'bar-row' }, [
         delay(h('p', { class: 'bar-label fade-up' }, [h('b', { text: s.actual.label + ': ' }), s.actual.value]), 2.2),
         h('div', { class: 'bar-track' }, [delay(h('div', { class: 'bar actual grow-actual' }), 2.4)]),
-        delay(h('p', { class: 'bar-sub fade-up', text: s.actual.sub + ' (bars drawn to scale)' }), 5.2)
+        delay(h('p', { class: 'bar-sub fade-up', text: s.actual.sub + ' · ' + (s.scaleNote || 'bars drawn to scale') }), 5.2)
       ]);
       return h('div', { class: 'st-scene sc-numbers' }, [
         h('div', { class: 'pad' }, [
@@ -217,39 +218,6 @@
       ]);
     },
 
-    ask: function (s, api) {
-      var input = h('input', { class: 'ask-input', type: 'text', maxlength: '140', 'aria-label': s.text, placeholder: 'Type your answer, then press Enter' });
-      var send = h('button', { class: 'st-btn', type: 'button', text: 'Send' });
-      var replyEl = h('p', { class: 'voice ask-reply' });
-      var cont = h('button', { class: 'st-btn', type: 'button', text: 'Continue' });
-      cont.hidden = true;
-      var row = h('div', { class: 'ask-row fade-up' }, [input, send]);
-      delay(row, 3.2);
-
-      function submit() {
-        var v = input.value.trim();
-        if (!v) return;
-        input.disabled = true; send.disabled = true;
-        // the answer is shown on screen only; nothing is stored or sent anywhere
-        typed(replyEl, '"' + v + '"  ' + s.reply, 0, 50);
-        cont.hidden = false;
-        cont.focus();
-      }
-      send.addEventListener('click', submit);
-      input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); submit(); } });
-      cont.addEventListener('click', function () { api.next(); });
-
-      return h('div', { class: 'st-scene sc-ask' }, [
-        h('div', { class: 'center' }, [
-          delay(h('h2', { class: 'title fade-up', text: s.title }), 0.2),
-          typed(h('p', { class: 'voice big' }), s.text, 0.9, 42),
-          row,
-          replyEl,
-          cont
-        ])
-      ]);
-    },
-
     reflect: function (s, api) {
       var lines = (s.lines || []).map(function (l) {
         return typed(h('p', { class: 'voice quiet' }), l.text, l.at, 22);
@@ -293,7 +261,7 @@
       if (chapters.indexOf(s.chapter) === -1) chapters.push(s.chapter);
     });
 
-    var root = h('div', { class: 'story', role: 'dialog', 'aria-label': 'Story: ' + machine.name, tabindex: '-1' });
+    var root = h('div', { class: 'story', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Story: ' + machine.name, tabindex: '-1' });
     var label = h('span', { class: 'st-label', text: machine.storyLabel || machine.name });
     var nav = h('nav', { class: 'st-chapters', 'aria-label': 'Chapters' });
     var chapterBtns = chapters.map(function (c) {
@@ -327,12 +295,14 @@
       credit
     ]);
     var live = h('p', { class: 'sr-only', 'aria-live': 'polite' });
+    var howTo = h('p', { class: 'sr-only', id: 'st-howto', text: 'A silent story told in short scenes. Press Space to pause or play, the left and right arrow keys to change scene, and Escape to skip to the facts.' });
+    root.setAttribute('aria-describedby', 'st-howto');
 
-    root.appendChild(head); root.appendChild(stage); root.appendChild(foot); root.appendChild(live);
+    root.appendChild(howTo); root.appendChild(head); root.appendChild(stage); root.appendChild(foot); root.appendChild(live);
     host.appendChild(root);
 
     typer = window.Typewriter ? window.Typewriter.make({ isPlaying: function () { return !!(state && state.playing); } }) : null;
-    state = { root: root, index: -1, elapsed: 0, playing: !reduceMotion, raf: 0, last: 0, scenes: scenes, opts: opts };
+    state = { visited: {}, completed: false, root: root, index: -1, elapsed: 0, playing: !reduceMotion, raf: 0, last: 0, scenes: scenes, opts: opts };
 
     var api = { close: close, answer: opts.userAnswer || '', next: function () { goTo(state.index + 1); } };
 
@@ -349,6 +319,9 @@
       if (i >= scenes.length) { close('finished'); return; }
       var s = scenes[i];
       state.index = i; state.elapsed = 0; state.last = 0;
+      state.visited[i] = true;
+      // 'watched' = reached the last scene after seeing most of the earlier ones
+      if (i === scenes.length - 1 && Object.keys(state.visited).length >= Math.ceil(scenes.length * 0.7)) state.completed = true;
       if (typer) typer.clear();
       var sceneEl = renderers[s.type](s, api);
       sceneEl.appendChild(h('div', { class: 'st-frame hud-frame', 'aria-hidden': 'true' }));
@@ -378,7 +351,7 @@
         state.last = ts;
         var dur = scenes[state.index].duration || 7000;
         segs[state.index]._fill.style.transform = 'scaleX(' + Math.min(1, state.elapsed / dur) + ')';
-        if (state.elapsed >= dur && !scenes[state.index].wait) {
+        if (state.elapsed >= dur) {
           if (state.index === scenes.length - 1) { setPlaying(false); segs[state.index]._fill.style.transform = 'scaleX(1)'; }
           else goTo(state.index + 1);
         }
@@ -393,10 +366,10 @@
       cancelAnimationFrame(state.raf);
       if (typer) { typer.destroy(); typer = null; }
       document.removeEventListener('keydown', onKey, true);
-      var r = state.root, cb = state.opts.onClose;
+      var r = state.root, cb = state.opts.onClose, watched = state.completed;
       state = null;
       r.classList.add('leaving');
-      setTimeout(function () { r.remove(); if (cb) cb(reason); }, reduceMotion ? 0 : 350);
+      setTimeout(function () { r.remove(); if (cb) cb(reason, watched); }, reduceMotion ? 0 : 350);
     }
 
     function onKey(e) {

@@ -1,3 +1,4 @@
+/* Written with help from an SI tool (Claude, by Anthropic). */
 /* Look and feel: dark Mars-dusk "mission console". Typewriter titles, mono data, copper + teal accents. */
 
 :root {
@@ -231,7 +232,7 @@ body { font-size: 16px; }
 h1, h2 { font-weight: 500; letter-spacing: .08em; }
 h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 .story-text { font-family: var(--mono); font-style: normal; font-size: 1.05rem; line-height: 1.7; letter-spacing: .01em; }
-.story-text::before { content: "> "; color: var(--copper); }
+.story-text::before { content: "> "; content: "> " / ""; color: var(--copper); }
 .kicker, .tag, summary, .controls button, .counter, .art-caption { font-family: var(--mono); }
 
 .tw-cursor {
@@ -273,3 +274,253 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 #next.nudge { border-color: var(--hud); color: var(--hud); animation: nudge 1.6s ease-in-out infinite; }
 @keyframes nudge { 50% { box-shadow: 0 0 0 4px rgba(127, 232, 220, .18); } }
 @media (prefers-reduced-motion: reduce) { #next.nudge { animation: none; } }
+
+/* readable small print */
+.art-caption { font-size: .72rem; }
+.m-note, .intro-note { font-size: .74rem; }
+.chips b { font-size: .68rem; }
+@media (max-height: 520px) {
+  .scene { padding: 8px; gap: 6px; }
+  .page { padding: 12px 16px; }
+  h2 { font-size: 1.1rem; }
+  .controls button { min-height: 36px; padding: 4px 12px; }
+}
+
+/* =====================================================================
+   Cover v2: poster-style cover (stars, real NASA horizon, emblem, clear hierarchy)
+   ===================================================================== */
+.cover {
+  height: min(700px, 100%);
+  padding: 30px 26px 0;
+  gap: 0;
+  justify-content: flex-start;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(127, 232, 220, .10), transparent 70%),
+    linear-gradient(180deg, #07090f 0%, #120a0c 38%, #2a120a 100%);
+  border: 1px solid var(--line-strong);
+  text-align: center;
+}
+.cover::before { display: none; }            /* remove the old cartoon horizon */
+.cover > * { position: relative; z-index: 2; }
+
+.cover-stars {
+  position: absolute !important; inset: 0 0 40% 0; z-index: 0 !important; pointer-events: none;
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 18%, #fff, transparent 60%),
+    radial-gradient(1px 1px at 28% 8%, #f4dcc0, transparent 60%),
+    radial-gradient(1.6px 1.6px at 44% 22%, #fff, transparent 60%),
+    radial-gradient(1px 1px at 61% 12%, #fff, transparent 60%),
+    radial-gradient(1.3px 1.3px at 78% 20%, #f4dcc0, transparent 60%),
+    radial-gradient(1px 1px at 90% 9%, #fff, transparent 60%),
+    radial-gradient(1px 1px at 8% 48%, #fff, transparent 60%),
+    radial-gradient(1.2px 1.2px at 35% 52%, #f4dcc0, transparent 60%),
+    radial-gradient(1px 1px at 70% 46%, #fff, transparent 60%),
+    radial-gradient(1.4px 1.4px at 93% 58%, #fff, transparent 60%),
+    radial-gradient(1px 1px at 52% 70%, #f4dcc0, transparent 60%),
+    radial-gradient(1px 1px at 20% 78%, #fff, transparent 60%);
+  animation: cover-twinkle 5s ease-in-out infinite;
+}
+@keyframes cover-twinkle { 50% { opacity: .55; } }
+
+.cover-photo {
+  position: absolute !important; left: 0; right: 0; bottom: 0; height: 44%; z-index: 1 !important; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 42%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 42%);
+}
+.cover-photo img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 38% 62%; display: block;
+  filter: sepia(.3) saturate(1.35) contrast(1.1) brightness(1.05);
+  transform: scale(1.04); animation: cover-drift 24s ease-in-out infinite alternate;
+}
+@keyframes cover-drift { to { transform: scale(1.14) translateX(-2%); } }
+.cover-photo::after {   /* warm sunset tint so the photo matches the rest of the book */
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(rgba(255, 140, 60, 0), rgba(214, 112, 40, .28) 70%, rgba(10, 4, 3, .55));
+}
+
+.cover-top { display: grid; justify-items: center; gap: 10px; margin-bottom: 18px; color: var(--sand); }
+.cover-emblem { width: 52px; height: 52px; color: var(--sand); filter: drop-shadow(0 0 10px rgba(217, 128, 63, .45)); }
+.cover-label { font-size: .68rem; letter-spacing: .34em; text-transform: uppercase; color: var(--muted); }
+
+.cover-title { font-size: clamp(2.1rem, 7.2vw, 3.3rem); font-weight: 500; letter-spacing: .2em; text-indent: .2em; line-height: 1; text-shadow: 0 0 28px rgba(217, 128, 63, .35); }
+.cover-sub { margin-top: 12px; font-family: var(--title); font-style: normal; font-size: clamp(.8rem, 2vw, .95rem); letter-spacing: .3em; text-indent: .3em; text-transform: uppercase; color: var(--amber); }
+.cover-rule { width: 56px; height: 2px; margin: 18px auto 16px; background: var(--copper); }
+.cover-tag { max-width: 26ch; font-size: .92rem; line-height: 1.55; color: var(--sand); }
+
+.cover-cta {
+  margin-top: 24px; display: inline-flex; align-items: center; gap: 12px; padding: 12px 26px; min-height: 46px;
+  border: 1px solid var(--hud); color: var(--hud); background: rgba(127, 232, 220, .08);
+  font-size: .78rem; letter-spacing: .26em; text-transform: uppercase;
+  transition: background .2s, box-shadow .2s;
+}
+.cover:hover .cover-cta, .cover:focus-visible .cover-cta { background: rgba(127, 232, 220, .2); box-shadow: 0 0 24px rgba(127, 232, 220, .25); }
+.cover-hint { display: none; }
+
+.cover-foot { position: absolute !important; left: 0; right: 0; bottom: 0; padding: 22px 16px 12px; display: grid; gap: 4px; justify-items: center;
+  background: linear-gradient(transparent, rgba(8, 3, 2, .82)); z-index: 3 !important; }
+.cover-roster { font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--sand); opacity: .9; }
+.cover-credit { font-size: .56rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+
+@media (max-width: 420px) {
+  .cover { padding: 22px 16px 0; }
+  .cover-tag { font-size: .85rem; }
+  .cover-roster { font-size: .54rem; letter-spacing: .1em; }
+}
+@media (max-height: 640px) {
+  .cover { padding-top: 18px; }
+  .cover-top { margin-bottom: 10px; }
+  .cover-emblem { width: 38px; height: 38px; }
+  .cover-rule { margin: 12px auto 10px; }
+  .cover-cta { margin-top: 16px; padding: 9px 20px; min-height: 40px; }
+}
+@media (max-height: 520px) {
+  .cover { aspect-ratio: auto; width: min(560px, 100%); }
+  .cover-emblem, .cover-tag, .cover-roster, .cover-credit { display: none; }
+  .cover-label { font-size: .6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cover-stars, .cover-photo img { animation: none; }
+}
+
+/* cover polish: balanced line breaks, brighter stars, corner brackets */
+.cover-sub { text-wrap: balance; letter-spacing: .22em; text-indent: .22em; font-size: clamp(.72rem, 1.8vw, .86rem); max-width: 28ch; }
+.cover-tag { text-wrap: balance; max-width: 30ch; }
+.cover-stars { filter: brightness(1.7) contrast(1.2); }
+.cover-stars::after {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 18% 30%, #fff, transparent 65%),
+    radial-gradient(2.2px 2.2px at 66% 34%, #fff, transparent 65%),
+    radial-gradient(1.8px 1.8px at 84% 42%, #f4dcc0, transparent 65%),
+    radial-gradient(2px 2px at 38% 64%, #f4dcc0, transparent 65%);
+  animation: cover-twinkle 3.4s ease-in-out infinite reverse;
+}
+.cover::after {
+  content: ""; position: absolute; inset: 12px; z-index: 4; pointer-events: none;
+  --c: rgba(244, 220, 192, .7); --len: 22px;
+  background-image:
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c));
+  background-size: var(--len) 2px, 2px var(--len), var(--len) 2px, 2px var(--len), var(--len) 2px, 2px var(--len), var(--len) 2px, 2px var(--len);
+  background-position: 0 0, 0 0, 100% 0, 100% 0, 0 100%, 0 100%, 100% 100%, 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* ---------- the glowing page revealed when the cover opens ---------- */
+.glow-page {
+  position: absolute; z-index: 0; pointer-events: none;
+  border: 1px solid rgba(255, 224, 176, .8);
+  background:
+    repeating-linear-gradient(0deg, rgba(70, 30, 10, .16) 0 1px, transparent 1px 28px),
+    radial-gradient(ellipse at 50% 42%, #fff6dc 0%, #ffd899 20%, #f2a45a 46%, #9a4a1d 78%, #3d1a0c 100%);
+  box-shadow:
+    0 0 50px 8px rgba(255, 176, 96, .6),
+    0 0 150px 40px rgba(217, 128, 63, .4),
+    inset 0 0 50px rgba(255, 244, 210, .55);
+  animation: glow-pulse 1.6s ease-in-out infinite alternate;
+}
+.glow-page[hidden] { display: none; }
+.glow-page::after {   /* HUD brackets so it still belongs to the same book */
+  content: ""; position: absolute; inset: 12px;
+  --c: rgba(60, 25, 8, .7); --len: 22px;
+  background-image:
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c));
+  background-size: var(--len) 2px, 2px var(--len), var(--len) 2px, 2px var(--len), var(--len) 2px, 2px var(--len), var(--len) 2px, 2px var(--len);
+  background-position: 0 0, 0 0, 100% 0, 100% 0, 0 100%, 0 100%, 100% 100%, 100% 100%;
+  background-repeat: no-repeat;
+}
+@keyframes glow-pulse { to { filter: brightness(1.12); } }
+.cover { z-index: 1; }
+@media (prefers-reduced-motion: reduce) { .glow-page { animation: none; } }
+.cover { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+
+/* ---------- glowing page v2: a soft, flowing screen of light (no lines, no brackets) ---------- */
+.glow-page {
+  border: 0; overflow: hidden;
+  background:
+    radial-gradient(circle at 28% 30%, rgba(255, 244, 214, .95), transparent 46%),
+    radial-gradient(circle at 72% 62%, rgba(255, 168, 86, .95), transparent 52%),
+    radial-gradient(circle at 36% 84%, rgba(127, 232, 220, .45), transparent 50%),
+    linear-gradient(160deg, #8a3a14, #d57a34 55%, #7a2f10);
+  background-size: 170% 170%;
+  animation: glow-flow 3.2s ease-in-out infinite alternate;
+  box-shadow: 0 0 60px 10px rgba(255, 176, 96, .55), 0 0 160px 40px rgba(217, 128, 63, .35);
+}
+.glow-page::before {   /* second layer drifting the other way, for a liquid feel */
+  content: ""; position: absolute; inset: -20%;
+  background:
+    radial-gradient(circle at 60% 25%, rgba(255, 230, 180, .7), transparent 42%),
+    radial-gradient(circle at 25% 70%, rgba(255, 140, 70, .65), transparent 48%),
+    radial-gradient(circle at 80% 85%, rgba(255, 244, 214, .5), transparent 40%);
+  mix-blend-mode: screen;
+  animation: glow-flow2 4.4s ease-in-out infinite alternate;
+}
+.glow-page::after { display: none; }
+@keyframes glow-flow { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
+@keyframes glow-flow2 { from { transform: translate(-6%, 4%) scale(1); } to { transform: translate(7%, -5%) scale(1.15); } }
+@media (prefers-reduced-motion: reduce) { .glow-page, .glow-page::before { animation: none; } }
+
+/* ---------- glowing page v3: no shape, just a drifting bloom of light that melts away ---------- */
+.glow-page {
+  border: 0; border-radius: 50%; box-shadow: none; overflow: hidden;
+  background: radial-gradient(closest-side, rgba(255, 246, 220, .95) 0%, rgba(255, 196, 120, .8) 38%, rgba(217, 128, 63, .4) 68%, transparent 100%);
+  -webkit-mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
+  filter: blur(10px);
+  animation: glow-breathe 2.6s ease-in-out infinite alternate;
+}
+.glow-page::before { border-radius: 50%; inset: -10%; }
+@keyframes glow-breathe { from { filter: blur(10px) brightness(1); } to { filter: blur(14px) brightness(1.18); } }
+@media (prefers-reduced-motion: reduce) { .glow-page { animation: none; } }
+
+/* keep the bloom from creating scrollbars, and soften the inner glow so no ring shows */
+.scene { overflow: hidden; }
+.glow-page { background: radial-gradient(closest-side, rgba(255, 246, 220, .9) 0%, rgba(255, 196, 120, .7) 30%, rgba(217, 128, 63, .32) 62%, transparent 100%); }
+.glow-page::before { opacity: .5; filter: blur(34px); }
+
+/* =====================================================================
+   Stamps: earned by finishing a robot's story
+   ===================================================================== */
+.stamp-slot {
+  position: absolute; top: 16px; right: 18px; z-index: 3; width: clamp(104px, 15vw, 164px);
+  transform: rotate(-5deg); pointer-events: none;
+}
+.stamp-wrap { position: relative; }
+.stamp-svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .4)); }
+.stamp-wrap .stamp-svg { filter: none; }
+.stamp-wrap { filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .4)); }
+.stamp-ring {
+  position: absolute; left: 50%; top: 50%; width: 120%; aspect-ratio: 1; margin: -60% 0 0 -60%;
+  border: 3px solid var(--copper); border-radius: 50%; pointer-events: none;
+}
+.postmark {
+  position: absolute; right: -14%; bottom: -16%; width: 62%; height: auto; color: rgba(52, 20, 8, .82);
+  mix-blend-mode: multiply; transform: rotate(-12deg);
+}
+/* make room so the title never runs under the stamp */
+.page-right.stamped > .kicker,
+.page-right.stamped > h2,
+.page-right.stamped > .tag,
+.page-right.stamped > .play-story { max-width: calc(100% - clamp(120px, 17vw, 180px)); }
+
+/* collection on the last page */
+.stamp-collection { margin: 6px 0 18px; padding: 14px 16px; border: 1px solid var(--line); background: rgba(244, 220, 192, .04); }
+.stamp-count { margin: 4px 0 12px; font-size: .86rem; color: var(--sand); }
+.stamp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 12px 10px; align-items: start; }
+.stamp-cell { display: grid; gap: 6px; justify-items: center; text-align: center; }
+.stamp-cell .stamp-svg { max-width: 150px; transform: rotate(-2deg); }
+.stamp-cell:nth-child(even) .stamp-svg { transform: rotate(2.5deg); }
+.stamp-svg.ghost { filter: grayscale(1) brightness(.55) contrast(.9); opacity: .38; }
+.stamp-cap { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.stamp-cell.earned .stamp-cap { color: var(--amber); }
+
+@media (max-width: 760px) {
+  .stamp-slot { width: 92px; top: 10px; right: 12px; }
+  .page-right.stamped > .kicker, .page-right.stamped > h2, .page-right.stamped > .tag, .page-right.stamped > .play-story { max-width: calc(100% - 104px); }
+}
+@media (prefers-reduced-motion: reduce) { .stamp-ring { display: none; } }

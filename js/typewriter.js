@@ -1,3 +1,4 @@
+/* Written with help from an SI tool (Claude, by Anthropic). */
 /* Typewriter effect.
    Typed text is shown in an aria-hidden span; the full sentence is also in the page (visually hidden)
    so screen readers read it once, complete, instead of letter by letter.

@@ -1,6 +1,7 @@
+/* Written with help from an SI tool (Claude, by Anthropic). */
 /* My Story: an interactive storybook.
    Reads data/machines.json and turns each machine into a spread.
-   Illustrations are PLACEHOLDERS drawn in code; replace with credited NASA images. */
+   Placeholder drawings are only used if an image is missing. */
 
 (function () {
   'use strict';
@@ -9,6 +10,7 @@
 
   var book = document.getElementById('book');
   var cover = document.getElementById('cover');
+  var glow = document.getElementById('glowPage');
   var spread = document.getElementById('spread');
   var pageLeft = document.getElementById('pageLeft');
   var pageRight = document.getElementById('pageRight');
@@ -54,7 +56,7 @@
     return match ? parseInt(match[0], 10) : 9999;
   }
 
-  fetch('data/machines.json')
+  fetch('data/machines.json?v=16')
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function (data) {
       machines = (data.machines || []).slice().sort(function (a, b) { return startYear(a) - startYear(b); });
@@ -171,14 +173,11 @@
   }
 
   function buildLeftCredits() {
-    var inner = h('div', { class: 'art-inner' });
-    inner.innerHTML = placeholderSVG({ id: 'end', name: 'The end', place: 'Moon' });
-    pageLeft.replaceChildren(h('div', { class: 'art' }, [inner]), h('div', { class: 'art-frame hud-frame', 'aria-hidden': 'true' }));
-    return inner;
-  }
-
-  function sentences(text) {
-    return (text || '').split(/(?<=[.!?])\s+/).filter(Boolean);
+    return buildLeftMachine({
+      id: 'end', name: 'The end',
+      image: { file: 'images/apollo17/landing-site.jpg', alt: 'Wide view of the Apollo 17 landing site on the Moon: the Lunar Module, an astronaut and the rover on gray ground with tall pale hills against black sky.',
+               credit: 'NASA', nasaId: 'as17-134-20435', focus: '50% 40%', zoom: 1.25 }
+    });
   }
 
   function buildRightMachine(m) {
@@ -233,6 +232,7 @@
       storyEl,
       after
     ].filter(Boolean));
+    if (window.Stamps && m.stamp && window.Stamps.isEarned(m.id)) window.Stamps.place(pageRight, m, false);
     return { spans: [], story: { el: storyEl, text: m.story || '' }, after: after, heading: heading };
   }
 
@@ -253,11 +253,12 @@
       h('p', { class: 'kicker', text: 'About this book' }),
       heading,
       h('div', { class: 'credits' }, [
+        window.Stamps ? window.Stamps.collection(machines) : null,
         userAnswer ? h('p', { class: 'your-question', text: 'You asked: "' + userAnswer + '" Every robot in this book began with a question like yours.' }) : null,
         h('p', { text: 'These robots finished their work, but the places they explored are still there, and so is what they taught us.' }),
         h('p', { text: 'Not affiliated with or endorsed by NASA. NASA did not review this project and is not responsible for its accuracy.' }),
-        h('p', { text: 'Each picture comes from the NASA Image and Video Library, with its credit line under the image. The drawing on this last page was made in code.' }),
-        h('p', { text: 'Super Intelligence (SI) disclosure: the story drafts and this page’s code were written with help from an SI tool (Claude). [Finalize wording before submitting.]' }),
+        h('p', { text: 'Each photo comes from the NASA Image and Video Library, with its credit line under the image.' }),
+        h('p', { text: 'Super Intelligence (SI) disclosure: the SI tool Claude (by Anthropic) helped research NASA source pages, draft the story text, and write this site’s code. The creator chose the concept, the look and the story direction. The NASA pictures are NASA images with their credit lines. The five postage-stamp illustrations are SI-generated art and carry a visible “SI-generated art” mark. The storm scene was drawn in code.' }),
         h('p', { text: 'Source pages consulted:' }),
         list
       ].filter(Boolean))
@@ -335,14 +336,26 @@
     if (!window.Story || window.Story.isActive() || busy) return;
     clearTimers();
     controls.hidden = true;
+    pageLeft.inert = true;
+    pageRight.inert = true;
     window.Story.open(m, {
       host: spread,
       userAnswer: userAnswer,
-      onClose: function () {
+      onClose: function (reason, watched) {
+        pageLeft.inert = false;
+        pageRight.inert = false;
         controls.hidden = false;
         if (revealNow) revealNow();
         var hd = pageRight.querySelector('h2');
         if (hd) hd.focus({ preventScroll: true });
+        // finishing a story earns its stamp, which is slammed onto the page
+        if (watched && window.Stamps && m.stamp && !window.Stamps.isEarned(m.id)) {
+          window.Stamps.earn(m.id);
+          setTimeout(function () {
+            window.Stamps.place(pageRight, m, true);
+            statusEl.textContent = 'Stamp earned: ' + m.name + '. Mission log complete for this robot.';
+          }, reduceMotion ? 0 : 450);
+        }
       }
     });
   }
@@ -388,8 +401,10 @@
   function openBook() {
     if (!machines.length || index !== -1 || busy) return;
     busy = true;
-    var done = function () {
+
+    function showBook() {
       cover.hidden = true;
+      glow.hidden = true;
       book.dataset.state = 'open';
       spread.hidden = false;
       controls.hidden = false;
@@ -397,14 +412,43 @@
       var parts = render(0);
       busy = false;
       if (parts.heading) parts.heading.focus({ preventScroll: true });
-    };
-    if (!reduceMotion && cover.animate) {
-      cover.animate(
-        [{ transform: 'rotateY(0deg)', opacity: 1 }, { transform: 'rotateY(-95deg)', opacity: 0 }],
-        { duration: 700, easing: 'ease-in', fill: 'forwards' }).finished.then(done);
-    } else {
-      done();
     }
+
+    if (reduceMotion || !cover.animate || !glow.animate) { showBook(); return; }
+
+    // 1) the cover swings open and a glowing page is revealed behind it
+    var cr = cover.getBoundingClientRect();
+    var br = book.getBoundingClientRect();
+    // the glow is a shapeless bloom, a bit larger than the cover so it has no visible edge
+    var padX = cr.width * 0.3, padY = cr.height * 0.22;
+    glow.style.left = (cr.left - br.left - padX) + 'px';
+    glow.style.top = (cr.top - br.top - padY) + 'px';
+    glow.style.width = (cr.width + padX * 2) + 'px';
+    glow.style.height = (cr.height + padY * 2) + 'px';
+    glow.hidden = false;
+    glow.animate([{ opacity: 0, transform: 'scale(.97)' }, { opacity: 1, transform: 'scale(1)' }],
+      { duration: 600, easing: 'ease-out', fill: 'forwards' });
+    cover.animate(
+      [{ transform: 'rotateY(0deg)' }, { transform: 'rotateY(-118deg)', opacity: 1, offset: .85 }, { transform: 'rotateY(-125deg)', opacity: 0 }],
+      { duration: 900, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards' }).finished.then(function () {
+      // 2) the glowing page zooms toward the reader while the book fades in behind it
+      cover.hidden = true;
+      spread.hidden = false;
+      controls.hidden = false;
+      glow.animate([{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(1.1)', opacity: 0 }],
+        { duration: 900, easing: 'ease-in-out', fill: 'forwards' });
+      spread.animate([{ opacity: 0, transform: 'scale(.97)' }, { opacity: 1, transform: 'scale(1)' }],
+        { duration: 900, delay: 100, easing: 'ease-out', fill: 'backwards' });
+      controls.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, delay: 500, fill: 'backwards' });
+      book.dataset.state = 'open';
+      index = 0;
+      var parts = render(0);
+      setTimeout(function () {
+        glow.hidden = true;
+        busy = false;
+        if (parts.heading) parts.heading.focus({ preventScroll: true });
+      }, 1050);
+    });
   }
 
   /* ---------- events ---------- */

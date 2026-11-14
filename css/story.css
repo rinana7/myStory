@@ -1,3 +1,4 @@
+/* Written with help from an SI tool (Claude, by Anthropic). */
 /* Cinematic story player: dark Mars palette, monospace headings, HUD frames. */
 
 .story {
@@ -264,7 +265,7 @@
 .title { font-weight: 500; letter-spacing: .1em; font-size: clamp(1.05rem, 2.4vw, 1.6rem); }
 .title.huge { font-size: clamp(1.6rem, 6vw, 3.6rem); letter-spacing: .16em; text-indent: .16em; font-weight: 500; }
 .voice { font-style: normal; font-size: clamp(.95rem, 1.7vw, 1.2rem); line-height: 1.65; letter-spacing: .01em; }
-.voice::before { content: "> "; color: var(--s-glow); }
+.voice::before { content: "> "; content: "> " / ""; color: var(--s-glow); }
 .voice.big { font-size: clamp(1.05rem, 2.2vw, 1.45rem); }
 .small, .bar-label, .hud-box span, .card .row span { font-family: var(--s-mono); }
 .tw-cursor { display: inline-block; width: .55em; height: 1.05em; margin-left: 2px; vertical-align: -0.15em; background: var(--s-glow); animation: tw-blink 1s steps(1) infinite; }
@@ -370,4 +371,54 @@
   .st-chapters { justify-content: flex-start; gap: 2px; }
   .st-chapters button { padding: 6px 6px; font-size: .66rem; letter-spacing: .1em; }
   .st-foot { padding: 8px 12px 10px; }
+}
+
+/* ---------- touch targets, small text and short (landscape phone) screens ---------- */
+.seg { height: 26px; padding: 11px 0; }
+.seg::before, .seg .fill { top: 11px; }
+.st-chapters button { min-height: 40px; }
+.st-credit { font-size: .7rem; }
+.voice-tag { font-size: .7rem; }
+.hud-box b, .card .row b, .info-card .src { font-size: .72rem; }
+
+@media (max-height: 520px) {
+  .st-head { padding: 4px 12px; }
+  .st-label { display: none; }
+  .st-chapters button { min-height: 32px; }
+  .st-foot { padding: 4px 12px 6px; }
+  .st-btn { min-height: 34px; padding: 2px 10px; }
+  .st-credit { display: none; }
+  .st-frame { display: none; }
+  .title { font-size: clamp(.95rem, 2.2vw, 1.2rem); }
+  .title.huge { font-size: clamp(1.3rem, 5vw, 2.2rem); }
+  .voice, .voice.big { font-size: clamp(.8rem, 1.6vw, 1rem); line-height: 1.4; }
+  .pad, .scan-grid, .card-grid, .last-grid { padding: 10px 18px; }
+  .scan-left { gap: 8px; }
+  .hud-box { padding: 5px 9px; }
+  .info-card { padding: 8px 10px; gap: 4px; }
+  .info-card p { font-size: .75rem; line-height: 1.35; }
+  .cards-row { gap: 8px; }
+  .tl-node p { font-size: .72rem; }
+  .overlay-bl { bottom: 8px; }
+  .overlay-tl { top: 8px; }
+  .voice-tag { top: 6px; right: 10px; padding: 3px 6px; font-size: .6rem; }
+}
+
+/* short landscape screens: two-column data card, tighter scanner boxes */
+@media (max-height: 520px) {
+  .card { grid-template-columns: 1fr 1fr; column-gap: 14px; row-gap: 4px; padding: 8px 12px; }
+  .card .row { padding-bottom: 3px; }
+  .card .row span { font-size: .78rem; }
+  .scan-right { gap: 6px; }
+  .hud-box span { font-size: .78rem; line-height: 1.3; }
+  .hud-box b { margin-bottom: 1px; }
+  .scan-left .voice { font-size: .8rem; }
+}
+
+@media (max-height: 520px) {
+  .scan-grid { grid-template-columns: minmax(0, .9fr) minmax(0, 1.2fr) minmax(0, 1.25fr); gap: 10px; }
+  .scan-right { gap: 4px; }
+  .hud-box { padding: 4px 8px; }
+  .hud-box span { font-size: .72rem; line-height: 1.25; }
+  .hud-box b { font-size: .62rem; margin-bottom: 0; }
 }

@@ -219,7 +219,8 @@
           "text": "NASA says Opportunity exceeded its life expectancy by 60 times.",
           "source": [
             "nasa-opportunity"
-          ]
+          ],
+          "scaleNote": "bars compare time, drawn to scale"
         },
         {
           "chapter": "Explore",
@@ -447,7 +448,13 @@
         "The NASA Opportunity page's second half was summarised by the fetch tool, not read verbatim; the Endeavour arrival date (Aug. 9, 2011) and anything else from it should be re-checked on the page before final publication.",
         "'My battery is low and it's getting dark' is not on any NASA page read, so no myth-vs-fact card yet.",
         "Perseverance passed Opportunity's off-Earth driving record on Oct. 11, 2026 (NASA overview page); available as an optional closing line."
-      ]
+      ],
+      "stamp": {
+        "file": "images/stamps/opportunity.jpg",
+        "w": 452,
+        "h": 416,
+        "alt": "Stylized postage stamp art of a six-wheeled Mars rover with solar panels under a red sky, titled Opportunity. SI-generated art."
+      }
     },
     {
       "id": "apollo17-lrv-alsep",
@@ -836,6 +843,12 @@
           }
         ],
         "reflection": "Almost five years. A small station on the Moon kept sending what it measured, until the day it was switched off. The last people to land there went home in 1972, and the station stayed behind, listening, for as long as it could."
+      },
+      "stamp": {
+        "file": "images/stamps/apollo17.jpg",
+        "w": 448,
+        "h": 418,
+        "alt": "Stylized postage stamp art of a moon buggy with a dish antenna and a science station, titled Apollo 17 LRV and ALSEP. SI-generated art."
       }
     },
     {
@@ -997,7 +1010,8 @@
           "source": [
             "nasa-ingenuity",
             "nasa-release"
-          ]
+          ],
+          "scaleNote": "bars compare number of flights, drawn to scale"
         },
         {
           "chapter": "Explore",
@@ -1238,6 +1252,12 @@
           }
         ],
         "reflection": "A helicopter meant to fly five times flew seventy-two. Then a rotor blade was damaged, and NASA said it could no longer fly. Far across the sand, a speck sits where it stopped, a flier that will never leave the ground again."
+      },
+      "stamp": {
+        "file": "images/stamps/ingenuity.jpg",
+        "w": 560,
+        "h": 356,
+        "alt": "Stylized postage stamp art of a small helicopter with two rotor blades on a red Martian plain, titled Ingenuity. SI-generated art."
       }
     },
     {
@@ -1642,6 +1662,12 @@
           }
         ],
         "reflection": "Dawn ran out of fuel to point itself, and its signal faded. For at least the next couple of decades, and probably much longer, it circles Ceres, silent, a monument to the worlds it showed us."
+      },
+      "stamp": {
+        "file": "images/stamps/dawn.jpg",
+        "w": 566,
+        "h": 354,
+        "alt": "Stylized postage stamp art of a spacecraft with two blue solar panels near a gray cratered world, titled Dawn. SI-generated art."
       }
     },
     {
@@ -1862,8 +1888,8 @@
               "value": "More than 70 percent"
             },
             {
-              "label": "Most boulders",
-              "value": "Came from a single crater (Shoemaker, proposed name)"
+              "label": "Larger rocks",
+              "value": "Most were ejected from a single crater (proposed name Shoemaker)"
             }
           ],
           "image": {
@@ -2055,7 +2081,14 @@
           }
         ],
         "reflection": "It was never meant to land. It landed anyway, gently, and kept talking for about two weeks. Then the cold took it. In December 2002, NASA tried again. No answer."
+      },
+      "stamp": {
+        "file": "images/stamps/near-shoemaker.jpg",
+        "w": 436,
+        "h": 416,
+        "alt": "Stylized postage stamp art of a gold spacecraft with a dish antenna on a rocky surface, with an asteroid in the sky, titled NEAR Shoemaker. SI-generated art."
       }
     }
-  ]
+  ],
+  "_siDisclosure": "Story text and scene scripts in this file were drafted with help from an SI tool (Claude, by Anthropic) from the NASA/NSSDCA source pages listed per machine. Reflection lines are marked 'story voice' and are not NASA statements. The five stamp illustrations in images/stamps/ are SI-generated art with a visible mark; they are stylized, not technical drawings."
 }
