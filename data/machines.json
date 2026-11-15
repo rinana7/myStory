@@ -1932,15 +1932,21 @@
           "id": "nasa-image-PIA03148",
           "label": "NASA image PIA03148 (last, closest image of Eros)",
           "url": "https://images.nasa.gov/details/PIA03148"
+        },
+        {
+          "id": "nasa-image-9701593",
+          "label": "NASA image 9701593 (NEAR spacecraft in preflight preparation)",
+          "url": "https://images.nasa.gov/details/9701593"
         }
       ],
       "image": {
-        "file": "images/near-shoemaker.jpg",
-        "alt": "Close-up view of the rocky, cratered surface of asteroid Eros against black space.",
-        "credit": "NASA/JPL/JHUAPL",
-        "nasaId": "PIA02900",
-        "focus": "40% 45%",
-        "zoom": 1.2
+        "file": "images/near/spacecraft.jpg",
+        "alt": "The NEAR spacecraft in a clean room, seen from above: a white circular dish on a gold-foil body with dark solar panels along the sides.",
+        "credit": "NASA",
+        "nasaId": "9701593",
+        "caption": "The NEAR spacecraft in preflight preparation at Kennedy Space Center, January 1996",
+        "focus": "50% 38%",
+        "zoom": 1.12
       },
       "notes": [
         "NEAR 'was not designed as a lander' (NASA mission page) even though the page's type list includes 'Lander' and its objective lists landing. Story says it was not designed as a lander.",
@@ -1949,7 +1955,8 @@
         "Eros is described as 'potato-shaped' in one NASA article and 'peanut-shaped' in a photo caption; the story avoids a shape word.",
         "Where NEAR is now isn't stated outright on the pages read; they say it landed on Eros and a Dec. 10, 2002 contact attempt failed.",
         "No NSSDCA ID found; the Master Catalog query form wasn't submitted. The mission page has no overview, science or end-of-mission subpages to read.",
-        "All pages read were dated Nov 2024 (NASA) or the 2001 article updated Jan 2024."
+        "All pages read were dated Nov 2024 (NASA) or the 2001 article updated Jan 2024.",
+        "The book-page and spacecraft scenes use a real photo of NEAR (NASA ID 9701593). It shows an octagonal gold-foil body with a white dish and four dark solar panels and no landing legs. The stamp art shows a legged lander with no solar panels, so it does not match the real spacecraft."
       ],
       "storyLabel": "NEAR Shoemaker · Eros",
       "scenes": [
@@ -1961,11 +1968,13 @@
           "kicker": "Asteroid 433 Eros · 1996–2001",
           "text": "I was the first spacecraft to orbit an asteroid, and the first to land on one.",
           "image": {
-            "file": "images/near/eros-sunset.jpg",
-            "alt": "A sliver of the asteroid Eros lit from one side, gray and rocky, against black space.",
-            "credit": "NASA/JPL/JHUAPL",
-            "nasaId": "PIA02493",
-            "focus": "55% 60%"
+            "file": "images/near/spacecraft.jpg",
+            "alt": "The NEAR spacecraft in a clean room, seen from above: a white circular dish on a gold-foil body with dark solar panels along the sides.",
+            "credit": "NASA",
+            "nasaId": "9701593",
+            "caption": "The NEAR spacecraft in preflight preparation at Kennedy Space Center, January 1996",
+            "fit": "contain",
+            "focus": "50% 50%"
           },
           "source": [
             "nasa-near",
@@ -2164,11 +2173,13 @@
             }
           ],
           "image": {
-            "file": "images/near/eros-sunset.jpg",
-            "alt": "A sliver of the asteroid Eros against black space.",
-            "credit": "NASA/JPL/JHUAPL",
-            "nasaId": "PIA02493",
-            "focus": "55% 60%"
+            "file": "images/near/spacecraft.jpg",
+            "alt": "The NEAR spacecraft in a clean room, seen from above: a white circular dish on a gold-foil body with dark solar panels along the sides.",
+            "credit": "NASA",
+            "nasaId": "9701593",
+            "caption": "The NEAR spacecraft in preflight preparation at Kennedy Space Center, January 1996",
+            "fit": "contain",
+            "focus": "50% 50%"
           },
           "source": [
             "nasa-near"
@@ -2239,11 +2250,13 @@
             }
           ],
           "image": {
-            "file": "images/near/eros-surface.jpg",
-            "alt": "Close-up of the gray, cratered surface of Eros.",
-            "credit": "NASA/JPL/JHUAPL",
-            "nasaId": "PIA02900",
-            "focus": "45% 40%"
+            "file": "images/near/spacecraft.jpg",
+            "alt": "The NEAR spacecraft in a clean room, seen from above: a white circular dish on a gold-foil body with dark solar panels along the sides.",
+            "credit": "NASA",
+            "nasaId": "9701593",
+            "caption": "The NEAR spacecraft in preflight preparation at Kennedy Space Center, January 1996",
+            "fit": "contain",
+            "focus": "50% 50%"
           },
           "source": []
         },

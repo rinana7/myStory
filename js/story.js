@@ -84,7 +84,7 @@
   var renderers = {
     hero: function (s) {
       var bg = h('div', { class: 'bg kenburns' }, [picture(s.image)]);
-      return h('div', { class: 'st-scene sc-hero' }, [
+      return h('div', { class: 'st-scene sc-hero' + (s.image && s.image.fit === 'contain' ? ' portrait' : '') }, [
         bg, h('div', { class: 'shade' }),
         h('div', { class: 'center' }, [
           typed(h('h2', { class: 'title huge' }), s.title, 0.3, 12),
