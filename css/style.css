@@ -335,10 +335,10 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
 }
 
 .cover-top { display: grid; justify-items: center; gap: 10px; margin-bottom: 18px; color: var(--sand); }
-.cover-emblem { width: 52px; height: 52px; color: var(--sand); filter: drop-shadow(0 0 10px rgba(114, 220, 207, .45)); }
+.cover-emblem { width: 52px; height: 52px; color: var(--sand);; }
 .cover-label { font-size: .68rem; letter-spacing: .34em; text-transform: uppercase; color: var(--muted); }
 
-.cover-title { font-size: clamp(2.1rem, 7.2vw, 3.3rem); font-weight: 500; letter-spacing: .2em; text-indent: .2em; line-height: 1; text-shadow: 0 0 28px rgba(114, 220, 207, .35); }
+.cover-title { font-size: clamp(2.1rem, 7.2vw, 3.3rem); font-weight: 500; letter-spacing: .2em; text-indent: .2em; line-height: 1; }
 .cover-sub { margin-top: 12px; font-family: var(--title); font-style: normal; font-size: clamp(.8rem, 2vw, .95rem); letter-spacing: .3em; text-indent: .3em; text-transform: uppercase; color: var(--amber); }
 .cover-rule { width: 56px; height: 2px; margin: 18px auto 16px; background: var(--copper); }
 .cover-tag { max-width: 26ch; font-size: .92rem; line-height: 1.55; color: var(--sand); }
@@ -349,7 +349,7 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
   font-size: .78rem; letter-spacing: .26em; text-transform: uppercase;
   transition: background .2s, box-shadow .2s;
 }
-.cover:hover .cover-cta, .cover:focus-visible .cover-cta { background: rgba(127, 232, 220, .2); box-shadow: 0 0 24px rgba(127, 232, 220, .25); }
+.cover:hover .cover-cta, .cover:focus-visible .cover-cta { background: rgba(127, 232, 220, .2); }
 .cover-hint { display: none; }
 
 .cover-foot { position: absolute !important; left: 0; right: 0; bottom: 0; padding: 22px 16px 12px; display: grid; gap: 4px; justify-items: center;
