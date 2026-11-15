@@ -480,10 +480,10 @@
     glow.style.height = (cr.height + padY * 2) + 'px';
     glow.hidden = false;
     glow.animate([{ opacity: 0, transform: 'scale(.97)' }, { opacity: 1, transform: 'scale(1)' }],
-      { duration: 600, easing: 'ease-out', fill: 'forwards' });
+      { duration: 1100, easing: 'ease-out', fill: 'forwards' });
     cover.animate(
       [{ transform: 'rotateY(0deg)' }, { transform: 'rotateY(-118deg)', opacity: 1, offset: .85 }, { transform: 'rotateY(-125deg)', opacity: 0 }],
-      { duration: 900, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards' }).finished.then(function () {
+      { duration: 2000, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards' }).finished.then(function () {
       // 2) the glowing page zooms toward the reader while the book fades in behind it
       cover.hidden = true;
       spread.hidden = false;
