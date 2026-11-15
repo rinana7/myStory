@@ -407,6 +407,7 @@
     var api = { close: close, answer: opts.userAnswer || '', next: function () { goTo(state.index + 1); }, pause: function () { setPlaying(false); } };
 
     function setPlaying(on) {
+      if (!state) return;
       state.playing = on;
       root.classList.toggle('paused', !on);
       play.textContent = on ? '⏸' : '▶';
@@ -415,6 +416,7 @@
     }
 
     function goTo(i) {
+      if (!state) return;   // the overlay is still fading out after a close
       if (i < 0) i = 0;
       if (i >= scenes.length) { close('finished'); return; }
       var s = scenes[i];
