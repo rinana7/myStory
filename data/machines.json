@@ -934,10 +934,10 @@
       "endingType": "damage",
       "years": "2021-2024",
       "status": "No longer capable of flight after one or more rotor blades sustained damage during landing on its last flight. NASA's mission-end release (Jan. 25, 2024) said it remained upright and in communication; no later status was found.",
-      "whyItWasSent": "To demonstrate the first powered flight on Mars. It was designed as a technology demonstration that would make no more than five test flights in 30 days.",
+      "whyItWasSent": "To demonstrate the first powered, controlled flight on Mars. It was designed as a technology demonstration that would make no more than five test flights in 30 days.",
       "whatItDiscovered": "It proved that powered, controlled flight on Mars was possible. It also acted as an aerial scout for Perseverance scientists and rover drivers, and paved the way for future aerial explorers at Mars.",
       "ending": "On its 72nd flight, on Jan. 18, 2024, imagery showed one or more rotor blades had been damaged during landing. NASA declared the mission completed on Jan. 25, 2024. The cause of the communications dropout and the helicopter's orientation at touchdown were still being investigated.",
-      "story": "I'm Ingenuity, a helicopter that rode to Mars strapped beneath the Perseverance rover. My team planned up to five test flights in 30 days. I flew 72 times! On April 19, 2021, I made the first powered flight on another planet. In all I flew about 17 kilometers, as high as 24 meters, and scouted rocky ground for Perseverance. On my last flight, January 18, 2024, one or more of my rotor blades was damaged during landing. I can't fly anymore, but I proved flying on Mars is possible.",
+      "story": "I'm Ingenuity, a helicopter that rode to Mars strapped beneath the Perseverance rover. My team planned up to five test flights in 30 days. I flew 72 times! On April 19, 2021, I made the first powered, controlled flight on another planet. In all I flew about 17 kilometers, as high as 24 meters, and scouted rocky ground for Perseverance. On my last flight, January 18, 2024, one or more of my rotor blades was damaged during landing. I can't fly anymore, but I proved flying on Mars is possible.",
       "stats": [
         {
           "label": "Planned",
@@ -1338,7 +1338,7 @@
               "at": 6.5
             },
             {
-              "text": "Far across the sand, a speck sits where it stopped, upright, a flier that will never leave the ground again.",
+              "text": "Far across the sand, a speck sits where it stopped, a flier that will never leave the ground again.",
               "at": 12.0
             }
           ],
@@ -1683,7 +1683,7 @@
             },
             {
               "label": "Ammonia",
-              "value": "Suggests Ceres's materials came from the outer solar system"
+              "value": "Suggests Ceres's materials may have come from the outer solar system"
             }
           ],
           "image": {
@@ -2090,7 +2090,7 @@
             },
             {
               "label": "Larger rocks",
-              "value": "Most were ejected from a single crater (proposed name Shoemaker)"
+              "value": "Nearly half (44 percent) were inside one crater (proposed name Shoemaker)"
             }
           ],
           "image": {
@@ -2237,7 +2237,7 @@
           "title": "The Quiet",
           "lines": [
             {
-              "text": "It was never meant to land.",
+              "text": "It was not designed as a lander.",
               "at": 1.5
             },
             {
@@ -2287,7 +2287,7 @@
             "source": "nasa-near"
           }
         ],
-        "reflection": "It was never meant to land. It landed anyway, gently, and kept talking for about two weeks. Then the cold took it. In December 2002, NASA tried again. No answer."
+        "reflection": "It was not designed as a lander. It landed anyway, gently, and kept talking for about two weeks. Then the cold took it. In December 2002, NASA tried again. No answer."
       },
       "stamp": {
         "file": "images/stamps/near-shoemaker.jpg",

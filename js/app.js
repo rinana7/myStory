@@ -57,7 +57,7 @@
     return match ? parseInt(match[0], 10) : 9999;
   }
 
-  fetch('data/machines.json?v=31')
+  fetch('data/machines.json?v=40')
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function (data) {
       machines = (data.machines || []).slice().sort(function (a, b) { return startYear(a) - startYear(b); });
