@@ -226,9 +226,10 @@
       var btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'stamp-btn';
-      btn.setAttribute('aria-label', 'Enlarge the ' + m.name + ' stamp' + (earned[m.id] ? '' : ' (not yet earned)'));
+      btn.setAttribute('aria-label', earned[m.id] ? 'Enlarge the ' + m.name + ' stamp' : m.name + ' stamp (not yet earned)');
+      if (!earned[m.id]) btn.disabled = true;
       btn.appendChild(build(m, { ghost: !earned[m.id], decorative: true }));
-      btn.addEventListener('click', function () { openLightbox(m, btn); });
+      btn.addEventListener('click', function () { if (earned[m.id]) openLightbox(m, btn); });
       cell.appendChild(btn);
       var cap = document.createElement('span');
       cap.className = 'stamp-cap';

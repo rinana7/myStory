@@ -581,3 +581,6 @@ h2 { font-size: clamp(1.05rem, 2.1vw, 1.55rem); line-height: 1.25; }
     radial-gradient(ellipse at 50% 42%, transparent 38%, rgba(2, 10, 10, .7) 100%),
     linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
 }
+
+/* stamps not yet earned can't be opened */
+.stamp-btn:disabled { cursor: default; }
