@@ -469,38 +469,27 @@
 
     if (reduceMotion || !cover.animate || !glow.animate) { showBook(); return; }
 
-    // 1) the cover swings open and a glowing page is revealed behind it
-    var cr = cover.getBoundingClientRect();
-    var br = book.getBoundingClientRect();
-    // the glow is a shapeless bloom, a bit larger than the cover so it has no visible edge
-    var padX = cr.width * 0.3, padY = cr.height * 0.22;
-    glow.style.left = (cr.left - br.left - padX) + 'px';
-    glow.style.top = (cr.top - br.top - padY) + 'px';
-    glow.style.width = (cr.width + padX * 2) + 'px';
-    glow.style.height = (cr.height + padY * 2) + 'px';
-    glow.hidden = false;
-    glow.animate([{ opacity: 0, transform: 'scale(.97)' }, { opacity: 1, transform: 'scale(1)' }],
-      { duration: 1100, easing: 'ease-out', fill: 'forwards' });
+    // 1) the cover swings open while the screen fades to black
+    var veil = document.createElement('div');
+    veil.setAttribute('aria-hidden', 'true');
+    veil.style.cssText = 'position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;z-index:50;';
+    document.body.appendChild(veil);
+    veil.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1800, easing: 'ease-in', fill: 'forwards' });
     cover.animate(
       [{ transform: 'rotateY(0deg)' }, { transform: 'rotateY(-118deg)', opacity: 1, offset: .85 }, { transform: 'rotateY(-125deg)', opacity: 0 }],
       { duration: 2000, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards' }).finished.then(function () {
-      // 2) the glowing page zooms toward the reader while the book fades in behind it
+      // 2) from black, the book fades in
       cover.hidden = true;
       spread.hidden = false;
       controls.hidden = false;
-      glow.animate([{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(1.1)', opacity: 0 }],
-        { duration: 900, easing: 'ease-in-out', fill: 'forwards' });
-      spread.animate([{ opacity: 0, transform: 'scale(.97)' }, { opacity: 1, transform: 'scale(1)' }],
-        { duration: 900, delay: 100, easing: 'ease-out', fill: 'backwards' });
-      controls.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, delay: 500, fill: 'backwards' });
       book.dataset.state = 'open';
       index = 0;
       var parts = render(0);
-      setTimeout(function () {
-        glow.hidden = true;
+      veil.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 1500, delay: 250, easing: 'ease-out', fill: 'forwards' }).finished.then(function () {
+        veil.remove();
         busy = false;
         if (parts.heading) parts.heading.focus({ preventScroll: true });
-      }, 1050);
+      });
     });
   }
 
