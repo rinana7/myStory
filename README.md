@@ -6,6 +6,8 @@ Open the book, answer one question, then meet five machines NASA left behind. Ea
 
 **Live site:** https://rinana7.github.io/myStory/
 
+**Demo slides:** https://claude.ai/artifact/Pf2UtCegZvHo9iu5wTc9Dk
+
 ## The five machines
 
 | Machine | Where | Ending |
