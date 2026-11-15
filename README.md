@@ -4,7 +4,7 @@ An interactive storybook for the **2026 NASA Space Apps Challenge** challenge *A
 
 Open the book, answer one question, then meet five machines NASA left behind. Each page zooms into a NASA image and plays a silent, caption-driven story with typewriter text, timelines, scanner-style panels, and a quiet ending.
 
-**Live site:** _add the GitHub Pages link here once published_
+**Live site:** https://rinana7.github.io/myStory/
 
 ## The five machines
 
