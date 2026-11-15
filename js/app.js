@@ -28,6 +28,7 @@
   var index = -1;          // -1 = cover, 0 = intro question, 1..n = machines, n+1 = credits page
   var busy = false;
   var timers = [];
+  var afterStory = null;   // starts the page text once the story movie has been skipped or finished
   var revealNow = null;    // function that shows everything immediately
 
   /* ---------- tiny DOM helper ---------- */
@@ -270,6 +271,7 @@
   function render(i) {
     clearTimers();
     revealNow = null;
+    afterStory = null;
 
     nextBtn.classList.remove('nudge');
     var zoomEl, parts;
@@ -295,7 +297,17 @@
 
     var TYPE_DELAY = 900, TYPE_CPS = 42;
     bookTyper.clear();
-    if (parts.story) bookTyper.add(parts.story.el, parts.story.text, { delay: TYPE_DELAY, cps: TYPE_CPS });
+    var hasStory = machineAt >= 0 && machineAt < machines.length && machines[machineAt].scenes && machines[machineAt].scenes.length && !!window.Story;
+    // pages with a story movie stay quiet until the movie is skipped or finished
+    if (parts.story && !hasStory) bookTyper.add(parts.story.el, parts.story.text, { delay: TYPE_DELAY, cps: TYPE_CPS });
+    if (hasStory && parts.story) {
+      afterStory = function () {
+        afterStory = null;
+        bookTyper.add(parts.story.el, parts.story.text, { delay: 400, cps: TYPE_CPS });
+        var ms = 400 + parts.story.text.length / TYPE_CPS * 1000 + 500;
+        later(function () { if (parts.after) parts.after.classList.add('on'); }, ms);
+      };
+    }
     if (isIntro) {
       // lead line types first, then the question, then the answer box appears
       bookTyper.add(parts.leadEl, intro.lead, { delay: TYPE_DELAY, cps: TYPE_CPS, onDone: function () {
@@ -307,6 +319,7 @@
 
     function showAll() {
       clearTimers();
+      if (afterStory) { var f = afterStory; afterStory = null; bookTyper.add(parts.story.el, parts.story.text, { delay: 0, cps: TYPE_CPS }); }
       bookTyper.finishAll();
       if (parts.after) parts.after.classList.add('on');
     }
@@ -314,17 +327,16 @@
 
     if (reduceMotion) { showAll(); return parts; }
 
-    // machines with a scene script start their story once the zoom is under way
-    if (machineAt >= 0 && machineAt < machines.length && machines[machineAt].scenes && machines[machineAt].scenes.length && window.Story) {
-      var storyMachine = machines[machineAt];
-      later(function () { openStory(storyMachine); }, 3200);
-    }
-
-    // 1) slow zoom toward the image, 2) tell the story line by line, 3) reveal facts
+    // 1) slow zoom toward the image
     requestAnimationFrame(function () {
       requestAnimationFrame(function () { zoomEl.classList.add('zoomed'); });
     });
-    if (!parts.manualReveal) {
+    if (hasStory) {
+      // 2) the story movie starts first; the page text follows when it is skipped or finished
+      var storyMachine = machines[machineAt];
+      later(function () { openStory(storyMachine); }, 1800);
+    } else if (!parts.manualReveal) {
+      // 2) tell the story line by line, 3) reveal facts
       var typingMs = TYPE_DELAY + (parts.story ? parts.story.text.length / TYPE_CPS * 1000 : 0) + 500;
       later(function () { if (parts.after) parts.after.classList.add('on'); }, typingMs);
     }
@@ -345,7 +357,7 @@
         pageLeft.inert = false;
         pageRight.inert = false;
         controls.hidden = false;
-        if (revealNow) revealNow();
+        if (afterStory) afterStory(); else if (revealNow) revealNow();
         var hd = pageRight.querySelector('h2');
         if (hd) hd.focus({ preventScroll: true });
         // finishing a story earns its stamp, which is slammed onto the page
